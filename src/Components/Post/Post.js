@@ -29,7 +29,10 @@ export default function Post() {
 
   return (
     <div className='post-info'>
-        {data.map(item => <h3 key={item.id}>{item.name}</h3>)}
+        {data.map(item => (
+        [<h3 key={item.id}>{item.name}</h3>,
+        <h2>{item.distance}</h2>,
+        <h2>{item.elapsed_time}</h2>]))}
 
         {/* <p></p>
         <p>Post description</p>
