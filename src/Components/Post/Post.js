@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../util/axios';
 
+// accessToken currently out of date
 let accessToken = "b99d56cc7b18aa3527edff334a58b370119d8bfa";
 
 const clientID = '84711';
@@ -21,10 +22,10 @@ export default function Post() {
     
   }, []);
 
-  const items = {
-    name: data.name,
+  // const items = {
+  //   name: data.name,
 
-  };
+  // };
   
 
   return (
