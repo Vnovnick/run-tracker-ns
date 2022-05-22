@@ -8,15 +8,7 @@ const authUrl = '/oauth/authorize';
 const redirectUri = 'http://localhost:3000/run-tracker-ns';
 
 
-export default function getAccessToken(){
-    if (accessToken){
-        return accessToken;
-    }
-
-    const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
-    if (accessTokenMatch){
-        accessToken = accessTokenMatch[1];
-    }
+export default function authorize(){
     axios.get(`${authUrl}?${clientID}&${redirectUri}&response_type=code&scope=activity:read_all`)
     
 };
