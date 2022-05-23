@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../util/axios';
-import authorize from '../../util/auth';
+import reAuthorize from '../../util/auth';
 
 // accessToken currently out of date
-let accessToken = "b99d56cc7b18aa3527edff334a58b370119d8bfa";
 
-const clientID = '84711';
-const clientSecret = '2656645c7185a01fbbf85c8bbbdf1d4d24273510';
 const dataUrl = 'api/v3/athlete/activities';
 
 
 export default function Post() {  
+  const [accessToken, setAccessToken] = useState('');
   const [data, setData] = useState([]);
   
+  
+  
+
   useEffect(() => {
     async function fetchData(){
       const request = await axios.get(`${dataUrl}?access_token=${accessToken}`);
