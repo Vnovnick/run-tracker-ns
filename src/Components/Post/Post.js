@@ -9,34 +9,55 @@ const authUrl = '/oauth/token';
 const authData = {
     client_id: '84711',
     client_secret: '2656645c7185a01fbbf85c8bbbdf1d4d24273510',
-    refresh_token: 'cb1144efacbd24937379f203717209da0b49a50c',
-    grant_type: 'refresh_token'
+    // refresh_token: 'cb1144efacbd24937379f203717209da0b49a50c',
+    code: '6d48ab930882cf49c28b03657089db9cd225f51d'
+
 }
-const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${authData.refresh_token}&grant_type=${authData.grant_type}`;
-const authCodeLink = `https://www.strava.com/oauth/authorize?client_id=${authData.client_id}&redirect_uri=http://localhost:3000/run-tracker-ns&response_type=code&scope=activity:read_all`;
+
 
 export default function Post() {  
   
+  const [refreshToken, setRefreshToken] = useState('cb1144efacbd24937379f203717209da0b49a50c');
+  const [accessToken, setAccessToken] = useState('');
   const [data, setData] = useState([]);
-  const [accessToken, setAccessToken] = useState(null);
   
-  
+  const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
+  const authCodeLink = `/oauth/authorize?client_id=${authData.client_id}&redirect_uri=http://localhost:3000/run-tracker-ns&response_type=code&scope=activity:read_all`;
+  const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${authData.code}&grant_type=authorization_code`; 
+
+
+
   useEffect(() => {
     async function fetchData(){
   
     // get auth code request
-    // const authCode = axios.get(authCodeLink);
-  
-    //refresh token post request
-    await axios.post(fullAuthLink)    
+    // await axios.get(authCodeLink);
+    
+
+    // getting refresh token with new auth code
+    await axios.post(accessCodeLink)
     .then(response => {
-        // console.log(response.data['access_token'])        
-        setAccessToken(response.data['access_token']);
-        // console.log(accessToken);
+      setRefreshToken(response.data['refresh_token']);
+      console.log(refreshToken);
     })
     .catch(error => {
-        console.error('Error: ', error);
+      console.error('Error: ', error);
     });
+
+  
+    //refresh token post request
+    if (refreshToken){
+      await axios.post(fullAuthLink)    
+      .then(response => {
+          // console.log(response.data['access_token'])        
+          setAccessToken(response.data['access_token']);
+          // console.log(accessToken);
+      })
+      .catch(error => {
+          console.error('Error: ', error);
+      });
+    }
+
   
     // get activity data request
     // had error where the get request would be run multiple times without a token
@@ -50,7 +71,7 @@ export default function Post() {
     }
     fetchData();
     
-  }, [accessToken]);
+  }, [accessToken, refreshToken, fullAuthLink, accessCodeLink]);
 
  
 
