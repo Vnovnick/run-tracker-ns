@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from '../../util/axios';
 // import reAuthorize from '../../util/auth';
 
-// accessToken currently out of date
+
 
 const dataUrl = 'api/v3/athlete/activities';
 const authUrl = '/oauth/token';
@@ -18,29 +18,29 @@ const authCodeLink = `https://www.strava.com/oauth/authorize?client_id=${authDat
 export default function Post() {  
   
   const [data, setData] = useState([]);
-  const [accessToken, setAccessToken] = useState('');
-
-
+  const [accessToken, setAccessToken] = useState(null);
+  
+  
   useEffect(() => {
     async function fetchData(){
-
+  
     // get auth code request
     // const authCode = axios.get(authCodeLink);
-    
-    
-    
+  
     //refresh token post request
     await axios.post(fullAuthLink)    
     .then(response => {
-        setAccessToken(response.data.access_token);
-        console.log(accessToken);
-        
+        // console.log(response.data['access_token'])        
+        setAccessToken(response.data['access_token']);
+        // console.log(accessToken);
     })
     .catch(error => {
         console.error('Error: ', error);
     });
-    
+  
     // get activity data request
+    // had error where the get request would be run multiple times without a token
+    // conditional fixed it, but some sort of request is still being run twice
     if (accessToken){
     const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`);
     console.log(requestActivities.data);
@@ -52,11 +52,7 @@ export default function Post() {
     
   }, [accessToken]);
 
-  // const items = {
-  //   name: data.name,
-
-  // };
-  
+ 
 
   return (
     <div className='post-info'>
