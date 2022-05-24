@@ -42,7 +42,7 @@ export default function Post() {
     
     // get activity data request
     if (accessToken){
-      const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`);
+    const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`);
     console.log(requestActivities.data);
     setData(requestActivities.data);
     }
