@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         
       </header>
-      {reAuthorize()}
+      {/* {reAuthorize()} */}
       <PostFeed />
     </div>
   );

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import axios from './axios';
 
 const authUrl = '/oauth/token';
@@ -14,17 +15,18 @@ export default function reAuthorize(){
         headers: {
             'Accept': 'application/json, text/plain */*',
             'Content-type': 'application/json'
-
+    
         }
     })
     .then(response => {
-        console.log('Status: ', response.status);
-        // console.log('Data: ', response.data)
-        return response.data;
+        const accessToken = response.data.access_token;
+        console.log(accessToken);
+        
     })
     .catch(error => {
         console.error('Error: ', error);
     });
-    
+   
     
 };
+
