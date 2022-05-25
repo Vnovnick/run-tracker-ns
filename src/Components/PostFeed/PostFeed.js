@@ -12,15 +12,43 @@ const authData = {
 
 export default function PostFeed() {
   const authCodeLink = `https://www.strava.com/oauth/authorize?client_id=${authData.client_id}&redirect_uri=http://localhost:3000/run-tracker-ns&response_type=code&scope=activity:read_all`;
-  
+  const [authCode, setAuthCode] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  const codeMatch = window.location.href.match(/code=([^&]*)/);
   // const authCodeRedirect = () => {
   //   window.open(authCodeLink, '_blank');
   // };
+  const handleLogIn = (event) => {
+    event.preventDefault();
+    if (loggedIn){
+      setLoggedIn(false);
+      console.log(loggedIn);
+    }else{
+      setLoggedIn(true);
+      console.log(loggedIn);
+    }
+    
+  };
+  const logout = () => {
+    // localStorage.clear();
+    // window.location.href = '/';
+  }
+  useEffect(() => {
+    if (codeMatch){
+      setLoggedIn(true);
+      // console.log(loggedIn);
+      setAuthCode(codeMatch[1]);
+      console.log(authCode);
+    }
 
+  }, [authCode, codeMatch, loggedIn])
+  
   return (
     <div className='post-feed'>
-        <a href={authCodeLink}>Log in</a>
-        {/* <Post /> */}
+      {loggedIn ? <a href='http://localhost:3000/' onChange={handleLogIn}>Log-off</a> : <a href={authCodeLink} onChange={handleLogIn}>Strava Log-in</a>}                        
+        <Post 
+        authCode={authCode}
+        loggedIn={loggedIn}/>
     </div>
   )
 }

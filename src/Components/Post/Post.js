@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../util/axios';
+import PostFeed from '../PostFeed/PostFeed';
 // import reAuthorize from '../../util/auth';
 
 
@@ -15,38 +16,43 @@ const authData = {
 }
 
 
-export default function Post() {  
+export default function Post(props) {  
   
   const [refreshToken, setRefreshToken] = useState('cb1144efacbd24937379f203717209da0b49a50c');
+  // const [expiresIn, setExpiresIn] = useState(null);
   const [accessToken, setAccessToken] = useState('');
   const [data, setData] = useState([]);
+  const [newAuth, setNewAuth] = useState(props.authCode);
   
   const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
   const authCodeLink = `/oauth/authorize?client_id=${authData.client_id}&redirect_uri=http://localhost:3000/run-tracker-ns&response_type=code&scope=activity:read_all`;
-  const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${authData.code}&grant_type=authorization_code`; 
+  const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${newAuth}&grant_type=authorization_code`; 
 
 
-
+  
   useEffect(() => {
     async function fetchData(){
   
     // get auth code request
     // await axios.get(authCodeLink);
     
-
+    
     // getting refresh token with new auth code
-    await axios.post(accessCodeLink)
-    .then(response => {
-      setRefreshToken(response.data['refresh_token']);
-      console.log(refreshToken);
-    })
-    .catch(error => {
-      console.error('Error: ', error);
-    });
+    if (newAuth && props.loggedIn) {
+      await axios.post(accessCodeLink)
+      .then(response => {        
+          setRefreshToken(response.data['refresh_token']);
+          console.log(refreshToken);        
+      })
+      .catch(error => {
+        console.error('Error: ', error);
+      });
+    };
+
 
   
     //refresh token post request
-    if (refreshToken){
+    if (refreshToken && props.loggedIn){
       await axios.post(fullAuthLink)    
       .then(response => {
           // console.log(response.data['access_token'])        
@@ -62,7 +68,7 @@ export default function Post() {
     // get activity data request
     // had error where the get request would be run multiple times without a token
     // conditional fixed it, but some sort of request is still being run twice
-    if (accessToken){
+    if (accessToken && props.loggedIn){
     const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`);
     console.log(requestActivities.data);
     setData(requestActivities.data);
@@ -71,7 +77,8 @@ export default function Post() {
     }
     fetchData();
     
-  }, [accessToken, refreshToken, fullAuthLink, accessCodeLink]);
+  }, [accessToken, refreshToken, fullAuthLink, accessCodeLink, newAuth, props.loggedIn]);
+
 
  
 
