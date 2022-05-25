@@ -5,7 +5,6 @@ import Post from '../Post/Post';
 const authData = {
   client_id: '84711',
   client_secret: '2656645c7185a01fbbf85c8bbbdf1d4d24273510',
-  // refresh_token: 'cb1144efacbd24937379f203717209da0b49a50c',
   code: '6d48ab930882cf49c28b03657089db9cd225f51d'
 
 }

@@ -9,7 +9,6 @@ const authUrl = '/oauth/token';
 const authData = {
     client_id: '84711',
     client_secret: '2656645c7185a01fbbf85c8bbbdf1d4d24273510',
-    // refresh_token: 'cb1144efacbd24937379f203717209da0b49a50c',
     code: '6d48ab930882cf49c28b03657089db9cd225f51d'
 
 }
@@ -18,7 +17,6 @@ const authData = {
 export default function Post(props) {  
   
   const [refreshToken, setRefreshToken] = useState('cb1144efacbd24937379f203717209da0b49a50c');
-  // const [expiresIn, setExpiresIn] = useState(null);
   const [accessToken, setAccessToken] = useState('');
   const [data, setData] = useState([]);
   const [newAuth, setNewAuth] = useState(props.authCode);
@@ -30,10 +28,8 @@ export default function Post(props) {
   
   useEffect(() => {
     async function fetchData(){
-  
-    // get auth code request
-    // await axios.get(authCodeLink);
-    
+
+    // requests still seem to run 3 times 
     
     // getting refresh token with new auth code
     if (newAuth && props.loggedIn) {
@@ -64,8 +60,7 @@ export default function Post(props) {
 
   
     // get activity data request
-    // had error where the get request would be run multiple times without a token
-    // conditional fixed it, but some sort of request is still being run twice
+
     if (accessToken && props.loggedIn){
     const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`);
     console.log(requestActivities.data);
