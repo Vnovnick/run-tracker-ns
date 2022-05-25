@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../util/axios';
-import PostFeed from '../PostFeed/PostFeed';
-// import reAuthorize from '../../util/auth';
+
 
 
 
@@ -25,7 +24,6 @@ export default function Post(props) {
   const [newAuth, setNewAuth] = useState(props.authCode);
   
   const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
-  const authCodeLink = `/oauth/authorize?client_id=${authData.client_id}&redirect_uri=http://localhost:3000/run-tracker-ns&response_type=code&scope=activity:read_all`;
   const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${newAuth}&grant_type=authorization_code`; 
 
 
