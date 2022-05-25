@@ -20,11 +20,9 @@ export default function Post(props) {
 
 
 
-  
-  const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
   const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${props.authCode}&grant_type=authorization_code`; 
-
-
+  const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
+  
 
   useEffect(() => {
     async function fetchData(){
@@ -47,13 +45,15 @@ export default function Post(props) {
 
     
 
+    
 
-  
+
+
     //refresh token post request
     if (refreshToken){
       await axios.post(fullAuthLink)    
       .then(response => {
-       
+      
           setAccessToken(response.data['access_token']);
           console.log(accessToken);
       })
@@ -62,13 +62,15 @@ export default function Post(props) {
       });
     }
 
-  
+
     // get activity data request
 
     if (accessToken){
-    const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`);
+    const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`, {
+      'Authorization': `Bearer ${accessToken}`
+    });
     console.log(requestActivities.data);
-    setData(requestActivities.data);
+    setData(requestActivities.data);    
     }
     
     }
@@ -76,9 +78,6 @@ export default function Post(props) {
     
     
   }, [accessToken, refreshToken, fullAuthLink, accessCodeLink, props.authCode, props.loggedIn]);
-
-
- 
 
   return (
     <div className='post-info'>
@@ -97,4 +96,5 @@ export default function Post(props) {
     </div>
   )
 };
+
 

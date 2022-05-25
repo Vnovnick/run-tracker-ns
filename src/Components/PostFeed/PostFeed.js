@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import Post from '../Post/Post';
+import axios from '../../util/axios';
 
 
 const authData = {
@@ -26,10 +27,10 @@ export default function PostFeed() {
   };
 
   // potential logout function to clear cache data later on
-  // const logout = () => {
-  //   // localStorage.clear();
-  //   // window.location.href = '/';
-  // }
+  const logout = () => {
+    axios.post('https://www.strava.com/oauth/deauthorize');
+    // window.location.href = '/';
+  }
 
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function PostFeed() {
   
   return (
     <div className='post-feed'>
-      {loggedIn ? <a href='http://localhost:3000/' onChange={handleLogIn}>Strava Log-out</a> : <a href={authCodeLink} onChange={handleLogIn}>Strava Log-in</a>}                        
+      {loggedIn ? <a href='http://localhost:3000/' onChange={handleLogIn} onClick={logout}>Strava Log-out</a> : <a href={authCodeLink} onChange={handleLogIn}>Strava Log-in</a>}                        
         <Post 
         authCode={authCode}
         loggedIn={loggedIn}/>
