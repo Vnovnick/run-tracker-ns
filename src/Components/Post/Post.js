@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../util/axios';
+import './Post.css';
 
 
 
@@ -43,12 +44,6 @@ export default function Post(props) {
       });
     }
 
-    
-
-    
-
-
-
     //refresh token post request
     if (refreshToken){
       await axios.post(fullAuthLink)    
@@ -80,12 +75,14 @@ export default function Post(props) {
   }, [accessToken, refreshToken, fullAuthLink, accessCodeLink, props.authCode, props.loggedIn]);
 
   return (
-    <div className='post-info'>
-        {data.map(item => (
-        <div key={item.id}>
+    <div className='post-list'>
+        {data.map(item => (        
+        <div className='post-info' key={item.id}>
+        <br></br>
         <h3>{item.name}</h3>
-        <h2>{item.distance}</h2>
-        <h2>{item.elapsed_time}</h2>
+        <h4>Distance: {item.distance}</h4>
+        <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
+        <br></br>
         </div>))}
 
         {/* <p></p>

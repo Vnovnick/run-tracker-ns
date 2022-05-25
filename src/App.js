@@ -10,7 +10,9 @@ function App() {
 
       </header>
 
-      <PostFeed />
+        <PostFeed />
+     
+
     </div>
   );
 }
