@@ -17,7 +17,7 @@ export default function Post(props) {
   const [refreshToken, setRefreshToken] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [data, setData] = useState([]);
-  // const [newAuth, setNewAuth] = useState('');
+
 
 
   
@@ -31,7 +31,7 @@ export default function Post(props) {
     
     
     // requests still seem to run 3 times 
-    // console.log(props.authCode);
+
     // getting refresh token with new auth code
     
     if (props.authCode && props.loggedIn){
@@ -53,7 +53,7 @@ export default function Post(props) {
     if (refreshToken){
       await axios.post(fullAuthLink)    
       .then(response => {
-          // console.log(response.data['access_token']);        
+       
           setAccessToken(response.data['access_token']);
           console.log(accessToken);
       })
