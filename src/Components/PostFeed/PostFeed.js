@@ -2,16 +2,14 @@ import React, {useEffect, useState } from 'react';
 import Post from '../Post/Post';
 import axios from '../../util/axios';
 import { params } from '../../util/Spotify';
+import { stravaApiData } from '../../apiData';
 
 
-const authData = {
-  client_id: '84711',
-  client_secret: '2656645c7185a01fbbf85c8bbbdf1d4d24273510',
-}
+
 
 export default function PostFeed() {
   const spotAuthCodeLink = `https://api.spotify.com/v1/authorize?client_id=${params.client_id}&client_secret=${params.client_secret}&response_type=code&redirect_uri=${params.redirect_uri}`;
-  const authCodeLink = `https://www.strava.com/oauth/authorize?client_id=${authData.client_id}&redirect_uri=http://localhost:3000/run-tracker-ns&response_type=code&scope=activity:read_all`;
+  const authCodeLink = `https://www.strava.com/oauth/authorize?client_id=${stravaApiData.client_id}&redirect_uri=http://localhost:3000/run-tracker-ns&response_type=code&scope=activity:read_all`;
 
   const stravaCodeMatch = window.location.href.match(/code=([^&]*)/);
   const [authCode, setAuthCode] = useState('');
@@ -60,9 +58,9 @@ export default function PostFeed() {
       // console.log(authCode);
     }
 
-  }, [authCode, codeMatch, loggedIn])
+  }, [authCode, stravaCodeMatch, loggedIn])
 
-  
+
   
   return (
     <div className='post-feed'>
