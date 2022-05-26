@@ -24,7 +24,7 @@ export default function Post(props) {
 
 
 
-  const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${props.authCode}&grant_type=authorization_code`; 
+  const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
   const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
   
 
@@ -36,7 +36,7 @@ export default function Post(props) {
 
     // getting refresh token with new auth code
     
-    if (props.authCode && props.loggedIn){
+    if (props.stravaAuthCode && props.loggedIn){
       await axios.post(accessCodeLink)
       .then(response => {        
           setRefreshToken(response.data['refresh_token']);
@@ -75,7 +75,7 @@ export default function Post(props) {
     fetchData();
     
     
-  }, [accessToken, refreshToken, fullAuthLink, accessCodeLink, props.authCode, props.loggedIn]);
+  }, [accessToken, refreshToken, fullAuthLink, accessCodeLink, props.stravaAuthCode, props.loggedIn]);
 
   return (
     <div className='post-list'>
