@@ -21,30 +21,30 @@ export default function PostFeed() {
   const [spotLoggedIn, setSpotLoggedIn] = useState(false);
 
   // handle login change for strava
-  // const handleLogIn = (event) => {
-  //   event.preventDefault();
-  //   if (loggedIn){
-  //     setLoggedIn(false);
-  //     console.log(loggedIn);
-  //   }else{
-  //     setLoggedIn(true);
-  //     console.log(loggedIn);
-  //   }
+  const handleLogIn = (event) => {
+    event.preventDefault();
+    if (loggedIn){
+      setLoggedIn(false);
+      console.log(loggedIn);
+    }else{
+      setLoggedIn(true);
+      console.log(loggedIn);
+    }
     
-  // };
+  };
   
   // handle login change for Spotify
-  // const handleLogIn2 = (event) => {
-  //   event.preventDefault();
-  //   if (spotLoggedIn){
-  //     setSpotLoggedIn(false);
-  //     console.log(spotLoggedIn);
-  //   }else{
-  //     setSpotLoggedIn(true);
-  //     console.log(spotLoggedIn);
-  //   }
+  const handleLogIn2 = (event) => {
+    event.preventDefault();
+    if (spotLoggedIn){
+      setSpotLoggedIn(false);
+      console.log(spotLoggedIn);
+    }else{
+      setSpotLoggedIn(true);
+      console.log(spotLoggedIn);
+    }
     
-  // };
+  };
 
 
 
@@ -75,9 +75,9 @@ export default function PostFeed() {
   
   return (
     <div className='post-feed'>
-      {spotLoggedIn ? <a href='http://localhost:3000/run-tracker-ns' >Spotify Log-out</a> : <a href={spotAuthCodeLink} >Spotify Log-in</a>}
+      {spotLoggedIn ? <a href='http://localhost:3000/run-tracker-ns' onChange={handleLogIn2}>Spotify Log-out</a> : <a href={spotAuthCodeLink} onChange={handleLogIn2}>Spotify Log-in</a>}
 
-      {loggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={logout}>Strava Log-out</a> : <a href={authCodeLink} >Strava Log-in</a>}                        
+      {loggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={logout} onChange={handleLogIn}>Strava Log-out</a> : <a href={authCodeLink} onChange={handleLogIn}>Strava Log-in</a>}                        
         <Post 
         stravaAuthCode={stravaAuthCode}
         spotifyAuthCode={spotifyAuthCode}
