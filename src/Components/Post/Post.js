@@ -6,6 +6,7 @@ import { stravaApiData } from '../../apiData';
 
 
 
+
 const dataUrl = 'api/v3/athlete/activities';
 const authUrl = '/oauth/token';
 const authData = {
