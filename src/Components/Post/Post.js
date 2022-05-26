@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../util/axios';
 import './Post.css';
+import { stravaApiData } from '../../apiData';
 
 
 
@@ -8,8 +9,8 @@ import './Post.css';
 const dataUrl = 'api/v3/athlete/activities';
 const authUrl = '/oauth/token';
 const authData = {
-    client_id: secrets.STRAVA_CLIENT_ID,
-    client_secret: '2656645c7185a01fbbf85c8bbbdf1d4d24273510',
+    client_id: stravaApiData.client_id,
+    client_secret: stravaApiData.client_secret,
 }
 
 
