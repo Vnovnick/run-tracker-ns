@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import axios from '../../util/axios';
+import axios from 'axios';
 import './Post.css';
-import { stravaApiData } from '../../apiData';
+import { spotifyApiData, stravaApiData } from '../../apiData';
+
+var Buffer = require('buffer/').Buffer;
 
 
+const redirect_uri = 'http://localhost:3000/run-tracker-ns';
 
+// Strava Urls/endpoints
+const baseStravaUrl = 'https://www.strava.com/';
+const stravaDataUrl = 'api/v3/athlete/activities';
+const stravaAuthUrl = 'oauth/token';
 
-
-
-const dataUrl = 'api/v3/athlete/activities';
-const authUrl = '/oauth/token';
-const authData = {
-    client_id: stravaApiData.client_id,
-    client_secret: stravaApiData.client_secret,
-}
+// Spotify Urls/endpoints
+const baseAuthSpotifyUrl = 'https://accounts.spotify.com/';
+const spotifyAuthUrl = 'api/token';
 
 
 export default function Post(props) {  
@@ -23,19 +25,49 @@ export default function Post(props) {
   const [stravaAccessToken, setStravaAccessToken] = useState('');
   const [stravaData, setStravaData] = useState([]);
 
-  const stravaAccessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
-  const stravaFullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${stravaRefreshToken}&grant_type=refresh_token`;
+  const stravaAccessCodeLink = `${baseStravaUrl}${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
+  const stravaFullAuthLink = `${baseStravaUrl}${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&refresh_token=${stravaRefreshToken}&grant_type=refresh_token`;
 
   // spotify states and links
   const [spotifyRefreshToken, setSpotifyRefreshToken] = useState('');
   const [spotifyAccessToken, setSpotifyAccessToken] = useState('');
   const [spotifyData, setSpotifyData] = useState([]);
 
-  
+  const spotifyAccessCodeLink = `${baseAuthSpotifyUrl}${spotifyAuthUrl}`;
 
+
+  // Spotify Auth + get data requests
   useEffect(() => {
-    async function fetchStravaData(){
-    
+    async function fetchSpotifyData(){
+      if (props.spotifyAuthCode && props.spotLoggedIn && props.spotifyStateMatch){
+
+        await axios.post(spotifyAccessCodeLink, {
+          code: props.spotifyAuthCode,
+          redirect_uri: redirect_uri,
+          // client_id: spotifyApiData.client_id,
+          // client_secret: spotifyApiData.client_secret,
+          grant_type: 'authorization_code'
+        }, {
+          headers: {
+            'Authorization': 'Basic ' + (Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64')),
+            'Content-type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error('Error: ', error);
+        })
+      }
+    }
+    fetchSpotifyData();
+  }, [props.spotifyAuthCode, props.spotLoggedIn, spotifyAccessCodeLink, props.spotifyStateMatch]);
+
+
+  // Strava Auth + get data requests
+  useEffect(() => {
+    async function fetchStravaData(){   
     
     // requests still seem to run 3 times 
 
@@ -69,7 +101,7 @@ export default function Post(props) {
     // get activity data request
 
     if (stravaAccessToken){
-    const requestActivities = await axios.get(`${dataUrl}?access_token=${stravaAccessToken}`, {
+    const requestActivities = await axios.get(`${baseStravaUrl}${stravaDataUrl}?access_token=${stravaAccessToken}`, {
       'Authorization': `Bearer ${stravaAccessToken}`
     });
     console.log(requestActivities.data);
