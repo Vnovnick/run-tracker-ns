@@ -18,18 +18,23 @@ const authData = {
 
 export default function Post(props) {  
   
-  const [refreshToken, setRefreshToken] = useState('');
-  const [accessToken, setAccessToken] = useState('');
-  const [data, setData] = useState([]);
+  // strava states and links
+  const [stravaRefreshToken, setStravaRefreshToken] = useState('');
+  const [stravaAccessToken, setStravaAccessToken] = useState('');
+  const [stravaData, setStravaData] = useState([]);
 
+  const stravaAccessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
+  const stravaFullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${stravaRefreshToken}&grant_type=refresh_token`;
 
+  // spotify states and links
+  const [spotifyRefreshToken, setSpotifyRefreshToken] = useState('');
+  const [spotifyAccessToken, setSpotifyAccessToken] = useState('');
+  const [spotifyData, setSpotifyData] = useState([]);
 
-  const accessCodeLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
-  const fullAuthLink = `${authUrl}?client_id=${authData.client_id}&client_secret=${authData.client_secret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
   
 
   useEffect(() => {
-    async function fetchData(){
+    async function fetchStravaData(){
     
     
     // requests still seem to run 3 times 
@@ -37,10 +42,10 @@ export default function Post(props) {
     // getting refresh token with new auth code
     
     if (props.stravaAuthCode && props.loggedIn){
-      await axios.post(accessCodeLink)
+      await axios.post(stravaAccessCodeLink)
       .then(response => {        
-          setRefreshToken(response.data['refresh_token']);
-          console.log(refreshToken);        
+          setStravaRefreshToken(response.data['refresh_token']);
+          console.log(stravaRefreshToken);        
       })
       .catch(error => {
         console.error('Error: ', error);
@@ -48,12 +53,12 @@ export default function Post(props) {
     }
 
     //refresh token post request
-    if (refreshToken){
-      await axios.post(fullAuthLink)    
+    if (stravaRefreshToken){
+      await axios.post(stravaFullAuthLink)    
       .then(response => {
           
-          setAccessToken(response.data['access_token']);
-          console.log(accessToken);
+          setStravaAccessToken(response.data['access_token']);
+          console.log(stravaAccessToken);
       })
       .catch(error => {
           console.error('Error: ', error);
@@ -63,23 +68,23 @@ export default function Post(props) {
 
     // get activity data request
 
-    if (accessToken){
-    const requestActivities = await axios.get(`${dataUrl}?access_token=${accessToken}`, {
-      'Authorization': `Bearer ${accessToken}`
+    if (stravaAccessToken){
+    const requestActivities = await axios.get(`${dataUrl}?access_token=${stravaAccessToken}`, {
+      'Authorization': `Bearer ${stravaAccessToken}`
     });
     console.log(requestActivities.data);
-    setData(requestActivities.data);    
+    setStravaData(requestActivities.data);    
     }
     
     }
-    fetchData();
+    fetchStravaData();
     
     
-  }, [accessToken, refreshToken, fullAuthLink, accessCodeLink, props.stravaAuthCode, props.loggedIn]);
+  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink, props.stravaAuthCode, props.loggedIn]);
 
   return (
     <div className='post-list'>
-        {data.map(item => (        
+        {stravaData.map(item => (        
         <div className='post-info' key={item.id}>
         <br></br>
         <h3>{item.name}</h3>
