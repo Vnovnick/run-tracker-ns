@@ -12,6 +12,8 @@ export default function PostFeed() {
   const spotAuthCodeLink = `https://accounts.spotify.com/authorize?client_id=${spotifyApiData.client_id}&client_secret=${spotifyApiData.client_secret}&scope=${spotifyApiData.scope}&state=${randSpotifyState}&response_type=code&redirect_uri=${redirect_uri}`;
   const authCodeLink = `https://www.strava.com/oauth/authorize?client_id=${stravaApiData.client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=activity:read_all`;
 
+
+
   const codeMatch = window.location.href.match(/code=([^&]*)/);
   const spotifyStateMatch = window.location.href.match(/state=([^&]*)/);
 

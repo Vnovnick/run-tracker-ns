@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './Post.css';
 import { spotifyApiData, stravaApiData } from '../../apiData';
+import qs from 'qs';
 
 var Buffer = require('buffer/').Buffer;
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
+
 
 // Strava Urls/endpoints
 const baseStravaUrl = 'https://www.strava.com/';
@@ -34,7 +36,7 @@ export default function Post(props) {
   const [spotifyData, setSpotifyData] = useState([]);
 
   const spotifyAccessCodeLink = `${baseAuthSpotifyUrl}${spotifyAuthUrl}`;
-  // (Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))
+
 
   // Spotify Auth + get data requests
   useEffect(() => {
@@ -42,17 +44,17 @@ export default function Post(props) {
       if (props.spotifyAuthCode && props.spotLoggedIn && props.spotifyStateMatch){
         console.log(props.spotifyAuthCode);
         console.log(props.spotifyStateMatch);
-
-        await axios.post(spotifyAccessCodeLink, {
+        
+        // gets refresh and access token
+        await axios.post(spotifyAccessCodeLink, qs.stringify({
           code: props.spotifyAuthCode,
           redirect_uri: redirect_uri,
-          // client_id: spotifyApiData.client_id,
-          // client_secret: spotifyApiData.client_secret,
           grant_type: 'authorization_code'
-        }, {
+        }),
+          {
           headers: {
-            'Authorization': 'Basic ' + spotifyApiData.client_id + ':' + spotifyApiData.client_secret,
-            'Content-type': 'application/x-www-form-urlencoded'
+            Authorization : `Basic ${(Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))}`,
+            'content-type': 'application/x-www-form-urlencoded'
           }
         })
         .then(response => {
