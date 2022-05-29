@@ -34,12 +34,14 @@ export default function Post(props) {
   const [spotifyData, setSpotifyData] = useState([]);
 
   const spotifyAccessCodeLink = `${baseAuthSpotifyUrl}${spotifyAuthUrl}`;
-
+  // (Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))
 
   // Spotify Auth + get data requests
   useEffect(() => {
     async function fetchSpotifyData(){
       if (props.spotifyAuthCode && props.spotLoggedIn && props.spotifyStateMatch){
+        console.log(props.spotifyAuthCode);
+        console.log(props.spotifyStateMatch);
 
         await axios.post(spotifyAccessCodeLink, {
           code: props.spotifyAuthCode,
@@ -49,7 +51,7 @@ export default function Post(props) {
           grant_type: 'authorization_code'
         }, {
           headers: {
-            'Authorization': 'Basic ' + (Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64')),
+            'Authorization': 'Basic ' + spotifyApiData.client_id + ':' + spotifyApiData.client_secret,
             'Content-type': 'application/x-www-form-urlencoded'
           }
         })

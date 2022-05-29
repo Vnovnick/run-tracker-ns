@@ -8,8 +8,8 @@ const redirect_uri = 'http://localhost:3000/run-tracker-ns';
 
 
 export default function PostFeed() {
-  let spotifyState = Math.random().toString(36).substring(1,17);
-  const spotAuthCodeLink = `https://accounts.spotify.com/authorize?client_id=${spotifyApiData.client_id}&client_secret=${spotifyApiData.client_secret}&scope=${spotifyApiData.scope}&state=${spotifyState}&response_type=code&redirect_uri=${redirect_uri}`;
+  let randSpotifyState = Math.random().toString(36).substring(1,17);
+  const spotAuthCodeLink = `https://accounts.spotify.com/authorize?client_id=${spotifyApiData.client_id}&client_secret=${spotifyApiData.client_secret}&scope=${spotifyApiData.scope}&state=${randSpotifyState}&response_type=code&redirect_uri=${redirect_uri}`;
   const authCodeLink = `https://www.strava.com/oauth/authorize?client_id=${stravaApiData.client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=activity:read_all`;
 
   const codeMatch = window.location.href.match(/code=([^&]*)/);
@@ -17,6 +17,7 @@ export default function PostFeed() {
 
   const [stravaAuthCode, setStravaAuthCode] = useState('');
   const [spotifyAuthCode, setSpotifyAuthCode] = useState('');
+  const [spotifyAuthState, setSpotifyAuthState] = useState('');
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [spotLoggedIn, setSpotLoggedIn] = useState(false);
@@ -63,14 +64,15 @@ export default function PostFeed() {
       setStravaAuthCode(codeMatch[1]);
       // console.log(authCode);
     } 
-    if (codeMatch && codeMatch[1].length > 41){
+    if (codeMatch && codeMatch[1].length > 41 && spotifyStateMatch){
       setSpotLoggedIn(true);
       setSpotifyAuthCode(codeMatch[1]);
+      setSpotifyAuthState(spotifyStateMatch[1]);
       // console.log(spotifyAuthCode);
     }
 
 
-  }, [stravaAuthCode, spotifyAuthCode, codeMatch, loggedIn, spotLoggedIn])
+  }, [stravaAuthCode, spotifyAuthCode, codeMatch, loggedIn, spotLoggedIn, spotifyStateMatch])
   
 
 
@@ -83,7 +85,7 @@ export default function PostFeed() {
       {loggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={logout} onChange={handleLogIn}>Strava Log-out</a> : <a href={authCodeLink} onChange={handleLogIn}>Strava Log-in</a>}                        
         <Post 
         stravaAuthCode={stravaAuthCode}
-        spotifyStateMatch={spotifyStateMatch}
+        spotifyStateMatch={spotifyAuthState}
         spotifyAuthCode={spotifyAuthCode}
         spotLoggedIn={spotLoggedIn}
         loggedIn={loggedIn}/>
@@ -91,4 +93,3 @@ export default function PostFeed() {
   )
 }
 
-// onChange={handleLogIn}
