@@ -62,6 +62,7 @@ export default function Post(props) {
             setSpotifyAccessToken(response.data.access_token);
             setSpotifyRefreshToken(response.data.refresh_token);
             console.log(spotifyAccessToken);
+            // write a conditional that will check if the token is expired and to only run the next request if it is in fact expired
           }
 
         })
@@ -69,6 +70,8 @@ export default function Post(props) {
           console.error('Error: ', error);
         })
       }
+
+      // below request creates an infinite loop; needs new conditional
 
       // if (spotifyRefreshToken){
       //   await axios.post(spotifyAccessCodeLink, qs.stringify({
