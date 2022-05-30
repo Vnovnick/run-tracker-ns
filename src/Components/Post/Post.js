@@ -4,7 +4,14 @@ import './Post.css';
 import { spotifyApiData, stravaApiData } from '../../apiData';
 import qs from 'qs';
 
+
 var Buffer = require('buffer/').Buffer;
+// const redis = require('redis');
+// const client = redis.createClient();
+
+// client.on('connect', function() {
+//   console.log('Connected!');
+// });
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
@@ -27,7 +34,7 @@ export default function Post(props) {
   const [stravaAccessToken, setStravaAccessToken] = useState('');
   const [stravaData, setStravaData] = useState([]);
 
-  const stravaAccessCodeLink = `${baseStravaUrl}${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
+  const stravaAccessCodeLink = `${baseStravaUrl}api/v3/${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
   const stravaFullAuthLink = `${baseStravaUrl}${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&refresh_token=${stravaRefreshToken}&grant_type=refresh_token`;
 
   // spotify states and links
@@ -112,52 +119,66 @@ export default function Post(props) {
 
   // Strava Auth + get data requests
   useEffect(() => {
-    async function fetchStravaData(){   
+    const authStrava = async () => {   
     
     // requests still seem to run 3 times 
 
     // getting refresh token with new auth code
     
-    if (props.stravaAuthCode && props.loggedIn){
+    
       await axios.post(stravaAccessCodeLink)
-      .then(response => {        
-          setStravaRefreshToken(response.data['refresh_token']);
-          console.log(stravaRefreshToken);        
+      .then(response => {  
+          if (response.status === 200){
+            console.log(response.data.access_token);
+            setStravaAccessToken(response.data.access_token)
+             
+            // console.log(stravaAccessToken); 
+          }   
+      
       })
       .catch(error => {
         console.error('Error: ', error);
       });
+    
     }
+    authStrava();
+
+    
+
+
 
     //refresh token post request
-    if (stravaRefreshToken){
-      await axios.post(stravaFullAuthLink)    
-      .then(response => {
-          
-          setStravaAccessToken(response.data['access_token']);
-          console.log(stravaAccessToken);
-      })
-      .catch(error => {
-          console.error('Error: ', error);
-      });
+     function refreshStravaAccessToken(){
+      if (stravaRefreshToken){
+        axios.post(stravaFullAuthLink)    
+        .then(response => {
+            
+            setStravaAccessToken(response.data['access_token']);
+            console.log(stravaAccessToken);
+        })
+        .catch(error => {
+            console.error('Error: ', error);
+        });
+      }
     }
 
-
-    // get activity data request
-
-    if (stravaAccessToken){
-    const requestActivities = await axios.get(`${baseStravaUrl}${stravaDataUrl}?access_token=${stravaAccessToken}`, {
-      'Authorization': `Bearer ${stravaAccessToken}`
-    });
-    console.log(requestActivities.data);
-    setStravaData(requestActivities.data);    
+    
+    async function fetchStravaData(){
+      
+        const requestActivities = await axios.get(`${baseStravaUrl}${stravaDataUrl}?access_token=${stravaAccessToken}`, {
+          'Authorization': `Bearer ${stravaAccessToken}`
+        });
+        console.log(requestActivities.data);
+        setStravaData(requestActivities.data);    
+        
     }
-    
+    if (stravaAccessToken) {
+      fetchStravaData(); 
     }
-    fetchStravaData();
+  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink]);
+
     
-    
-  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink, props.stravaAuthCode, props.loggedIn]);
+  
 
   return (
     <div className='post-list'>

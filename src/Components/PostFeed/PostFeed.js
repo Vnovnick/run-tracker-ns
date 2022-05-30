@@ -61,23 +61,35 @@ export default function PostFeed() {
   }
 
 
-  useEffect(() => {
-    if (codeMatch && codeMatch[1].length < 41){
-      setLoggedIn(true);
-      // console.log(loggedIn);
-      setStravaAuthCode(codeMatch[1]);
-      // console.log(authCode);
+ 
+    const getStravaUrlCode = () => {
+      if (codeMatch && codeMatch[1].length < 41){
+        setLoggedIn(true);
+        // console.log(loggedIn);
+        setStravaAuthCode(codeMatch[1]);
+        // console.log(authCode);
+      }
+    }
+ 
+    const getSpotifyUrlCode = () => {
+      if (codeMatch && codeMatch[1].length > 41 && spotifyStateMatch){
+        setSpotLoggedIn(true);
+        setSpotifyAuthCode(codeMatch[1]);
+        setSpotifyAuthState(spotifyStateMatch[1]);
+        // console.log(spotifyAuthCode);
+      }
     } 
-    if (codeMatch && codeMatch[1].length > 41 && spotifyStateMatch){
-      setSpotLoggedIn(true);
-      setSpotifyAuthCode(codeMatch[1]);
-      setSpotifyAuthState(spotifyStateMatch[1]);
-      // console.log(spotifyAuthCode);
+    if (!stravaAuthCode){
+      getStravaUrlCode();
     }
 
-
-  }, [stravaAuthCode, spotifyAuthCode, codeMatch, loggedIn, spotLoggedIn, spotifyStateMatch])
+    if (!spotifyAuthCode || !spotifyAuthState) {
+      getSpotifyUrlCode();
+    }
     
+
+
+
   return (
     <div className='post-feed'>
       {spotLoggedIn ? <a href='http://localhost:3000/run-tracker-ns' >Spotify Log-out</a> : <a href={spotAuthCodeLink} >Spotify Log-in</a>}
@@ -93,3 +105,4 @@ export default function PostFeed() {
   )
 }
 
+// useEffect(() => {  }, [codeMatch, spotifyStateMatch, spotifyAuthCode, spotifyAuthState, stravaAuthCode])
