@@ -42,8 +42,8 @@ export default function Post(props) {
   useEffect(() => {
     async function fetchSpotifyData(){
       if (props.spotifyAuthCode && props.spotLoggedIn && props.spotifyStateMatch){
-        console.log(props.spotifyAuthCode);
-        console.log(props.spotifyStateMatch);
+        // console.log(props.spotifyAuthCode);
+        // console.log(props.spotifyStateMatch);
         
         // gets refresh and access token
         await axios.post(spotifyAccessCodeLink, qs.stringify({
@@ -58,15 +58,53 @@ export default function Post(props) {
           }
         })
         .then(response => {
-          console.log(response.data);
+          if (response.status === 200) {
+            setSpotifyAccessToken(response.data.access_token);
+            setSpotifyRefreshToken(response.data.refresh_token);
+            console.log(spotifyAccessToken);
+          }
+
         })
         .catch(error => {
           console.error('Error: ', error);
         })
       }
+
+      // if (spotifyRefreshToken){
+      //   await axios.post(spotifyAccessCodeLink, qs.stringify({
+      //     grant_type: 'refresh_token',
+      //     refresh_token: spotifyRefreshToken
+      //   }), {
+      //     headers: {
+      //       Authorization : `Basic ${(Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))}`,
+      //       'content-type': 'application/x-www-form-urlencoded'
+      //     }
+      //   }
+      //   )
+      //   .then(response => {
+      //     setSpotifyAccessToken(response.data.access_token);
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   })
+      // }
+
+      if (spotifyAccessToken){
+        const requestRecentlyPlayed = await axios.get('https://api.spotify.com/v1/me/player/recently-played', {
+          headers: {
+            Authorization: `Bearer ${spotifyAccessToken}`,
+            'content-type': 'application/json'
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        console.log(requestRecentlyPlayed.data);
+        setSpotifyData(requestRecentlyPlayed.data.items);
+      }
     }
     fetchSpotifyData();
-  }, [props.spotifyAuthCode, props.spotLoggedIn, spotifyAccessCodeLink, props.spotifyStateMatch]);
+  }, [props.spotifyAuthCode, props.spotLoggedIn, spotifyAccessCodeLink, props.spotifyStateMatch, spotifyAccessToken, spotifyRefreshToken]);
 
 
   // Strava Auth + get data requests
@@ -128,12 +166,11 @@ export default function Post(props) {
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
         <br></br>
         </div>))}
-
-        {/* <p></p>
-        <p>Post description</p>
-        <h3>distance</h3>
-        <h3>Average Pace</h3>
-        <h3>Moving Time</h3> */}
+        {spotifyData.map(item => (
+          <div className='post-tracks' key={item.id}>
+            <h3>{item.track.name}</h3>
+          </div>
+        ))}
     </div>
   )
 };
