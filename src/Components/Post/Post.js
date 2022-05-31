@@ -3,15 +3,15 @@ import axios from 'axios';
 import './Post.css';
 import { spotifyApiData, stravaApiData } from '../../apiData';
 import qs from 'qs';
-
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 var Buffer = require('buffer/').Buffer;
-// const redis = require('redis');
-// const client = redis.createClient();
 
-// client.on('connect', function() {
-//   console.log('Connected!');
-// });
+const persistConfig = {
+  key: 'persist-key',
+  storage
+}
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
@@ -120,17 +120,13 @@ export default function Post(props) {
   // Strava Auth + get data requests
   useEffect(() => {
     const authStrava = async () => {   
-    
     // requests still seem to run 3 times 
-
     // getting refresh token with new auth code
-    
-    
       await axios.post(stravaAccessCodeLink)
       .then(response => {  
           if (response.status === 200){
             console.log(response.data.access_token);
-            setStravaAccessToken(response.data.access_token)
+            setStravaAccessToken(response.data.access_token);
              
             // console.log(stravaAccessToken); 
           }   
@@ -141,11 +137,7 @@ export default function Post(props) {
       });
     
     }
-    authStrava();
-
-    
-
-
+    authStrava();  
 
     //refresh token post request
      function refreshStravaAccessToken(){
