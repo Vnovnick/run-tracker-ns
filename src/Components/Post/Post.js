@@ -138,7 +138,7 @@ export default function Post(props) {
       });
     
     }
-    if (props.stravaAuthCode && props.loggedIn){
+    if (props.stravaAuthCode){
       authStrava(); 
     }
  
@@ -174,7 +174,7 @@ export default function Post(props) {
     if (stravaAccessToken) {
       fetchStravaData(); 
     }
-  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink, props.stravaAuthCode, props.loggedIn]);
+  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink, props.stravaAuthCode]);
 
   return (
     <div className='post-list'>
