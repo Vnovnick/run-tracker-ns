@@ -3,15 +3,16 @@ import axios from 'axios';
 import './Post.css';
 import { spotifyApiData, stravaApiData } from '../../apiData';
 import qs from 'qs';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import { persistStore, persistReducer } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
+import PostContent from '../PostContent/PostContent';
 
 var Buffer = require('buffer/').Buffer;
 
-const persistConfig = {
-  key: 'persist-key',
-  storage
-}
+// const persistConfig = {
+//   key: 'persist-key',
+//   storage
+// }
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
@@ -137,22 +138,25 @@ export default function Post(props) {
       });
     
     }
-    authStrava();  
+    if (props.stravaAuthCode && props.loggedIn){
+      authStrava(); 
+    }
+ 
 
     //refresh token post request
-     function refreshStravaAccessToken(){
-      if (stravaRefreshToken){
-        axios.post(stravaFullAuthLink)    
-        .then(response => {
+    //  function refreshStravaAccessToken(){
+    //   if (stravaRefreshToken){
+    //     axios.post(stravaFullAuthLink)    
+    //     .then(response => {
             
-            setStravaAccessToken(response.data['access_token']);
-            console.log(stravaAccessToken);
-        })
-        .catch(error => {
-            console.error('Error: ', error);
-        });
-      }
-    }
+    //         setStravaAccessToken(response.data['access_token']);
+    //         console.log(stravaAccessToken);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error: ', error);
+    //     });
+    //   }
+    // }
 
     
     async function fetchStravaData(){
@@ -161,32 +165,22 @@ export default function Post(props) {
           'Authorization': `Bearer ${stravaAccessToken}`
         });
         console.log(requestActivities.data);
-        setStravaData(requestActivities.data);    
+        setStravaData(requestActivities.data); 
+        window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
+        let storageData = localStorage.getItem('StravaData');
+        console.log(JSON.parse(storageData));   
         
     }
     if (stravaAccessToken) {
       fetchStravaData(); 
     }
-  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink]);
-
-    
-  
+  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink, props.stravaAuthCode, props.loggedIn]);
 
   return (
     <div className='post-list'>
-        {stravaData.map(item => (        
-        <div className='post-info' key={item.id}>
-        <br></br>
-        <h3>{item.name}</h3>
-        <h4>Distance: {item.distance}</h4>
-        <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
-        <br></br>
-        </div>))}
-        {spotifyData.map(item => (
-          <div className='post-tracks' key={item.id}>
-            <h3>{item.track.name}</h3>
-          </div>
-        ))}
+        <PostContent         
+        spotifyData={spotifyData}
+        />
     </div>
   )
 };

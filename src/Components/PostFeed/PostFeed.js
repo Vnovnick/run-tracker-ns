@@ -18,6 +18,9 @@ export default function PostFeed() {
   const spotifyStateMatch = window.location.href.match(/state=([^&]*)/);
 
   const [stravaAuthCode, setStravaAuthCode] = useState('');
+
+
+
   const [spotifyAuthCode, setSpotifyAuthCode] = useState('');
   const [spotifyAuthState, setSpotifyAuthState] = useState('');
 
@@ -57,7 +60,7 @@ export default function PostFeed() {
   // potential logout function to clear cache data later on
   const logout = () => {
     axios.post('https://www.strava.com/oauth/deauthorize');
-    // window.location.href = '/';
+    localStorage.clear();
   }
 
 
@@ -85,8 +88,7 @@ export default function PostFeed() {
 
     if (!spotifyAuthCode || !spotifyAuthState) {
       getSpotifyUrlCode();
-    }
-    
+    }  
 
 
 
