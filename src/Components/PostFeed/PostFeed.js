@@ -32,11 +32,11 @@ export default function PostFeed() {
   // handle login change for strava
   // const handleLogIn = (event) => {
   //   event.preventDefault();
-  //   if (loggedIn){
-  //     setLoggedIn(false);
+  //   if (!loggedIn && window.localStorage.getItem('StravaData')){
+  //     setLoggedIn(true);
   //     console.log(loggedIn);
   //   }else{
-  //     setLoggedIn(true);
+  //     setLoggedIn(false);
   //     console.log(loggedIn);
   //   }
     
@@ -58,13 +58,17 @@ export default function PostFeed() {
 
 
   // potential logout function to clear cache data later on
-  const logout = () => {
+  const stravaLogout = () => {
     axios.post('https://www.strava.com/oauth/deauthorize');
-    localStorage.clear();
+    window.localStorage.removeItem('StravaData');
+  }
+  const spotifyLogout = () => {
+   window.localStorage.removeItem('SpotifyData')
+ 
   }
 
 
- 
+
     const getStravaUrlCode = () => {
       if (codeMatch && codeMatch[1].length < 41){
         setLoggedIn(true);
@@ -90,13 +94,19 @@ export default function PostFeed() {
       getSpotifyUrlCode();
     }  
 
+    
+
 
 
   return (
     <div className='post-feed'>
-      {spotLoggedIn ? <a href='http://localhost:3000/run-tracker-ns' >Spotify Log-out</a> : <a href={spotAuthCodeLink} >Spotify Log-in</a>}
-
-      {loggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={logout} >Strava Log-out</a> : <a href={authCodeLink} >Strava Log-in</a>}                        
+      <ul>
+        <li>{spotLoggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={spotifyLogout} >Spotify Log-out</a> : <a href={spotAuthCodeLink} >Spotify Log-in</a>}
+      </li>
+      <li>  {loggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={stravaLogout} >Strava Log-out</a> : <a href={authCodeLink}>Strava Log-in</a>}    </li>
+      </ul>
+      
+                        
         <Post 
         stravaAuthCode={stravaAuthCode}
         spotifyStateMatch={spotifyAuthState}

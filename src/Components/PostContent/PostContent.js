@@ -20,16 +20,40 @@ export default function PostContent(props) {
 // 7. display the songs in this new list along with the 
 
 
-    const tracksDuringRun = () => {
+
+    let stravaStorageData = localStorage.getItem('StravaData');
+    let stravaConvertedData = JSON.parse(stravaStorageData);
+    let spotifyStorageData = localStorage.getItem('SpotifyData');
+    let spotifyConvertedData = JSON.parse(spotifyStorageData);
+
+    if (stravaConvertedData) {
+        const runStartDates = stravaConvertedData.map(({start_date}) => start_date); //'2022-05-28T00:56:57Z'
+        const movingTimes = stravaConvertedData.map(({moving_time}) => moving_time);
+        console.log(movingTimes);
+        // console.log(runStartDates);
+
+        let convRunStartDates = runStartDates.map(date => {
+            let event = new Date(date);             
+            const [hours, minutes, seconds] = event.toLocaleTimeString('it-IT').split(':');
+            const totalSeconds = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
+            return totalSeconds;
+            
+        });
+        console.log(convRunStartDates);
+
+        // let convMovingTimes = movingTimes.map(num => {
+            
+        // })
+        
+
 
     };
-    let storageData = localStorage.getItem('StravaData');
-    let convertedData = JSON.parse(storageData);
 
+// 2022-05-31T15:18:44.481Z
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
     <div>
-        {convertedData ? convertedData.map(item => (        
+        {stravaConvertedData ? stravaConvertedData.map(item => (        
         <div className='post-info' key={item.id}>
         <br></br>
         <h3>{item.name}</h3>
@@ -38,11 +62,11 @@ export default function PostContent(props) {
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
     
-    {props.spotifyData.map(item => (
+    {spotifyConvertedData ? spotifyConvertedData.map(item => (
         <div className='post-tracks' key={item.id}>
         <h3>{item.track.name}</h3>
         </div>
-        ))}
+        )) : 'Please Log-in to view Spotify Data'}
     {/* {props.stravaData.map(item => (        
         <div className='post-info' key={item.id}>
         <br></br>
