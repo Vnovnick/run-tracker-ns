@@ -1,4 +1,5 @@
 import React from 'react';
+import { customRange } from './range';
 
 export default function PostContent(props) {
 
@@ -23,6 +24,7 @@ export default function PostContent(props) {
 
     let stravaStorageData = localStorage.getItem('StravaData');
     let stravaConvertedData = JSON.parse(stravaStorageData);
+
     let spotifyStorageData = localStorage.getItem('SpotifyData');
     let spotifyConvertedData = JSON.parse(spotifyStorageData);
 
@@ -40,6 +42,19 @@ export default function PostContent(props) {
             
         });
         console.log(convRunStartDates);
+
+        let zippedTimes = convRunStartDates.map((d, i) => {
+            return [d, movingTimes[i]];
+        });
+        console.log(zippedTimes);
+
+        let runEndTimes = zippedTimes.map(arr => {
+            return arr[0] + arr[1];
+        })
+        console.log(runEndTimes);
+
+
+
 
         // let convMovingTimes = movingTimes.map(num => {
             
