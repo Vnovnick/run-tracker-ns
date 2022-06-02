@@ -98,14 +98,14 @@ export default function Post(props) {
         setStravaData(requestActivities.data); 
         window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
         let stravaStorageData = localStorage.getItem('StravaData');
-        console.log(JSON.parse(stravaStorageData));  
+        // console.log(JSON.parse(stravaStorageData));  
          
         
     }
     if (stravaAccessToken) {
       fetchStravaData(); 
     }
-  }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink, props.stravaAuthCode]);
+  }, [stravaAccessToken, stravaRefreshToken, stravaAccessCodeLink, props.stravaAuthCode]);
 
 
 
@@ -176,9 +176,8 @@ export default function Post(props) {
   
   const fetchSpotifyData = async () => {
     let stravaConvertedData = JSON.parse(localStorage.getItem('StravaData'));
-    const afterDate = stravaConvertedData[29].start_date;
-    let date = new Date(afterDate); 
-    let spotAfter = date.getTime(); 
+    let spotAfter = new Date(stravaConvertedData[4].start_date).getTime(); 
+    
 
     
       const requestRecentlyPlayed = await axios.get(`https://api.spotify.com/v1/me/player/recently-played?after=${spotAfter}&limit=50` ,{
@@ -194,7 +193,7 @@ export default function Post(props) {
       setSpotifyData(requestRecentlyPlayed.data.items);
       window.localStorage.setItem('SpotifyData', JSON.stringify(requestRecentlyPlayed.data.items));
       let spotifyStorageData = localStorage.getItem('SpotifyData');
-      console.log(JSON.parse(spotifyStorageData));
+      // console.log(JSON.parse(spotifyStorageData));
     
   }
 

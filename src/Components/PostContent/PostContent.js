@@ -20,6 +20,9 @@ export default function PostContent(props) {
 // 6. if the played at dates/times fall within the range of the seconds list or match any of the seconds on said list, then they will be added to a separate array that is tied to the run
 // 7. display the songs in this new list along with the 
 
+// {start: start_time, end: end_time} => [start, end], 
+// 
+// is the song greater than or less than runRange
 
 
     let stravaStorageData = localStorage.getItem('StravaData');
@@ -29,44 +32,40 @@ export default function PostContent(props) {
     let spotifyConvertedData = JSON.parse(spotifyStorageData);
 
     if (stravaConvertedData) {
-        const runStartDates = stravaConvertedData.map(({start_date}) => start_date); //'2022-05-28T00:56:57Z'
-        const movingTimes = stravaConvertedData.map(({moving_time}) => moving_time);
-        console.log(movingTimes);
-        // console.log(runStartDates);
-
+        const runStartDates = stravaConvertedData.map(({start_date}) => start_date); //original date formal = '2022-05-28T00:56:57Z'
+        const movingTimes = stravaConvertedData.map(({elapsed_time}) => elapsed_time);
         let convRunStartDates = runStartDates.map(date => {
-            let event = new Date(date);             
-            const [hours, minutes, seconds] = event.toLocaleTimeString('it-IT').split(':');
-            const totalSeconds = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
-            return totalSeconds;
-            
+            return new Date(date).getTime();        
         });
-        console.log(convRunStartDates);
+
+
+        // console.log(convRunStartDates);
 
         let zippedTimes = convRunStartDates.map((d, i) => {
-            return [d, movingTimes[i]];
+            return [d, (movingTimes[i] * 1000)];
         });
         console.log(zippedTimes);
 
         let runEndTimes = zippedTimes.map(arr => {
             return arr[0] + arr[1];
         })
-        console.log(runEndTimes);
+        // console.log(runEndTimes);
 
-        let runTimeRanges = convRunStartDates.map((s, i) => {
-            return [customRange(s, runEndTimes[i])];
-        })
-    };
-
+        let runRanges = convRunStartDates.map((d, i) => {
+            return [d, runEndTimes[i]];
+        });
+        // console.log(runRanges);
 
     if (spotifyConvertedData){
         let spotifyPlayedAtArr = spotifyConvertedData.map(({played_at}) => played_at);
+        let convSpotifyPlayedAtArr = spotifyPlayedAtArr.map(date => {
+            return new Date(date).getTime();             
+
+        })};
+
+        // const trackRunList = (start <= trackTime < end)
     };
 
-
-
-
-// 2022-05-31T15:18:44.481Z
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
     <div>
