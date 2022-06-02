@@ -47,90 +47,6 @@ export default function Post(props) {
   const spotifyAccessCodeLink = `${baseAuthSpotifyUrl}${spotifyAuthUrl}`;
 
 
-  // Spotify Auth + get data requests
-  useEffect(() => {
-
-      
-        // console.log(props.spotifyAuthCode);
-        // console.log(props.spotifyStateMatch);
-        
-        // gets refresh and access token
-        const authSpotify = async () => {
-          await axios.post(spotifyAccessCodeLink, qs.stringify({
-            code: props.spotifyAuthCode,
-            redirect_uri: redirect_uri,
-            grant_type: 'authorization_code'
-          }),
-            {
-            headers: {
-              Authorization : `Basic ${(Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))}`,
-              'content-type': 'application/x-www-form-urlencoded'
-            }
-          })
-          .then(response => {
-            if (response.status === 200) {
-              setSpotifyAccessToken(response.data.access_token);
-              setSpotifyRefreshToken(response.data.refresh_token);
-              console.log(spotifyAccessToken);
-              // write a conditional that will check if the token is expired and to only run the next request if it is in fact expired
-            }
-  
-          })
-          .catch(error => {
-            console.error('Error: ', error);
-          })
-        }
-        if (props.spotifyAuthCode && props.spotLoggedIn && props.spotifyStateMatch){
-          authSpotify();
-        }
-        
-      
-
-      // below request creates an infinite loop; needs new conditional
-
-      // if (spotifyRefreshToken){
-      //   await axios.post(spotifyAccessCodeLink, qs.stringify({
-      //     grant_type: 'refresh_token',
-      //     refresh_token: spotifyRefreshToken
-      //   }), {
-      //     headers: {
-      //       Authorization : `Basic ${(Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))}`,
-      //       'content-type': 'application/x-www-form-urlencoded'
-      //     }
-      //   }
-      //   )
-      //   .then(response => {
-      //     setSpotifyAccessToken(response.data.access_token);
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   })
-      // }
-      const fetchSpotifyData = async () => {
-        
-          const requestRecentlyPlayed = await axios.get('https://api.spotify.com/v1/me/player/recently-played', {
-            headers: {
-              Authorization: `Bearer ${spotifyAccessToken}`,
-              'content-type': 'application/json'
-            }
-          })
-          .catch(error => {
-            console.log(error);
-          })
-          console.log(requestRecentlyPlayed.data);
-          setSpotifyData(requestRecentlyPlayed.data.items);
-          window.localStorage.setItem('SpotifyData', JSON.stringify(requestRecentlyPlayed.data.items));
-          let spotifyStorageData = localStorage.getItem('SpotifyData');
-          console.log(JSON.parse(spotifyStorageData));
-        
-      }
-
-      if (spotifyAccessToken){
-        fetchSpotifyData();
-      }
-
-  }, [props.spotifyAuthCode, props.spotLoggedIn, spotifyAccessCodeLink, props.spotifyStateMatch, spotifyAccessToken, spotifyRefreshToken]);
-
 
   // Strava Auth + get data requests
   useEffect(() => {
@@ -181,8 +97,9 @@ export default function Post(props) {
         // console.log(requestActivities.data);
         setStravaData(requestActivities.data); 
         window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
-        let stravaspotifyStorageData = localStorage.getItem('StravaData');
-        console.log(JSON.parse(stravaspotifyStorageData));   
+        let stravaStorageData = localStorage.getItem('StravaData');
+        console.log(JSON.parse(stravaStorageData));  
+         
         
     }
     if (stravaAccessToken) {
@@ -190,10 +107,108 @@ export default function Post(props) {
     }
   }, [stravaAccessToken, stravaRefreshToken, stravaFullAuthLink, stravaAccessCodeLink, props.stravaAuthCode]);
 
+
+
+
+
+  // Spotify Auth + get data requests
+
+  useEffect(() => {
+
+      
+    // console.log(props.spotifyAuthCode);
+    // console.log(props.spotifyStateMatch);
+    
+    // gets refresh and access token
+    const authSpotify = async () => {
+      await axios.post(spotifyAccessCodeLink, qs.stringify({
+        code: props.spotifyAuthCode,
+        redirect_uri: redirect_uri,
+        grant_type: 'authorization_code'
+      }),
+        {
+        headers: {
+          Authorization : `Basic ${(Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))}`,
+          'content-type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {
+          setSpotifyAccessToken(response.data.access_token);
+          setSpotifyRefreshToken(response.data.refresh_token);
+          console.log(spotifyAccessToken);
+          // write a conditional that will check if the token is expired and to only run the next request if it is in fact expired
+        }
+
+      })
+      .catch(error => {
+        console.error('Error: ', error);
+      })
+    }
+    if (props.spotifyAuthCode && props.spotLoggedIn && props.spotifyStateMatch){
+      authSpotify();
+    }
+    
+  
+
+  // below request creates an infinite loop; needs new conditional
+
+  // if (spotifyRefreshToken){
+  //   await axios.post(spotifyAccessCodeLink, qs.stringify({
+  //     grant_type: 'refresh_token',
+  //     refresh_token: spotifyRefreshToken
+  //   }), {
+  //     headers: {
+  //       Authorization : `Basic ${(Buffer.from(spotifyApiData.client_id + ':' + spotifyApiData.client_secret).toString('base64'))}`,
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     }
+  //   }
+  //   )
+  //   .then(response => {
+  //     setSpotifyAccessToken(response.data.access_token);
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   })
+  // }
+
+
+  
+  const fetchSpotifyData = async () => {
+    let stravaConvertedData = JSON.parse(localStorage.getItem('StravaData'));
+    const afterDate = stravaConvertedData[29].start_date;
+    let date = new Date(afterDate); 
+    let spotAfter = date.getTime(); 
+
+    
+      const requestRecentlyPlayed = await axios.get(`https://api.spotify.com/v1/me/player/recently-played?after=${spotAfter}&limit=50` ,{
+        headers: {
+          Authorization: `Bearer ${spotifyAccessToken}`,
+          'content-type': 'application/json'
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+      console.log(requestRecentlyPlayed.data);
+      setSpotifyData(requestRecentlyPlayed.data.items);
+      window.localStorage.setItem('SpotifyData', JSON.stringify(requestRecentlyPlayed.data.items));
+      let spotifyStorageData = localStorage.getItem('SpotifyData');
+      console.log(JSON.parse(spotifyStorageData));
+    
+  }
+
+  if (spotifyAccessToken && window.localStorage.getItem('StravaData')){
+    fetchSpotifyData();
+  }
+
+}, [props.spotifyAuthCode, props.spotLoggedIn, spotifyAccessCodeLink, props.spotifyStateMatch, spotifyAccessToken, spotifyRefreshToken]);
+
+
   return (
     <div className='post-list'>
         <PostContent         
-        spotifyData={spotifyData}
+        
         />
     </div>
   )

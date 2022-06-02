@@ -61,9 +61,11 @@ export default function PostFeed() {
   const stravaLogout = () => {
     axios.post('https://www.strava.com/oauth/deauthorize');
     window.localStorage.removeItem('StravaData');
+    window.localStorage.removeItem('stravaLogin');
   }
   const spotifyLogout = () => {
-   window.localStorage.removeItem('SpotifyData')
+   window.localStorage.removeItem('SpotifyData');
+   window.localStorage.removeItem('spotifyLogin');
  
   }
 
@@ -72,8 +74,10 @@ export default function PostFeed() {
     const getStravaUrlCode = () => {
       if (codeMatch && codeMatch[1].length < 41){
         setLoggedIn(true);
-        // console.log(loggedIn);
         setStravaAuthCode(codeMatch[1]);
+        window.localStorage.setItem('stravaLogin', loggedIn);
+        // console.log(loggedIn);
+       
         // console.log(authCode);
       }
     }
@@ -81,6 +85,7 @@ export default function PostFeed() {
     const getSpotifyUrlCode = () => {
       if (codeMatch && codeMatch[1].length > 41 && spotifyStateMatch){
         setSpotLoggedIn(true);
+        window.localStorage.setItem('spotifyLogin', spotLoggedIn);
         setSpotifyAuthCode(codeMatch[1]);
         setSpotifyAuthState(spotifyStateMatch[1]);
         // console.log(spotifyAuthCode);
@@ -94,6 +99,9 @@ export default function PostFeed() {
       getSpotifyUrlCode();
     }  
 
+    const renderTotalLogout = () => {
+      return <li><a href='http://localhost:3000/run-tracker-ns' onClick={() => {stravaLogout(); spotifyLogout();}}>Log-out of both Strava and Spotify</a></li>;
+    };
     
 
 
@@ -101,10 +109,15 @@ export default function PostFeed() {
   return (
     <div className='post-feed'>
       <ul>
-        <li>{spotLoggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={spotifyLogout} >Spotify Log-out</a> : <a href={spotAuthCodeLink} >Spotify Log-in</a>}
-      </li>
-      <li>  {loggedIn ? <a href='http://localhost:3000/run-tracker-ns' onClick={stravaLogout} >Strava Log-out</a> : <a href={authCodeLink}>Strava Log-in</a>}    </li>
-      </ul>
+     {(window.localStorage.getItem('stravaLogin') && window.localStorage.getItem('spotifyLogin')) && (renderTotalLogout())}
+     </ul>       
+      {!(window.localStorage.getItem('stravaLogin') && window.localStorage.getItem('spotifyLogin')) && 
+      <ul id='logins'>
+        {window.localStorage.getItem('stravaLogin') ? <li><a href={redirect_uri} onClick={stravaLogout} >Strava Log-out</a></li> : <li><a href={authCodeLink}>Strava Log-in</a></li>}  
+        {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} >Spotify Log-out</a></li> : <li><a href={spotAuthCodeLink} >Spotify Log-in</a></li>)}
+      </ul>}
+
+      
       
                         
         <Post 

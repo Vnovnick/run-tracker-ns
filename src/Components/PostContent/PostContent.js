@@ -53,16 +53,18 @@ export default function PostContent(props) {
         })
         console.log(runEndTimes);
 
-
-
-
-        // let convMovingTimes = movingTimes.map(num => {
-            
-        // })
-        
-
-
+        let runTimeRanges = convRunStartDates.map((s, i) => {
+            return [customRange(s, runEndTimes[i])];
+        })
     };
+
+
+    if (spotifyConvertedData){
+        let spotifyPlayedAtArr = spotifyConvertedData.map(({played_at}) => played_at);
+    };
+
+
+
 
 // 2022-05-31T15:18:44.481Z
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
@@ -76,12 +78,12 @@ export default function PostContent(props) {
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
-    
+    <br></br>
     {spotifyConvertedData ? spotifyConvertedData.map(item => (
         <div className='post-tracks' key={item.id}>
         <h3>{item.track.name}</h3>
         </div>
-        )) : 'Please Log-in to view Spotify Data'}
+        )) : 'Please first login to Strava to be able to login to Spotify'}
     {/* {props.stravaData.map(item => (        
         <div className='post-info' key={item.id}>
         <br></br>
