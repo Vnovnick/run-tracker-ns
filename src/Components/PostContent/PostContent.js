@@ -1,5 +1,5 @@
 import React from 'react';
-import { customRange } from './range';
+import { trackList } from './trackList';
 
 export default function PostContent(props) {
 
@@ -38,13 +38,10 @@ export default function PostContent(props) {
             return new Date(date).getTime();        
         });
 
-
-        // console.log(convRunStartDates);
-
         let zippedTimes = convRunStartDates.map((d, i) => {
             return [d, (movingTimes[i] * 1000)];
         });
-        console.log(zippedTimes);
+        // console.log(zippedTimes);
 
         let runEndTimes = zippedTimes.map(arr => {
             return arr[0] + arr[1];
@@ -54,14 +51,41 @@ export default function PostContent(props) {
         let runRanges = convRunStartDates.map((d, i) => {
             return [d, runEndTimes[i]];
         });
-        // console.log(runRanges);
+        console.log(runRanges[0]);
 
     if (spotifyConvertedData){
         let spotifyPlayedAtArr = spotifyConvertedData.map(({played_at}) => played_at);
         let convSpotifyPlayedAtArr = spotifyPlayedAtArr.map(date => {
-            return new Date(date).getTime();             
+            return new Date(date).getTime();})
 
-        })};
+        // const trackList = (song) => {
+        //     if (song >= runRanges[0][0] && song <= runRanges[0][1]){
+        //         return song;
+        //     }     
+        // };
+        // let testTrackList = convSpotifyPlayedAtArr.filter(trackList);
+        // console.log(testTrackList);
+
+        const rangeFunc = (run) => {
+            return convSpotifyPlayedAtArr.filter(song => {
+                if (song >= run[0] && song <= run[1]){
+                    return song;
+                }
+                return false;  
+            })
+        };
+
+
+        let tracksDuringRun = runRanges.map(rangeFunc);
+        // let testTrackList = convSpotifyPlayedAtArr.filter(trackList);
+
+        console.log(tracksDuringRun);
+        };
+
+        // let playedDuringRun = runRanges.map((run, i) => {
+        //     if (run[i][0] <= convSpotifyPlayedAtArr)
+        // })
+
 
         // const trackRunList = (start <= trackTime < end)
     };
