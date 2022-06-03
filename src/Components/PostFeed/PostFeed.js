@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Post from '../Post/Post';
 import axios from 'axios';
 import { stravaApiData, spotifyApiData } from '../../apiData';
@@ -66,6 +66,7 @@ export default function PostFeed() {
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');
    window.localStorage.removeItem('spotifyLogin');
+   window.localStorage.removeItem('tracks');
  
   }
 

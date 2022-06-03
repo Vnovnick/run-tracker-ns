@@ -1,5 +1,5 @@
 import React from 'react';
-import { trackList } from './trackList';
+
 
 export default function PostContent(props) {
 
@@ -25,11 +25,12 @@ export default function PostContent(props) {
 // is the song greater than or less than runRange
 
 
-    let stravaStorageData = localStorage.getItem('StravaData');
-    let stravaConvertedData = JSON.parse(stravaStorageData);
+    const stravaStorageData = localStorage.getItem('StravaData');
+    const stravaConvertedData = JSON.parse(stravaStorageData);
 
-    let spotifyStorageData = localStorage.getItem('SpotifyData');
-    let spotifyConvertedData = JSON.parse(spotifyStorageData);
+    const spotifyStorageData = localStorage.getItem('SpotifyData');
+    const spotifyConvertedData = JSON.parse(spotifyStorageData);
+    console.log(spotifyConvertedData);
 
     if (stravaConvertedData) {
         const runStartDates = stravaConvertedData.map(({start_date}) => start_date); //original date formal = '2022-05-28T00:56:57Z'
@@ -51,7 +52,8 @@ export default function PostContent(props) {
         let runRanges = convRunStartDates.map((d, i) => {
             return [d, runEndTimes[i]];
         });
-        console.log(runRanges[0]);
+
+
 
     if (spotifyConvertedData){
         let spotifyPlayedAtArr = spotifyConvertedData.map(({played_at}) => played_at);
@@ -74,34 +76,40 @@ export default function PostContent(props) {
                 return false;  
             })
         };
-
-
-        let tracksDuringRun = runRanges.map(rangeFunc);
-        // let testTrackList = convSpotifyPlayedAtArr.filter(trackList);
-
+        const tracksDuringRun = runRanges.map(rangeFunc);
+        window.localStorage.setItem('tracks', JSON.stringify(tracksDuringRun));      
         console.log(tracksDuringRun);
         };
 
-        // let playedDuringRun = runRanges.map((run, i) => {
-        //     if (run[i][0] <= convSpotifyPlayedAtArr)
-        // })
-
-
-        // const trackRunList = (start <= trackTime < end)
     };
+    // const songObjFunc = (trackTime) => {
+    //     return spotifyConvertedData.filter(obj => {
+            
+    //         if ((new Date(obj.played_at).getTime()) === trackTime){
+    //             return obj;
+    //         }
+    //         return false;
+    //     })
+    // };
+
+    const trackTimeListing = JSON.parse(localStorage.getItem('tracks'));
+    // const runSongObj = trackTimeListing.map(songObjFunc);
+    // console.log(runSongObj);
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
     <div>
-        {stravaConvertedData ? stravaConvertedData.map(item => (        
+        {stravaConvertedData ? stravaConvertedData.map((item, i) => (        
         <div className='post-info' key={item.id}>
         <br></br>
         <h3>{item.name}</h3>
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
+        {trackTimeListing ? <ul>{trackTimeListing[i].map(t => <li>{t}</li>)}</ul> : 'No song data to display.'}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
     <br></br>
+    {/* {spotifyConvertedData && <p>{tracksDuringRun[0]}</p>} */}
     {spotifyConvertedData ? spotifyConvertedData.map(item => (
         <div className='post-tracks' key={item.id}>
         <h3>{item.track.name}</h3>
