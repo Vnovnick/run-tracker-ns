@@ -77,24 +77,33 @@ export default function PostContent(props) {
             })
         };
         const tracksDuringRun = runRanges.map(rangeFunc);
-        window.localStorage.setItem('tracks', JSON.stringify(tracksDuringRun));      
+        // window.localStorage.setItem('tracks', JSON.stringify(tracksDuringRun));      
         console.log(tracksDuringRun);
+
+        const songObjs = (trackTimes) => {
+            return spotifyConvertedData.filter(obj => {
+                let objPlayedAt = new Date(obj.played_at).getTime();
+                if (trackTimes.includes(objPlayedAt)){
+                    return obj;
+                }
+                return false;
+                
+            })
+        };  
+
+        const runSongObj = tracksDuringRun.map(songObjs);
+        window.localStorage.setItem('runTracks', runSongObj);
+        console.log(runSongObj);
+
         };
 
-    };
-    // const songObjFunc = (trackTime) => {
-    //     return spotifyConvertedData.filter(obj => {
-            
-    //         if ((new Date(obj.played_at).getTime()) === trackTime){
-    //             return obj;
-    //         }
-    //         return false;
-    //     })
-    // };
 
-    const trackTimeListing = JSON.parse(localStorage.getItem('tracks'));
-    // const runSongObj = trackTimeListing.map(songObjFunc);
-    // console.log(runSongObj);
+    };
+
+
+
+    const runTrackObjs = JSON.parse(localStorage.getItem('songsDuringRun'));
+
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
@@ -105,7 +114,7 @@ export default function PostContent(props) {
         <h3>{item.name}</h3>
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
-        {trackTimeListing ? <ul>{trackTimeListing[i].map(t => <li>{t}</li>)}</ul> : 'No song data to display.'}
+        {runTrackObjs ? <ul>{trackTimeListing[i].map(t => <li>{t}</li>)}</ul> : 'No song data to display.'}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
     <br></br>
