@@ -92,7 +92,7 @@ export default function PostContent(props) {
         };  
 
         const runSongObj = tracksDuringRun.map(songObjs);
-        window.localStorage.setItem('runTracks', runSongObj);
+        window.localStorage.setItem('runTracks', JSON.stringify(runSongObj));
         console.log(runSongObj);
 
         };
@@ -102,7 +102,7 @@ export default function PostContent(props) {
 
 
 
-    const runTrackObjs = JSON.parse(localStorage.getItem('songsDuringRun'));
+    const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));
 
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
@@ -114,7 +114,7 @@ export default function PostContent(props) {
         <h3>{item.name}</h3>
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
-        {runTrackObjs ? <ul>{trackTimeListing[i].map(t => <li>{t}</li>)}</ul> : 'No song data to display.'}
+        {runTrackObjs ? <ul>{runTrackObjs[i].map(t => <li>{t.track.name}</li>)}</ul> : 'No song data to display.'}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
     <br></br>
