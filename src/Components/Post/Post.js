@@ -106,13 +106,9 @@ export default function Post(props) {
       fetchStravaData(); 
     }
   }, [stravaAccessToken, stravaRefreshToken, stravaAccessCodeLink, props.stravaAuthCode]);
-
-
-
-
+  
 
   // Spotify Auth + get data requests
-
   useEffect(() => {
 
       
@@ -175,8 +171,9 @@ export default function Post(props) {
 
   
   const fetchSpotifyData = async () => {
-    let stravaConvertedData = JSON.parse(localStorage.getItem('StravaData'));
-    let spotAfter = new Date(stravaConvertedData[4].start_date).getTime(); 
+    // getting 'after' parameter in recently played get request
+    // let stravaConvertedData = JSON.parse(localStorage.getItem('StravaData'));
+    // let spotAfter = new Date(stravaConvertedData[4].start_date).getTime(); 
     // after=${spotAfter}
 
     
