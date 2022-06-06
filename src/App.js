@@ -1,5 +1,8 @@
 import './App.css';
 import PostFeed from './Components/PostFeed/PostFeed';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 
 
@@ -10,10 +13,11 @@ function App() {
       <header className="App-header">
 
       </header>
+      
 
         <PostFeed />
      
-
+        
     </div>
   );
 }

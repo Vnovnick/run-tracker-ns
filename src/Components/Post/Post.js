@@ -203,9 +203,8 @@ export default function Post(props) {
 
   return (
     <div className='post-list'>
-        <PostContent         
+        <PostContent/>
         
-        />
     </div>
   )
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Post from '../Post/Post';
 import axios from 'axios';
 import { stravaApiData, spotifyApiData } from '../../apiData';
+import Sidebar from '../Sidebar/Sidebar';
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
@@ -66,7 +67,7 @@ export default function PostFeed() {
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');
    window.localStorage.removeItem('spotifyLogin');
-   window.localStorage.removeItem('tracks');
+   window.localStorage.removeItem('runTracks');
  
   }
 
@@ -116,11 +117,9 @@ export default function PostFeed() {
       <ul id='logins'>
         {window.localStorage.getItem('stravaLogin') ? <li><a href={redirect_uri} onClick={stravaLogout} >Strava Log-out</a></li> : <li><a href={authCodeLink}>Strava Log-in</a></li>}  
         {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} >Spotify Log-out</a></li> : <li><a href={spotAuthCodeLink} >Spotify Log-in</a></li>)}
-      </ul>}
-
+      </ul>}    
       
-      
-                        
+        <Sidebar />               
         <Post 
         stravaAuthCode={stravaAuthCode}
         spotifyStateMatch={spotifyAuthState}

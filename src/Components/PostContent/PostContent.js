@@ -1,4 +1,7 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './PostContent.css';
+import { $CombinedState } from 'redux';
 
 
 export default function PostContent(props) {
@@ -70,18 +73,19 @@ export default function PostContent(props) {
         };
     };
 
-    const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));
+    const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));   
+
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
-    <div>
+    <div className='post-content'>
         {stravaConvertedData ? stravaConvertedData.map((item, i) => (        
         <div className='post-info' key={item.id}>
         <br></br>
         <h3>{item.name}</h3>
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
-        {runTrackObjs ? <ul>{runTrackObjs[i].map(t => <li>{t.track.name}</li>)}</ul> : 'No song data to display.'}
+        {runTrackObjs ? <ul class="song-list">{runTrackObjs[i].map(t => (<li><img src={t.track.album.images[1].url}></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul> : 'No song data to display.'}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
     <br></br>
