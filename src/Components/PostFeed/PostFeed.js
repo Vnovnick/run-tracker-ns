@@ -3,6 +3,7 @@ import Post from '../Post/Post';
 import axios from 'axios';
 import { stravaApiData, spotifyApiData } from '../../apiData';
 import Sidebar from '../Sidebar/Sidebar';
+import './PostFeed.css';
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
@@ -110,7 +111,7 @@ export default function PostFeed() {
 
   return (
     <div className='post-feed'>
-      <ul>
+      <ul id='total-logout'>
      {(window.localStorage.getItem('stravaLogin') && window.localStorage.getItem('spotifyLogin')) && (renderTotalLogout())}
      </ul>       
       {!(window.localStorage.getItem('stravaLogin') && window.localStorage.getItem('spotifyLogin')) && 
