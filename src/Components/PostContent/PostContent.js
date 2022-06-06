@@ -85,15 +85,16 @@ export default function PostContent(props) {
         <h3>{item.name}</h3>
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
-        {runTrackObjs ? <ul class="song-list">{runTrackObjs[i].map(t => (<li><img src={t.track.album.images[1].url} width="200" height="200"></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul> : 'No song data to display.'}
+        {runTrackObjs ? <ul class="song-list">{runTrackObjs[i].map(t => (<li><img src={t.track.album.images[1].url} width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul> : 'No song data to display.'}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
     <br></br>
-    {spotifyConvertedData ? spotifyConvertedData.map(item => (
+    {!spotifyConvertedData && 'Login to Strava and then to Spotify to see song data'}
+    {/* {spotifyConvertedData ? spotifyConvertedData.map(item => (
         <div className='post-tracks' key={item.id}>
         <h3>{item.track.name}</h3>
         </div>
-        )) : 'Please first login to Strava to be able to login to Spotify'}
+        )) : 'Please first login to Strava to be able to login to Spotify'} */}
     </div>
   )
 }
