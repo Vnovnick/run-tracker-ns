@@ -85,7 +85,7 @@ export default function PostContent(props) {
         <h3>{item.name}</h3>
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p>
-        {runTrackObjs ? <ul class="song-list">{runTrackObjs[i].map(t => (<li><img src={t.track.album.images[1].url}></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul> : 'No song data to display.'}
+        {runTrackObjs ? <ul class="song-list">{runTrackObjs[i].map(t => (<li><img src={t.track.album.images[1].url} width="200" height="200"></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul> : 'No song data to display.'}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
     <br></br>
