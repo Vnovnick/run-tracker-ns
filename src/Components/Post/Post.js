@@ -35,6 +35,7 @@ export default function Post(props) {
   const [stravaRefreshToken, setStravaRefreshToken] = useState('');
   const [stravaAccessToken, setStravaAccessToken] = useState('');
   const [stravaData, setStravaData] = useState([]);
+  const [stravaUser, setStravaUser] = useState(null);
 
   const stravaAccessCodeLink = `${baseStravaUrl}api/v3/${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
   const stravaFullAuthLink = `${baseStravaUrl}${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&refresh_token=${stravaRefreshToken}&grant_type=refresh_token`;
@@ -56,7 +57,7 @@ export default function Post(props) {
       await axios.post(stravaAccessCodeLink)
       .then(response => {  
           if (response.status === 200){
-            console.log(response.data.access_token);
+            // console.log(response.data.access_token);
             setStravaAccessToken(response.data.access_token);
              
             // console.log(stravaAccessToken); 
@@ -97,7 +98,7 @@ export default function Post(props) {
         // console.log(requestActivities.data);
         setStravaData(requestActivities.data); 
         window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
-        let stravaStorageData = localStorage.getItem('StravaData');
+        // let stravaStorageData = localStorage.getItem('StravaData');
         // console.log(JSON.parse(stravaStorageData));  
          
         
@@ -105,7 +106,23 @@ export default function Post(props) {
     if (stravaAccessToken) {
       fetchStravaData(); 
     }
-  }, [stravaAccessToken, stravaRefreshToken, stravaAccessCodeLink, props.stravaAuthCode]);
+
+    async function fetchStravaUserData(){
+      const requestUser = await axios.get(`${baseStravaUrl}/api/v3/athlete?access_token=${stravaAccessToken}`, {
+        'Authorization': `Bearer ${stravaAccessToken}`});
+
+      setStravaUser(requestUser.data);
+      window.localStorage.setItem('StravaUserName', requestUser.data.username);
+      window.localStorage.setItem('StravaUserProfile', requestUser.data.profile);
+
+      // window.localStorage.setItem('StravaUsername', JSON.stringify())
+
+      
+    }
+    if (stravaAccessToken && !window.localStorage.getItem('StravaUserName')) {
+      fetchStravaUserData(); 
+    }
+  }, [stravaAccessToken, stravaRefreshToken, stravaAccessCodeLink, props.stravaAuthCode, stravaUser]);
   
 
   // Spotify Auth + get data requests
@@ -132,7 +149,7 @@ export default function Post(props) {
         if (response.status === 200) {
           setSpotifyAccessToken(response.data.access_token);
           setSpotifyRefreshToken(response.data.refresh_token);
-          console.log(spotifyAccessToken);
+          // console.log(spotifyAccessToken);
           // write a conditional that will check if the token is expired and to only run the next request if it is in fact expired
         }
 
@@ -186,7 +203,7 @@ export default function Post(props) {
       .catch(error => {
         console.log(error);
       })
-      console.log(requestRecentlyPlayed.data);
+      // console.log(requestRecentlyPlayed.data);
       setSpotifyData(requestRecentlyPlayed.data.items);
       window.localStorage.setItem('SpotifyData', JSON.stringify(requestRecentlyPlayed.data.items));
       let spotifyStorageData = localStorage.getItem('SpotifyData');

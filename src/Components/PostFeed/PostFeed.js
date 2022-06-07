@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Post from '../Post/Post';
 import axios from 'axios';
 import { stravaApiData, spotifyApiData } from '../../apiData';
-import Sidebar from '../Sidebar/Sidebar';
 import './PostFeed.css';
 
 
@@ -59,17 +58,24 @@ export default function PostFeed() {
 
 
 
+
   // potential logout function to clear cache data later on
   const stravaLogout = () => {
     axios.post('https://www.strava.com/oauth/deauthorize');
     window.localStorage.removeItem('StravaData');
     window.localStorage.removeItem('stravaLogin');
+    window.localStorage.removeItem('StravaUserProfile');
+    window.localStorage.removeItem('StravaUserName');
   }
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');
    window.localStorage.removeItem('spotifyLogin');
    window.localStorage.removeItem('runTracks');
  
+  }
+  window.onclose = () => {
+    stravaLogout();
+    spotifyLogout();
   }
 
 
@@ -120,7 +126,7 @@ export default function PostFeed() {
         {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} >Spotify Log-out</a></li> : <li><a href={spotAuthCodeLink} >Spotify Log-in</a></li>)}
       </ul>}    
       
-        <Sidebar />               
+                      
         <Post 
         stravaAuthCode={stravaAuthCode}
         spotifyStateMatch={spotifyAuthState}
