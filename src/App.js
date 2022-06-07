@@ -12,11 +12,9 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-      </header>
-      
+      </header>     
 
-        <PostFeed />
-     
+        <PostFeed />   
         
     </div>
   );
