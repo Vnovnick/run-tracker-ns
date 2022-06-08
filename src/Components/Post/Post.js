@@ -7,6 +7,7 @@ import qs from 'qs';
 // import { persistStore, persistReducer } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
 import PostContent from '../PostContent/PostContent';
+import Sidebar from '../Sidebar/Sidebar';
 
 var Buffer = require('buffer/').Buffer;
 
@@ -216,6 +217,7 @@ export default function Post(props) {
 
   return (
     <div className='post-list'>
+        <Sidebar/>
         <PostContent/>
         
     </div>

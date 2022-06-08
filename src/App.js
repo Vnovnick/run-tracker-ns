@@ -16,7 +16,7 @@ function App() {
       </header>     
         
         <PostFeed />
-        <Sidebar />
+      
         
         
     </div>
