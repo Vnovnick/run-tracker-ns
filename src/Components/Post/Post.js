@@ -113,11 +113,7 @@ export default function Post(props) {
 
       setStravaUser(requestUser.data);
       window.localStorage.setItem('StravaUserName', requestUser.data.username);
-      window.localStorage.setItem('StravaUserProfile', requestUser.data.profile);
-
-      // window.localStorage.setItem('StravaUsername', JSON.stringify())
-
-      
+      window.localStorage.setItem('StravaUserProfile', requestUser.data.profile);      
     }
     if (stravaAccessToken && !window.localStorage.getItem('StravaUserName')) {
       fetchStravaUserData(); 

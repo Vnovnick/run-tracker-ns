@@ -4,6 +4,7 @@ import './PostContent.css';
 // import { $CombinedState } from 'redux';
 
 
+
 export default function PostContent(props) {
 // strava data points to work with: 
 // elapsed_time, start_date, moving_time
@@ -11,12 +12,13 @@ export default function PostContent(props) {
 // spotify data points to work with:
 // played_at
 
+
     const stravaStorageData = localStorage.getItem('StravaData');
     const stravaConvertedData = JSON.parse(stravaStorageData);
 
     const spotifyStorageData = localStorage.getItem('SpotifyData');
     const spotifyConvertedData = JSON.parse(spotifyStorageData);
-    console.log(spotifyConvertedData);
+    // console.log(spotifyConvertedData);
 
     if (stravaConvertedData) {
         const runStartDates = stravaConvertedData.map(({start_date}) => start_date); //original date formal = '2022-05-28T00:56:57Z'
@@ -86,7 +88,7 @@ export default function PostContent(props) {
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p> 
         {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
-        (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class="song-list">{runTrackObjs[i].map(t => (<li><img src={t.track.album.images[1].url} width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul></div>) : 
+        (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class="song-list">{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul></div>) : 
         ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}

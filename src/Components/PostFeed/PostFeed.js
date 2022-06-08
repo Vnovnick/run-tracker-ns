@@ -3,6 +3,8 @@ import Post from '../Post/Post';
 import axios from 'axios';
 import { stravaApiData, spotifyApiData } from '../../apiData';
 import './PostFeed.css';
+import Sidebar from '../Sidebar/Sidebar';
+import { logDOM } from '@testing-library/react';
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
@@ -126,13 +128,14 @@ export default function PostFeed() {
         {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} >Spotify Log-out</a></li> : <li><a href={spotAuthCodeLink} >Spotify Log-in</a></li>)}
       </ul>}    
       
-                      
+            
         <Post 
         stravaAuthCode={stravaAuthCode}
         spotifyStateMatch={spotifyAuthState}
         spotifyAuthCode={spotifyAuthCode}
         spotLoggedIn={spotLoggedIn}
         loggedIn={loggedIn}/>
+
     </div>
   )
 }
