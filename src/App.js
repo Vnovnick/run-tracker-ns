@@ -14,11 +14,9 @@ function App() {
       <header className="App-header">
 
       </header>     
-        
+        <main>
         <PostFeed />
-      
-        
-        
+        </main>        
     </div>
   );
 }

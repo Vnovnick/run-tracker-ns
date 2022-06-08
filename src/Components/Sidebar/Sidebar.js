@@ -1,5 +1,6 @@
 import React from 'react';
-import './Sidebar.css';
+import './Sidebar.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function Sidebar() {
@@ -14,12 +15,12 @@ export default function Sidebar() {
 
   return (
     <div className='sidebar'>
-      <h1>I am a Sidebar.</h1>
+      <h1>Run_Tracker</h1>
       <ul id='user-info'>
       { window.localStorage.getItem('StravaData') &&
-      <li id='strava-user'><img src={stravaUserProfile} alt='strava-profile'></img>{stravaUserName}</li>}
+      <li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' alt='strava-profile'></img><h4>{stravaUserName}</h4></li>}
       { window.localStorage.getItem('SpotifyData') &&
-      <li id='spotify-user'><img src={spotifyUserProfile} alt='strava-profile'></img>{spotifyUserName}</li>}
+      <li id='spotify-user'><img src={spotifyUserProfile} className='rounded-circle border border-success' alt='strava-profile'></img><h4>{spotifyUserName}</h4></li>}
       </ul>
     </div>
   )

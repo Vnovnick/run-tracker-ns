@@ -88,7 +88,7 @@ export default function PostContent(props) {
         <h4>Distance: {item.distance}</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p> 
         {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
-        (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class="song-list">{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul></div>) : 
+        (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class="song-list">{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul></div>) : 
         ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}
         <br></br>
         </div>)) : 'Please Log-in to view Strava Data'}
