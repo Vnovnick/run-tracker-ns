@@ -1,8 +1,18 @@
-.post-feed ul{
+.post-feed{
+    background-color: #ffeecc;
+}
+
+.post-feed #total-logout{
     list-style-type: none;
     display: inline-flex;
 
 }
+.post-feed #logins{
+    list-style-type: none;
+    display: inline-flex;
+}
+
 .post-feed ul li {
     padding: 9px;
 }
+

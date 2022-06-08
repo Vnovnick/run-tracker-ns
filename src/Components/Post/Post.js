@@ -110,7 +110,10 @@ export default function Post(props) {
 
     async function fetchStravaUserData(){
       const requestUser = await axios.get(`${baseStravaUrl}/api/v3/athlete?access_token=${stravaAccessToken}`, {
-        'Authorization': `Bearer ${stravaAccessToken}`});
+        'Authorization': `Bearer ${stravaAccessToken}`})
+        .catch(error => {
+          console.log(error);
+        });
 
       setStravaUser(requestUser.data);
       window.localStorage.setItem('StravaUserName', requestUser.data.username);
@@ -211,6 +214,25 @@ export default function Post(props) {
   if (spotifyAccessToken && window.localStorage.getItem('StravaData')){
     fetchSpotifyData();
   }
+
+  const fetchSpotifyUserData = async () => {
+    const requestUserInfo = await axios.get(`https://api.spotify.com/v1/me`, {
+      headers: {
+        Authorization: `Bearer ${spotifyAccessToken}`,
+        'content-type': 'application/json'
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+    window.localStorage.setItem('SpotifyUserName', requestUserInfo.data.display_name);
+    window.localStorage.setItem('SpotifyUserProfile', requestUserInfo.data.images[0].url);  
+
+  };
+  if (spotifyAccessToken && !window.localStorage.getItem('SpotifyUserName')){
+    fetchSpotifyUserData();
+  } 
 
 }, [props.spotifyAuthCode, props.spotLoggedIn, spotifyAccessCodeLink, props.spotifyStateMatch, spotifyAccessToken, spotifyRefreshToken]);
 

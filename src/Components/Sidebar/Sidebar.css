@@ -9,7 +9,20 @@
     min-width: 15%;
 
 }
+.sidebar #strava-user img{
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+}
+.sidebar #spotify-user img{
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+}
 
-.sidebar h1 {
-    background-color: gray;
+
+.sidebar #user-info {
+
+    list-style-type: none;
+
 }
