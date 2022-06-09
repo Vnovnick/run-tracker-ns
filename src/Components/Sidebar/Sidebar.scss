@@ -25,6 +25,14 @@
     list-style-type: none;
 
 }
+.sidebar #strava-user{
+    transition: box-shadow .3s;
+    border-radius: 15px;
+
+}
+.sidebar #strava-user:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
 
 .sidebar #strava-user img{
     width: 70px;
@@ -38,6 +46,14 @@
     display: inline;
     padding-left: 10px;
 
+}
+.sidebar #spotify-user{
+    transition: box-shadow .3s;
+    border-radius: 15px;
+    width: auto;
+}
+.sidebar #spotify-user:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
 }
 
 .sidebar #spotify-user img{
