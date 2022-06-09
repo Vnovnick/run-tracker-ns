@@ -1,6 +1,7 @@
 import React from 'react';
 import './Sidebar.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CalendarComp from '../Calendar/CalendarComp';
 
 
 export default function Sidebar() {
@@ -22,6 +23,8 @@ export default function Sidebar() {
       { window.localStorage.getItem('SpotifyData') &&
       <li id='spotify-user'><img src={spotifyUserProfile} className='rounded-circle border border-success' alt='strava-profile'></img><h4>{spotifyUserName}</h4></li>}
       </ul>
+      {window.localStorage.getItem('StravaData') &&
+      <CalendarComp />}
     </div>
   )
 };

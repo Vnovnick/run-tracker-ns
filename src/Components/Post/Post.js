@@ -239,6 +239,7 @@ export default function Post(props) {
 
   return (
     <div className='post-list'>
+
         <Sidebar/>
         <PostContent/>
         
