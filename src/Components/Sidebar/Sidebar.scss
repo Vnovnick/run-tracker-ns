@@ -13,8 +13,11 @@
     border-top-left-radius:15px;
     border-bottom-left-radius: 15px;
 
-}
 
+}
+.customButton {
+    width: 300px !important;
+}
 .sidebar h1 {
     color: aliceblue;
     text-align: center;
@@ -23,23 +26,55 @@
 
 .sidebar #user-info {
     list-style-type: none;
-
+    position: relative;
 }
-.sidebar #strava-user{
-    transition: box-shadow .3s;
+
+#stravaProfButton {
+    transition: box-shadow .3s !important;
     border-radius: 15px;
+    display: flex;    
+    align-items: center;
 
 }
-.sidebar #strava-user:hover {
-    box-shadow: 0 0 11px rgba(33,33,33,.2);
+.collapse{
+    width: 300px;
+    align-items: center;
+ 
+
 }
+
+.collapsing{
+    width: 300px;
+    align-items: center;
+
+}
+// #stravaProfButton:focus{
+    
+// }
+#stravaProfButton:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    
+
+}
+#spotifyProfButton {
+    transition: box-shadow .3s !important;
+    border-radius: 15px;
+    display: flex;    
+    align-items: center;
+
+}
+#spotifyProfButton:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);  
+
+
+}
+// #spotifyProfButton:focus{
+//     border-color: ;
+// }
 
 .sidebar #strava-user img{
     width: 70px;
-    height: 70px;
-    border-color: $orange-500;
-    
-
+    height: 70px;   
 }
 .sidebar #strava-user h4 {
     font-size:14pt;
@@ -47,18 +82,10 @@
     padding-left: 10px;
 
 }
-.sidebar #spotify-user{
-    transition: box-shadow .3s;
-    border-radius: 15px;
-    width: auto;
-}
-.sidebar #spotify-user:hover {
-    box-shadow: 0 0 11px rgba(33,33,33,.2);
-}
 
 .sidebar #spotify-user img{
     width: 70px;
-    height: 70px;
+    height: 70px;   
 
 }
 .sidebar #spotify-user h4 {
