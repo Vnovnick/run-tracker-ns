@@ -41,6 +41,24 @@ export default function PostContent(props) {
             return [d, runEndTimes[i]];
         });
 
+        const ISOConversion = runStartDates.map(date => {
+            let newDate = new Date(date);
+            let year = newDate.getFullYear();
+            let month = newDate.getMonth() + 1;
+            let day = newDate.getDate();
+
+            if (day < 10){
+                day = '0' + day;
+            }
+            if (month < 10){
+                month = '0' + month;
+            }
+
+            return (month + '/' + day + '/' + year);
+        })
+
+        window.localStorage.setItem('runTimes', JSON.stringify(ISOConversion));
+
     if (spotifyConvertedData){
         let spotifyPlayedAtArr = spotifyConvertedData.map(({played_at}) => played_at);
         let convSpotifyPlayedAtArr = spotifyPlayedAtArr.map(date => {
@@ -75,7 +93,8 @@ export default function PostContent(props) {
         };
     };
 
-    const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));   
+    const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));
+    const runTimes = JSON.parse(localStorage.getItem('runTimes'));   
 
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
@@ -86,7 +105,7 @@ export default function PostContent(props) {
         <br></br>
         <h3>{item.name}</h3>
         <h4>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
-        <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p> 
+        <p>{runTimes[i]} || Time Elapsed: {item.elapsed_time}</p> 
         {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
         (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class="song-list">{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul></div>) : 
         ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}
