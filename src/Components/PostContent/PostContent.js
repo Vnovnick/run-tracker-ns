@@ -54,10 +54,18 @@ export default function PostContent(props) {
                 month = '0' + month;
             }
 
-            return (month + '/' + day + '/' + year);
+            return (month + '/' + day);
         })
 
         window.localStorage.setItem('runTimes', JSON.stringify(ISOConversion));
+
+        const elapsedConv = movingTimes.map(time => {
+            const mins = Math.floor(time/60);
+            const seconds = time % 60;
+            return `${mins.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        })
+
+        window.localStorage.setItem('convMovingTimes', JSON.stringify(elapsedConv));
 
     if (spotifyConvertedData){
         let spotifyPlayedAtArr = spotifyConvertedData.map(({played_at}) => played_at);
@@ -94,18 +102,19 @@ export default function PostContent(props) {
     };
 
     const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));
-    const runTimes = JSON.parse(localStorage.getItem('runTimes'));   
+    const runTimes = JSON.parse(localStorage.getItem('runTimes'));  
+    const convMovingTimes = JSON.parse(localStorage.getItem('convMovingTimes'));
 
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
     <div className='post-content'>
         {stravaConvertedData ? stravaConvertedData.map((item, i) => (        
-        <div className='post-info' key={item.id}>
-        <br></br>
-        <h3>{item.name}</h3>
+        <div className='post-info' key={item.id}>     
+        <h3 id='run-date'>{runTimes[i]} </h3>
+        <h3 id='run-name'>{item.name}</h3>
         <h4>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
-        <p>{runTimes[i]} || Time Elapsed: {item.elapsed_time}</p> 
+        <p>Time Elapsed: {convMovingTimes[i]}</p> 
         {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
         (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class="song-list">{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul></div>) : 
         ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}

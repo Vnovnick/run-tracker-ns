@@ -70,6 +70,7 @@ export default function PostFeed() {
     window.localStorage.removeItem('StravaUserName');
     window.localStorage.removeItem('runData');
     window.localStorage.removeItem('runTimes');
+    window.localStorage.removeItem('convMovingTimes');
   }
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');
