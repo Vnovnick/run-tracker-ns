@@ -64,10 +64,11 @@ export default function PostFeed() {
   // potential logout function to clear cache data later on
   const stravaLogout = () => {
     axios.post('https://www.strava.com/oauth/deauthorize');
-    window.localStorage.removeItem('StravaData');
+    // window.localStorage.removeItem('StravaData');
     window.localStorage.removeItem('stravaLogin');
     window.localStorage.removeItem('StravaUserProfile');
     window.localStorage.removeItem('StravaUserName');
+    window.localStorage.removeItem('runData');
   }
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');

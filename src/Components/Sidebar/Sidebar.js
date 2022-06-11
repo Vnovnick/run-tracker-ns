@@ -33,7 +33,7 @@ export default function Sidebar() {
     <div className='sidebar'>
       <h1>Run_Tracker</h1>
       <ul id='user-info'>
-      { window.localStorage.getItem('StravaData') &&
+      { window.localStorage.getItem('runData') &&
       <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
       <div className='collapse' id='stravaCollapse'>
         <div className="card card-body">Strava User Info</div>
@@ -47,7 +47,7 @@ export default function Sidebar() {
       </ul>
 
 
-      {window.localStorage.getItem('StravaData') &&
+      {window.localStorage.getItem('runData') &&
       <CalendarComp />}
     </div>
   )

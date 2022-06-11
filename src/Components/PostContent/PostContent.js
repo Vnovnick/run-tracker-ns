@@ -13,7 +13,7 @@ export default function PostContent(props) {
 // played_at
 
 
-    const stravaStorageData = localStorage.getItem('StravaData');
+    const stravaStorageData = localStorage.getItem('runData');
     const stravaConvertedData = JSON.parse(stravaStorageData);
 
     const spotifyStorageData = localStorage.getItem('SpotifyData');
@@ -85,7 +85,7 @@ export default function PostContent(props) {
         <div className='post-info' key={item.id}>
         <br></br>
         <h3>{item.name}</h3>
-        <h4>Distance: {item.distance}</h4>
+        <h4>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
         <p>Start Date: {item.start_date} || Time Elapsed: {item.elapsed_time}</p> 
         {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
         (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class="song-list">{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="200" height="200" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul></div>) : 
