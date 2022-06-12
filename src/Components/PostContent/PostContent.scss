@@ -37,7 +37,7 @@
     overflow: auto;
 }
 
-.song-list {
+.song-list, .song-list-open {
     list-style-type: none;
     justify-content: center;
     display: inline-flex;
@@ -46,20 +46,8 @@
     padding:0;
     margin: 0;
     overflow: auto;
-
-
 }
-.song-list-open {
-    list-style-type: none;
-    justify-content: center;
-    display: inline-flex;
-    flex-wrap: wrap;
-    flex-flow: row wrap;
-    padding:0;
-    margin: 0;
-    overflow: auto;
 
-}
 .song-list li, .song-list-open li {
     max-width: max-content;
     align-items: stretch;
