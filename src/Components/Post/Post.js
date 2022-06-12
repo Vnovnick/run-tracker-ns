@@ -148,10 +148,6 @@ export default function Post(props) {
   // Spotify Auth + get data requests
   useEffect(() => {
 
-      
-    // console.log(props.spotifyAuthCode);
-    // console.log(props.spotifyStateMatch);
-    
     // gets refresh and access token
     const authSpotify = async () => {
       await axios.post(spotifyAccessCodeLink, qs.stringify({
@@ -213,7 +209,11 @@ export default function Post(props) {
     // let spotAfter = new Date(stravaConvertedData[4].start_date).getTime(); 
     // after=${spotAfter}
 
-    
+      // const strava = JSON.parse(window.localStorage.getItem('runData'));
+      // let before = (new Date(strava[2].start_date).getTime()) + (strava[2].elapsed_time * 1000);
+      // let after = new Date(strava[2].start_date).getTime();
+      // console.log(before);
+      // console.log(after);
       const requestRecentlyPlayed = await axios.get(`https://api.spotify.com/v1/me/player/recently-played?&limit=50` ,{
         headers: {
           Authorization: `Bearer ${spotifyAccessToken}`,
