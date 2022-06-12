@@ -44,7 +44,7 @@ export default function PostContent(props) {
 
         const ISOConversion = runStartDates.map(date => {
             let newDate = new Date(date);
-            let year = newDate.getFullYear();
+            // let year = newDate.getFullYear();
             let month = newDate.getMonth() + 1;
             let day = newDate.getDate();
 
@@ -114,23 +114,35 @@ export default function PostContent(props) {
     };
 
     const [chartToggle, setChartToggle] = useState(false);
+
+    // useEffect(() => {
+    //     const chartFunc = (id) => {
+    //         setChartToggle(chartToggle => !chartToggle)
+    //         let chartCollapse = document.querySelector(`[id^=${id}]`);
+    //         let bsChartCollapse = new Collapse(chartCollapse, {toggle: false})
+    //         chartToggle ? bsChartCollapse.show() : bsChartCollapse.hide(); 
+    //     }
+
+    // })
     useEffect(() => {
-        let chartCollapse = document.getElementById('chartCollapse');
-        let bsChartCollapse = new Collapse(chartCollapse, {toggle: false})
-        chartToggle ? bsChartCollapse.show() : bsChartCollapse.hide(); 
+        if (stravaConvertedData){
+            let chartCollapse = document.querySelector('[id^="chartCollapse"]');
+            let bsChartCollapse = new Collapse(chartCollapse, {toggle: false})
+            chartToggle ? bsChartCollapse.show() : bsChartCollapse.hide(); 
+        }
     })
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
     <div className='post-content'>
         {stravaConvertedData ? stravaConvertedData.map((item, i) => (        
         <div className='post-info-wrapper'>
-            <div className='post-info' key={item.id}>     
+            <div className='post-info' key={i}>     
                 <div className='post-stravaData'>
                     <h3 id='run-date'>{runTimes[i]} </h3>
                     <h3 id='run-name'>{item.name}</h3>
                     <h4 id='run-distance'>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
                     <p id='run-elapsed'>Time Elapsed: {convMovingTimes[i]}</p> 
-                    <button className='btn' id='chartButton' onClick={() => setChartToggle(chartToggle => !chartToggle)}>Run Chart</button>
+                    <button className='btn' id='chartButton' onClick={() => {setChartToggle(chartToggle => !chartToggle)}}>Run Chart</button>
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
                 (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class={songListClass ? 'song-list-open' : "song-list"}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
@@ -141,14 +153,14 @@ export default function PostContent(props) {
                 <br></br>
 
             </div>
-            <div className='collapse customCollapse' id='chartCollapse'>
+            <div className='collapse customCollapse' id={`chartCollapse${i}`}>
                     <div className='card card-body'>Chart</div>                
                 </div>
         </div>
         )) 
-        : 'Please Log-in to view Strava Data'}
+        : 'Please log-in to view Strava Data and to access Spotify log-in'}
         <br></br>    
-        {!spotifyConvertedData && 'Login to Strava and then to Spotify to see song data'}
+        {/* {!spotifyConvertedData && 'Login to Strava and then to Spotify to see song data'} */}
     </div>
   )
 }

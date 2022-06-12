@@ -3,8 +3,7 @@ import Post from '../Post/Post';
 import axios from 'axios';
 import { stravaApiData, spotifyApiData } from '../../apiData';
 import './PostFeed.css';
-import Sidebar from '../Sidebar/Sidebar';
-import { logDOM } from '@testing-library/react';
+
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';

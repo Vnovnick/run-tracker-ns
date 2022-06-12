@@ -1,7 +1,6 @@
 import './App.css';
 import PostFeed from './Components/PostFeed/PostFeed';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Sidebar from './Components/Sidebar/Sidebar';
 
 
 
