@@ -9,6 +9,7 @@ export default function Sidebar() {
   
   const stravaUserName = localStorage.getItem('StravaUserName');
   const stravaUserProfile = localStorage.getItem('StravaUserProfile');
+  const stravaTotals = JSON.parse(localStorage.getItem('stravaTotals'));
 
   const spotifyUserName = localStorage.getItem('SpotifyUserName');
   const spotifyUserProfile = localStorage.getItem('SpotifyUserProfile');
@@ -36,7 +37,7 @@ export default function Sidebar() {
       { window.localStorage.getItem('runData') &&
       <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
       <div className='collapse' id='stravaCollapse'>
-        <div className="card card-body">Strava User Info</div>
+        <div className="card card-body">{window.localStorage.getItem('stravaTotals') ? <p>Total Runs: {stravaTotals.count}<br></br>Total Distance: {(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p> : 'Strava Data'}</div>
       </div>
       { window.localStorage.getItem('SpotifyData') &&
       <button className='btn customButton' id='spotifyProfButton' onClick={() => setSpotifyProfToggle(spotifyProfToggle => !spotifyProfToggle)}><li id='spotify-user'><img src={spotifyUserProfile} className='rounded-circle border border-success' alt='strava-profile'></img><h4>{spotifyUserName}</h4></li></button>}

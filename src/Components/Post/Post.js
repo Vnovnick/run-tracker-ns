@@ -37,6 +37,8 @@ export default function Post(props) {
   const [stravaAccessToken, setStravaAccessToken] = useState('');
   const [stravaData, setStravaData] = useState([]);
   const [stravaUser, setStravaUser] = useState(null);
+  const [stravaUserId, setStravaUserId] = useState(null);
+  const [stravaTotals, setStravaTotals] = useState(null);
 
   const stravaAccessCodeLink = `${baseStravaUrl}api/v3/${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&code=${props.stravaAuthCode}&grant_type=authorization_code`; 
   const stravaFullAuthLink = `${baseStravaUrl}${stravaAuthUrl}?client_id=${stravaApiData.client_id}&client_secret=${stravaApiData.client_secret}&refresh_token=${stravaRefreshToken}&grant_type=refresh_token`;
@@ -119,13 +121,28 @@ export default function Post(props) {
         });
 
       setStravaUser(requestUser.data);
+      setStravaUserId(requestUser.data.id);
       window.localStorage.setItem('StravaUserName', requestUser.data.username);
       window.localStorage.setItem('StravaUserProfile', requestUser.data.profile);      
     }
     if (stravaAccessToken && !window.localStorage.getItem('StravaUserName')) {
       fetchStravaUserData(); 
     }
-  }, [stravaAccessToken, stravaRefreshToken, stravaAccessCodeLink, props.stravaAuthCode, stravaUser]);
+
+    async function fetchUserTotals(){
+      const requestTotals = await axios.get(`${baseStravaUrl}/api/v3/athletes/${stravaUserId}/stats?access_token=${stravaAccessToken}`, {
+        'Authorization': `Bearer ${stravaAccessToken}`
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      setStravaTotals(requestTotals.data.all_run_totals);
+      window.localStorage.setItem('stravaTotals', JSON.stringify(requestTotals.data.all_run_totals));
+    }
+    if (!window.localStorage.getItem('StravaTotals') && stravaUserId){
+      fetchUserTotals();
+    }
+  }, [stravaAccessToken, stravaRefreshToken, stravaAccessCodeLink, props.stravaAuthCode, stravaUser, stravaUserId]);
   
 
   // Spotify Auth + get data requests
