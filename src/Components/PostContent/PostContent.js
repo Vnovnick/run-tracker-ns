@@ -114,23 +114,22 @@ export default function PostContent(props) {
     };
 
     const [chartToggle, setChartToggle] = useState(false);
-
-    // useEffect(() => {
-    //     const chartFunc = (id) => {
-    //         setChartToggle(chartToggle => !chartToggle)
-    //         let chartCollapse = document.querySelector(`[id^=${id}]`);
-    //         let bsChartCollapse = new Collapse(chartCollapse, {toggle: false})
-    //         chartToggle ? bsChartCollapse.show() : bsChartCollapse.hide(); 
-    //     }
-
-    // })
+    const [divID, setDivID] = useState('');
     useEffect(() => {
         if (stravaConvertedData){
-            let chartCollapse = document.querySelector('[id^="chartCollapse"]');
-            let bsChartCollapse = new Collapse(chartCollapse, {toggle: false})
-            chartToggle ? bsChartCollapse.show() : bsChartCollapse.hide(); 
+            let chartCollapse = document.querySelector(`[id^="chartCollapse"]`);
+            if (divID){
+                let chartCollapse = document.querySelector(`[id^=${divID}]`);
+                let bsChartCollapse = new Collapse(chartCollapse, {toggle: false})
+                chartToggle ? bsChartCollapse.show() : bsChartCollapse.hide(); 
+            } else{
+                let bsChartCollapse = new Collapse(chartCollapse, {toggle: false})
+                chartToggle ? bsChartCollapse.show() : bsChartCollapse.hide(); 
+            }
+
         }
     })
+    // 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
   return (
     <div className='post-content'>
@@ -142,7 +141,8 @@ export default function PostContent(props) {
                     <h3 id='run-name'>{item.name}</h3>
                     <h4 id='run-distance'>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
                     <p id='run-elapsed'>Time Elapsed: {convMovingTimes[i]}</p> 
-                    <button className='btn' id='chartButton' onClick={() => {setChartToggle(chartToggle => !chartToggle)}}>Run Chart</button>
+                    <button className='btn' id='chartButton' 
+                    onClick={() => {setChartToggle(chartToggle => !chartToggle); setDivID(`chartCollapse${i}`)}}>Run Chart</button>
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
                 (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class={songListClass ? 'song-list-open' : "song-list"}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
