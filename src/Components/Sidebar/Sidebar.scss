@@ -39,15 +39,25 @@
 .collapse{
     width: 300px;
     align-items: center;
- 
 
 }
 
 .collapsing{
     width: 300px;
     align-items: center;
+}
+.card {
+    background-color:#ffeecc !important;
+}
+// #run-totals, #distance-totals {
+
+// }
+
+#run-totals p, #distance-totals p{
+    font-size: 20px;
 
 }
+
 // #stravaProfButton:focus{
     
 // }
@@ -92,4 +102,25 @@
     font-size: 14pt;
     display: inline;
     padding-left: 10px;
+}
+
+#top-tracks, #top-artists {
+    list-style-type: none;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    padding:0;
+    margin: auto;
+    overflow: auto;
+    
+}
+#top-tracks li, #top-artists li {
+    max-width: max-content;
+    align-items: stretch;
+    max-width: 85px;
+
+}
+#top-tracks img, #top-artists img {
+    padding: 3px;
 }
