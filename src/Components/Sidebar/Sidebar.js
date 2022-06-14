@@ -40,12 +40,12 @@ export default function Sidebar() {
       { window.localStorage.getItem('runData') &&
       <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
       <div className='collapse' id='stravaCollapse'>
-        <div className="card card-body">{window.localStorage.getItem('stravaTotals') ? <><div id='run-totals'><h4>Total Runs: </h4><p>{stravaTotals.count}</p></div><div id='distance-totals'><h4>Total Distance: </h4><p>{(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p></div></> : 'Strava Data'}</div>
+        <div className="card card-body sidebarCollapse">{window.localStorage.getItem('stravaTotals') ? <><div id='run-totals'><h4>Total Runs: </h4><p>{stravaTotals.count}</p></div><div id='distance-totals'><h4>Total Distance: </h4><p>{(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p></div></> : 'Strava Data'}</div>
       </div>
       { window.localStorage.getItem('SpotifyData') &&
       <button className='btn customButton' id='spotifyProfButton' onClick={() => setSpotifyProfToggle(spotifyProfToggle => !spotifyProfToggle)}><li id='spotify-user'><img src={spotifyUserProfile} className='rounded-circle border border-success' alt='strava-profile'></img><h4>{spotifyUserName}</h4></li></button>}
       <div className='collapse' id='spotifyCollapse'>
-        <div className="card card-body">{window.localStorage.getItem('topTracks') && <div><h4>Top Tracks:</h4><ul id='top-tracks'>{topTracks.map(track => (<li key={track.id}><img src={track.album.images[1].url} className='rounded' alt='track' width='75' height='75'></img></li>))}</ul>
+        <div className="card card-body sidebarCollapse">{window.localStorage.getItem('topTracks') && <div><h4>Top Tracks:</h4><ul id='top-tracks'>{topTracks.map(track => (<li key={track.id}><img src={track.album.images[1].url} className='rounded' alt='track' width='75' height='75'></img></li>))}</ul>
         <h4>Top Artists:</h4><ul id='top-artists'>{topArtists.map(artist => (<li key={artist.id}><img src={artist.images[1].url} className='rounded' alt='artist' width='75' height='75'></img><strong>{artist.name}</strong></li>))}</ul></div>}</div>
       </div>
       
