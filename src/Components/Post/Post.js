@@ -214,7 +214,7 @@ export default function Post(props) {
       // let after = new Date(strava[2].start_date).getTime();
       // console.log(before);
       // console.log(after);
-      const requestRecentlyPlayed = await axios.get(`https://api.spotify.com/v1/me/player/recently-played?&limit=50` ,{
+      const requestRecentlyPlayed = await axios.get(`https://api.spotify.com/v1/me/player/recently-played?limit=50` ,{
         headers: {
           Authorization: `Bearer ${spotifyAccessToken}`,
           'content-type': 'application/json'
@@ -253,6 +253,39 @@ export default function Post(props) {
   if (spotifyAccessToken && !window.localStorage.getItem('SpotifyUserName')){
     fetchSpotifyUserData();
   } 
+
+  const fetchTopItems = async () => {
+    const requestTopArtists = await axios.get(`https://api.spotify.com/v1/me/top/artists?limit=3`, {
+      headers: {
+        Authorization: `Bearer ${spotifyAccessToken}`,
+        'content-type': 'application/json'
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+    const requestTopTracks = await axios.get('https://api.spotify.com/v1/me/top/tracks?limit=5', {
+      headers: {
+        Authorization: `Bearer ${spotifyAccessToken}`,
+        'content-type': 'application/json'
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+    const topArtists = requestTopArtists.data.items;
+    window.localStorage.setItem('topArtists', JSON.stringify(topArtists));
+    const topTracks = requestTopTracks.data.items;
+    window.localStorage.setItem('topTracks', JSON.stringify(topTracks));
+
+    console.log(topArtists);
+    console.log(topTracks);
+  }
+  if (spotifyAccessToken && !window.localStorage.getItem('topArtists')){
+    fetchTopItems();
+  }
 
 }, [props.spotifyAuthCode, props.spotLoggedIn, spotifyAccessCodeLink, props.spotifyStateMatch, spotifyAccessToken, spotifyRefreshToken]);
 

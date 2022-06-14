@@ -78,6 +78,8 @@ export default function PostFeed() {
    window.localStorage.removeItem('runTracks');
    window.localStorage.removeItem('SpotifyUserName');
    window.localStorage.removeItem('SpotifyUserProfile');
+   window.localStorage.removeItem('topArtists');
+   window.localStorage.removeItem('topTracks');
  
   }
   window.onclose = () => {
