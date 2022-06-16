@@ -95,7 +95,7 @@ export default function Post(props) {
     
     async function fetchStravaData(){
       
-        const requestActivities = await axios.get(`${baseStravaUrl}${stravaDataUrl}?access_token=${stravaAccessToken}`, {
+        const requestActivities = await axios.get(`${baseStravaUrl}${stravaDataUrl}?access_token=${stravaAccessToken}&per_page=10`, {
           'Authorization': `Bearer ${stravaAccessToken}`
         });
         // console.log(requestActivities.data);

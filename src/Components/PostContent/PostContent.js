@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './PostContent.scss';
+import RunChart from '../RunChart/RunChart';
 // import { $CombinedState } from 'redux';
 
 
@@ -136,7 +137,13 @@ export default function PostContent(props) {
 
             </div>
             <div className='collapse customCollapse' id={`chartCollapse${i}`}>
-                    <div className='card card-body'>Chart</div>                
+                    <div className='card card-body'>
+                        {(runTrackObjs && runTrackObjs[i].length >= 1) && 
+                        <RunChart 
+                        runTracks={runTrackObjs[i]}
+                        />    }
+
+                    </div>                
                 </div>
         </div>
         )) 
