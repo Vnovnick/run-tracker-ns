@@ -42,7 +42,7 @@ export default function RunChart(props) {
             <Line type="monotone" dataKey="playTime" stroke="#8884d8" />
             {/* <CartesianGrid strokeDasharray="5 5" /> */}
             <XAxis dataKey="url" interval={0} tick={<CustomXAxisTick/>}/>
-            <YAxis/>
+            {/* <YAxis/> */}
             <Tooltip />
             <Legend />                
             {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
