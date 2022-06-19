@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './PostContent.scss';
 import RunChart from '../RunChart/RunChart';
+import moment from 'moment';
 // import { $CombinedState } from 'redux';
 
 
@@ -43,19 +44,21 @@ export default function PostContent(props) {
         });
 
         const ISOConversion = runStartDates.map(date => {
-            let newDate = new Date(date);
-            // let year = newDate.getFullYear();
-            let month = newDate.getMonth() + 1;
-            let day = newDate.getDate();
+            return moment(date).format('D MMM YYYY, h:mm A');
+            
+            // let newDate = new Date(date);
+            // // let year = newDate.getFullYear();
+            // let month = newDate.getMonth() + 1;
+            // let day = newDate.getDate();
 
-            if (day < 10){
-                day = '0' + day;
-            }
-            if (month < 10){
-                month = '0' + month;
-            }
+            // if (day < 10){
+            //     day = '0' + day;
+            // }
+            // if (month < 10){
+            //     month = '0' + month;
+            // }
 
-            return (month + '/' + day);
+            // return (month + '/' + day);
         })
 
         window.localStorage.setItem('runTimes', JSON.stringify(ISOConversion));
