@@ -13,7 +13,7 @@ function CustomXAxisTick (props){
 
     return(
     <g transform={`translate(${props.x},${props.y})`}>
-      <image xlinkHref={props.payload.value} x={0} y={0} height="50px" width="50px" Anchor="middle" />
+      <image xlinkHref={props.payload.value} x={-25} y={0} height="50px" width="50px" Anchor="middle" />
     </g>
   )
 };
@@ -62,7 +62,7 @@ export default function RunChart(props) {
         }}>
             <Line type="monotone" dataKey="playTime" stroke="#8884d8" />
             {/* <CartesianGrid strokeDasharray="5 5" /> */}
-            <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick/>}/>
+            <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick />} />
             {/* <YAxis/> */}
             <Tooltip content={<CustomTooltip payload={chartData} />} formatter={(playTime) => moment(playTime).format('h:mm:ss a')} />            
             <Legend />                
