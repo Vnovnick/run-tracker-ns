@@ -101,7 +101,6 @@ export default function Post(props) {
         // console.log(requestActivities.data);
         setStravaData(requestActivities.data); 
         const convRunData = requestActivities.data.map(({name, distance, start_date, elapsed_time}) => ({name, distance, start_date, elapsed_time}));
-        const runData = convRunData.map(obj => {obj.isOpen = false; return obj;});
         window.localStorage.setItem('runData', JSON.stringify(runData));
         // window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
 
