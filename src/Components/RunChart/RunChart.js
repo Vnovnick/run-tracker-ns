@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { LineChart, 
     ResponsiveContainer,
     Legend, 
@@ -50,22 +51,19 @@ export default function RunChart(props) {
 
   return (
     <div className='chart-dropdown'>
-        <h1 className='chart-heading'>
-            Run Chart
-        </h1>
  
-        <LineChart width={950} height={450} data={chartData} margin={{
+        <LineChart width={950} height={180} data={chartData} margin={{
         
-        right: 70,
-        left: 20,
-        bottom: 5,
+        right: 50,
+        left: 50,
+        bottom: 30,
         }}>
-            <Line type="monotone" dataKey="playTime" stroke="#8884d8" />
+            <Line type="monotone" dataKey="playTime" stroke="#0AA411" />
             {/* <CartesianGrid strokeDasharray="5 5" /> */}
             <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick />} />
             {/* <YAxis/> */}
-            <Tooltip content={<CustomTooltip payload={chartData} />} formatter={(playTime) => moment(playTime).format('h:mm:ss a')} />            
-            <Legend />                
+            <Tooltip content={<CustomTooltip />} />            
+                           
 
         </LineChart>
 

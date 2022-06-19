@@ -127,8 +127,8 @@ export default function PostContent(props) {
                     <h3 id='run-name'>{item.name}</h3>
                     <h4 id='run-distance'>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
                     <p id='run-elapsed'>Time Elapsed: {convMovingTimes[i]}</p> 
-                    <button className='btn' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`}>
-                        Run Chart</button>
+                    {(runTrackObjs && runTrackObjs[i].length > 2) && <button className='btn' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`}>
+                        Song Timeline</button>}
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
                 (<div className='song-list-wrapper'><h3>Listened to: </h3><ul class={songListClass ? 'song-list-open' : "song-list"}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
