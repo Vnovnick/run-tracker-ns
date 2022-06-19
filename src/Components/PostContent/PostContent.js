@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './PostContent.scss';
 import RunChart from '../RunChart/RunChart';
@@ -116,18 +116,23 @@ export default function PostContent(props) {
         setSongListClass(!songListClass);
     };
 
+
+    // const myRef = useRef(null);
+    // const scroll = () => myRef.current.scrollIntoView({behavior: 'smooth'});
+    const scrollTo = (target) => document.getElementById(target).scrollIntoView();
+
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
-  return (
-    <div className='post-content'>
+    return (
+    <div className='post-content' >
         {stravaConvertedData ? stravaConvertedData.map((item, i) => (        
-        <div className='post-info-wrapper'>
-            <div className='post-info' key={i}>     
+        <div className='post-info-wrapper' id={`postDiv${i}`}>
+            <div className='post-info' key={i} >     
                 <div className='post-stravaData'>
                     <h3 id='run-date'>{runTimes[i]} </h3>
                     <h3 id='run-name'>{item.name}</h3>
                     <h4 id='run-distance'>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
                     <p id='run-elapsed'>Time Elapsed: {convMovingTimes[i]}</p> 
-                    {(runTrackObjs && runTrackObjs[i].length > 2) && <button className='btn' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`}>
+                    {(runTrackObjs && runTrackObjs[i].length > 2) && <button className='btn' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`} onClick={() => {scrollTo(`postDiv${i}`)}}>
                         Song Timeline</button>}
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
