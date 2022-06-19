@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './PostContent.scss';
 import RunChart from '../RunChart/RunChart';
@@ -116,9 +116,6 @@ export default function PostContent(props) {
         setSongListClass(!songListClass);
     };
 
-
-    // const myRef = useRef(null);
-    // const scroll = () => myRef.current.scrollIntoView({behavior: 'smooth'});
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
