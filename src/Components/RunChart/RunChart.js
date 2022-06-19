@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { LineChart, 
     ResponsiveContainer,
     Legend, 
@@ -20,6 +21,7 @@ export default function RunChart(props) {
     console.log(props.runTracks);
     const playTimes = props.runTracks.map(t => {
         return new Date(t.played_at).getTime();
+        
     });
 
     const chartData = props.runTracks.map((t, i) => {
@@ -41,9 +43,9 @@ export default function RunChart(props) {
         }}>
             <Line type="monotone" dataKey="playTime" stroke="#8884d8" />
             {/* <CartesianGrid strokeDasharray="5 5" /> */}
-            <XAxis dataKey="url" interval={0} tick={<CustomXAxisTick/>}/>
+            <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick/>}/>
             {/* <YAxis/> */}
-            <Tooltip />
+            <Tooltip formatter={(playTime) => moment(playTime).format('h:mm:ss a')}/>
             <Legend />                
             {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
         </LineChart>
