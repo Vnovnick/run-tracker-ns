@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/run-tracker-ns/static/css/main.e90d1d5b.css",
-    "main.js": "/run-tracker-ns/static/js/main.4c7ba287.js",
-    "static/js/787.2580e665.chunk.js": "/run-tracker-ns/static/js/787.2580e665.chunk.js",
-    "index.html": "/run-tracker-ns/index.html",
-    "main.e90d1d5b.css.map": "/run-tracker-ns/static/css/main.e90d1d5b.css.map",
-    "main.4c7ba287.js.map": "/run-tracker-ns/static/js/main.4c7ba287.js.map",
-    "787.2580e665.chunk.js.map": "/run-tracker-ns/static/js/787.2580e665.chunk.js.map"
+    "main.css": "/run-tracker-ns/public/static/css/main.e90d1d5b.css",
+    "main.js": "/run-tracker-ns/public/static/js/main.acdab8ee.js",
+    "static/js/787.2580e665.chunk.js": "/run-tracker-ns/public/static/js/787.2580e665.chunk.js",
+    "index.html": "/run-tracker-ns/public/index.html",
+    "main.e90d1d5b.css.map": "/run-tracker-ns/public/static/css/main.e90d1d5b.css.map",
+    "main.acdab8ee.js.map": "/run-tracker-ns/public/static/js/main.acdab8ee.js.map",
+    "787.2580e665.chunk.js.map": "/run-tracker-ns/public/static/js/787.2580e665.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e90d1d5b.css",
-    "static/js/main.4c7ba287.js"
+    "static/js/main.acdab8ee.js"
   ]
 }
