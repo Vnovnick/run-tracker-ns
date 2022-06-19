@@ -10,6 +10,10 @@
     width: 1000px !important;
     text-align: center;
 
+
+}
+.customCard {
+    background-color: #fff8ea !important;
 }
 
 .post-info {
@@ -29,11 +33,15 @@
 #run-date {
     vertical-align: top;
     text-align: left;
+    margin-bottom: 20px;
+}
+#run-distance, #run-elapsed {
+    padding: 10px;
 }
 
-/* #run-name {
-    text-align: left;
-} */
+#chartButton {
+    background-color: #fff8ea !important;
+}
 .song-list-wrapper{
 
     justify-content: center;

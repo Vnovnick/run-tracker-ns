@@ -142,7 +142,7 @@ export default function PostContent(props) {
 
             </div>
             <div className='collapse customCollapse' id={`chartCollapse${i}`}>
-                    <div className='card card-body'>
+                    <div className='card card-body customCard'>
                         {(runTrackObjs && runTrackObjs[i].length >= 1) && 
                         <RunChart 
                         runTracks={runTrackObjs[i]}

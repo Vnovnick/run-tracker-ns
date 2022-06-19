@@ -10,20 +10,30 @@ import { LineChart,
     YAxis,
     CartesianGrid } from 'recharts';
 
+
+ 
+const tickStyles = {
+  height: "65px",
+  width: "65px",
+}
 function CustomXAxisTick (props){
 
     return(
+
     <g transform={`translate(${props.x},${props.y})`}>
-      <image xlinkHref={props.payload.value} x={-25} y={0} height="50px" width="50px" Anchor="middle" />
+      <image xlinkHref={props.payload.value} x={-32} y={0} style={tickStyles} anchor="middle" />
     </g>
+
   )
 };
+
+const tooltipStyles = {backgroundColor: '#FFFDEF', border: '0.1px solid #D5FFD7', textAlign: 'left', padding: '5px'};
 
 function CustomTooltip (props){
   if (props.active && props.payload && props.payload.length){
     return(
-      <div className='custom-tooltip'>
-        <p className='label'>{`${props.payload[0].payload.name}`}</p>
+      <div className='custom-tooltip rounded' style={tooltipStyles}>
+        <p className='label'><strong>{`${props.payload[0].payload.name}`}</strong></p>
         <p className='tooltip-time'>{`${moment(props.payload[0].payload.playTime).format('h:mm:ss a')}`}</p>
       </div>
     )
@@ -56,13 +66,13 @@ export default function RunChart(props) {
         
         right: 50,
         left: 50,
-        bottom: 30,
+        bottom: 50,
         }}>
             <Line type="monotone" dataKey="playTime" stroke="#0AA411" />
-            {/* <CartesianGrid strokeDasharray="5 5" /> */}
+            {<CartesianGrid strokeDasharray="3 3" />}
             <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick />} />
             {/* <YAxis/> */}
-            <Tooltip content={<CustomTooltip />} />            
+            <Tooltip content={<CustomTooltip/>} />            
                            
 
         </LineChart>
