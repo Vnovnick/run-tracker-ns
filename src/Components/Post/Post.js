@@ -4,8 +4,7 @@ import './Post.css';
 import { spotifyApiData, stravaApiData } from '../../apiData';
 import qs from 'qs';
 
-// import { persistStore, persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
+
 import PostContent from '../PostContent/PostContent';
 import Sidebar from '../Sidebar/Sidebar';
 
