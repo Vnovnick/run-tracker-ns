@@ -44,7 +44,7 @@ export default function PostContent(props) {
         });
 
         const ISOConversion = runStartDates.map(date => {
-            return moment(date).format('D MMM YYYY, h:mm A');
+            return moment(date).format('D MMM h:mm A');
             
             // let newDate = new Date(date);
             // // let year = newDate.getFullYear();

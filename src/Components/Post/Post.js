@@ -100,7 +100,7 @@ export default function Post(props) {
         });
         // console.log(requestActivities.data);
         setStravaData(requestActivities.data); 
-        const convRunData = requestActivities.data.map(({name, distance, start_date, elapsed_time}) => ({name, distance, start_date, elapsed_time}));
+        const runData = requestActivities.data.map(({name, distance, start_date, elapsed_time}) => ({name, distance, start_date, elapsed_time}));
         window.localStorage.setItem('runData', JSON.stringify(runData));
         // window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
 
