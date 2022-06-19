@@ -10,12 +10,28 @@ import { LineChart,
     CartesianGrid } from 'recharts';
 
 function CustomXAxisTick (props){
+
     return(
     <g transform={`translate(${props.x},${props.y})`}>
       <image xlinkHref={props.payload.value} x={0} y={0} height="50px" width="50px" Anchor="middle" />
     </g>
   )
-}
+};
+
+function CustomTooltip (props){
+  if (props.active && props.payload && props.payload.length){
+    return(
+      <div className='custom-tooltip'>
+        <p className='label'>{`${props.payload[0].payload.name}`}</p>
+        <p className='tooltip-time'>{`${moment(props.payload[0].payload.playTime).format('h:mm:ss a')}`}</p>
+      </div>
+    )
+  }
+  return null;
+
+}; 
+
+
 
 export default function RunChart(props) {
     console.log(props.runTracks);
@@ -27,6 +43,9 @@ export default function RunChart(props) {
     const chartData = props.runTracks.map((t, i) => {
         return {name: t.track.name, url: t.track.album.images[1].url, playTime: playTimes[i]}
     })
+
+
+     
     console.log(chartData);
 
   return (
@@ -45,9 +64,9 @@ export default function RunChart(props) {
             {/* <CartesianGrid strokeDasharray="5 5" /> */}
             <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick/>}/>
             {/* <YAxis/> */}
-            <Tooltip formatter={(playTime) => moment(playTime).format('h:mm:ss a')}/>
+            <Tooltip content={<CustomTooltip payload={chartData} />} formatter={(playTime) => moment(playTime).format('h:mm:ss a')} />            
             <Legend />                
-            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+
         </LineChart>
 
 
