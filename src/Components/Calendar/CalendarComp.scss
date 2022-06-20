@@ -106,7 +106,7 @@ background-color: #e6e6e6;
 border-radius: 5px;
 }
 .react-calendar__tile--now {
-background: $red-300;
+background: #ffffff;
 }
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
@@ -135,7 +135,15 @@ background-color: #e6e6e6;
   color: green;
   background-color: rgb(138, 199, 138);
 }
+.longrun:hover {
+  color: rgb(10, 15, 10);
+  background-color: rgb(108, 255, 108) !important;
+}
 .workout {
   color: rgb(90, 73, 250);
-  background-color: #f0f0f0;
+  background-color: #b9b8fa;
+}
+.workout:hover {
+  color: rgb(10, 15, 10);
+  background-color: #f0f0f0 !important;
 }

@@ -22,9 +22,9 @@ const longRuns = stravaConvertedData.map(run => {
 
 
 const tileClassFunc = ({ date, view }) => {
-  if(workoutRuns.find(x=>x===moment(date).format("DD-MM-YYYY"))){
+  if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
       return  'workout'; 
-  }else if (longRuns.find(x=>x===moment(date).format("DD-MM-YYYY"))){
+  }else if (longRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
       return 'longrun';
   }
 }

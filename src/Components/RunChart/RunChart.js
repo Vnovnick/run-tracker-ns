@@ -61,7 +61,7 @@ export default function RunChart(props) {
 
   return (
     <div className='chart-dropdown'>
- 
+
         <LineChart width={950} height={180} data={chartData} margin={{
         
         right: 50,
