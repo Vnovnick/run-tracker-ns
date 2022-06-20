@@ -125,8 +125,17 @@ color: white;
 }
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-background: black;
+background: rgb(153, 153, 153);
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
 background-color: #e6e6e6;
+}
+
+.longrun {
+  color: green;
+  background-color: rgb(138, 199, 138);
+}
+.workout {
+  color: rgb(90, 73, 250);
+  background-color: #f0f0f0;
 }

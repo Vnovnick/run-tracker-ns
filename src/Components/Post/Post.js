@@ -100,6 +100,8 @@ export default function Post(props) {
         // console.log(requestActivities.data);
         setStravaData(requestActivities.data); 
         const runData = requestActivities.data.map(({name, distance, start_date, elapsed_time, workout_type}) => ({name, distance, start_date, elapsed_time, workout_type}));
+        console.log(runData[0].workout_type)
+        console.log(runData[5].workout_type)
         window.localStorage.setItem('runData', JSON.stringify(runData));
         // window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
 
