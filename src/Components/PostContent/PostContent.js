@@ -128,7 +128,7 @@ export default function PostContent(props) {
                     <h3 id='run-date'>{runTimes[i]} </h3>
                     <h3 id='run-name'>{item.name}</h3>
                     <h4 id='run-distance'>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
-                    <p id='run-elapsed'>Time Elapsed: {convMovingTimes[i]}</p> 
+                    <h5 id='run-elapsed'>Time Elapsed: {convMovingTimes[i]}</h5> 
                     {(runTrackObjs && runTrackObjs[i].length > 2) && <button className='btn' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`} onClick={() => {scrollTo(`postDiv${i}`)}}>
                         Song Timeline</button>}
                 </div>
