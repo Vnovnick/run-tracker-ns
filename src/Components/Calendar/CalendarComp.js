@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import Calendar from 'react-calendar';
 import './CalendarComp.scss';
 import moment from 'moment';
+import blueDot from '../Calendar/blueDot.png';
+import greenDot from '../Calendar/greenDot.png';
 
 const stravaStorageData = localStorage.getItem('runData');
 const stravaConvertedData = JSON.parse(stravaStorageData);
@@ -28,6 +30,18 @@ const tileClassFunc = ({ date, view }) => {
       return 'longrun';
   }
 }
+const tileContentFunc = ({ date, view }) => {
+  if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
+      return  (
+        <img id='blue-dot' src={blueDot} width='5px' height='5px'></img>
+      ); 
+  }else if (longRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
+      return (
+        <img id='green-dot' src={greenDot} width='8px' height='8px'></img>
+      );
+  }
+  
+}
 
 // workout_types: 3 = workout; 2 = longrun
 export default function CalendarComp() {
@@ -39,6 +53,7 @@ export default function CalendarComp() {
         <Calendar onChange={onChange} 
         value={value}
         tileClassName={tileClassFunc}
+        tileContent={tileContentFunc}
        />
     </div>
   )

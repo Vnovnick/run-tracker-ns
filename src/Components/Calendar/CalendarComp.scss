@@ -133,7 +133,7 @@ background-color: #e6e6e6;
 
 .longrun {
   color: green;
-  background-color: rgb(138, 199, 138);
+  // background-color: rgb(138, 199, 138);
 }
 .longrun:hover {
   color: rgb(10, 15, 10);
@@ -141,9 +141,20 @@ background-color: #e6e6e6;
 }
 .workout {
   color: rgb(90, 73, 250);
-  background-color: #b9b8fa;
+  // background-color: #b9b8fa;
 }
 .workout:hover {
   color: rgb(10, 15, 10);
   background-color: #f0f0f0 !important;
+}
+#green-dot {
+  margin-top: -27px;
+  margin-right: -7px;
+  left: 0;
+  bottom: 5%;
+
+}
+#blue-dot{
+  margin-top: -27px;
+  margin-right: -7px;
 }
