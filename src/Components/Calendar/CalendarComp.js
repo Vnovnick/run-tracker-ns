@@ -13,7 +13,7 @@ export default function CalendarComp() {
   const stravaStorageData = localStorage.getItem('runData');
   const stravaConvertedData = JSON.parse(stravaStorageData);
 
-  if (stravaConvertedData){
+
     const workoutRuns = stravaConvertedData.map(run => {
       if (run.workout_type === 3){
         return moment(run.start_date).format("DD-MM-YYYY");
@@ -26,26 +26,28 @@ export default function CalendarComp() {
       }
       return null;
     })
-    
-  
-  const tileClassFunc = ({ date, view }) => {
-    if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
-        return  'workout'; 
-    }else if (longRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
-        return 'longrun';
+   
+
+    const tileClassFunc = ({ date, view }) => {
+      if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
+          return  'workout'; 
+      }else if (longRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
+          return 'longrun';
+      }
     }
-  }
-  const tileContentFunc = ({ date, view }) => {
-    if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
-        return  (
-          <img id='blue-dot' src={blueDot} width='5px' height='5px'></img>
-        ); 
-    }else if (longRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
-        return (
-          <img id='green-dot' src={greenDot} width='8px' height='8px'></img>
-        );
-    }}
-  }
+    const tileContentFunc = ({ date, view }) => {
+      if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
+          return  (
+            <img id='blue-dot' src={blueDot} width='5px' height='5px'></img>
+          ); 
+      }else if (longRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
+          return (
+            <img id='green-dot' src={greenDot} width='8px' height='8px'></img>
+          );
+      }}
+  
+
+  
    
     
   
