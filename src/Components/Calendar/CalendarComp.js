@@ -7,14 +7,13 @@ import blueDot from '../Calendar/blueDot.png';
 import greenDot from '../Calendar/greenDot.png';
 
 
-
 // workout_types: 3 = workout; 2 = longrun
 export default function CalendarComp() {
   const stravaStorageData = localStorage.getItem('runData');
   const stravaConvertedData = JSON.parse(stravaStorageData);
 
 
-    const workoutRuns = stravaConvertedData.map(run => {
+  const workoutRuns = stravaConvertedData.map(run => {
       if (run.workout_type === 3){
         return moment(run.start_date).format("DD-MM-YYYY");
       }
@@ -44,25 +43,17 @@ export default function CalendarComp() {
           return (
             <img id='green-dot' src={greenDot} width='8px' height='8px'></img>
           );
-      }}
-  
+      }} 
 
-  
-   
-    
-  
-    const [value, onChange] = useState(new Date());
-  
+    const [value, onChange] = useState(new Date()); 
   
     return (
-    <div>
-      
-            <Calendar onChange={onChange} 
-            value={value}            
-            tileClassName={tileClassFunc}
-            tileContent={tileContentFunc}
-           /> 
-
-  </div>
+      <div>      
+        <Calendar onChange={onChange} 
+        value={value}            
+        tileClassName={tileClassFunc}
+        tileContent={tileContentFunc}
+        />
+      </div>
   )
 }
