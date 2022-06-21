@@ -53,7 +53,15 @@ export default function Sidebar() {
 
 
       {window.localStorage.getItem('runData') &&
-      <CalendarComp />}
+      <>
+      <CalendarComp />
+      <br></br>
+      <div id='color-text'>
+      <h5>Long runs marked with <span style={{color: 'green'}}><strong>green</strong></span>.</h5>
+      <h5>Workout runs marked with <span style={{color: 'blue'}}><strong>blue</strong></span>.</h5>
+      </div>
+      </>
+      }
     </div>
   )
 };
