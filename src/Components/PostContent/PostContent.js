@@ -119,13 +119,20 @@ export default function PostContent(props) {
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
 
     const [clickedDay, setClickedDay] = useState('');
+
     useEffect(() =>{
-        if (window.localStorage.getItem('selectedDay')){ 
-            setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));           
-            let runTimes = JSON.parse(localStorage.getItem('runTimes'));
-            let index = runTimes.findIndex(run => run.includes(clickedDay));
-            console.log(index);
-            scrollTo(`postDiv${index}`);
+        const changeDay = () => {
+            if (window.localStorage.getItem('selectedDay')){ 
+                setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));           
+                let runTimes = JSON.parse(localStorage.getItem('runTimes'));
+                let index = runTimes.findIndex(run => run.includes(clickedDay));
+                console.log(index);
+                scrollTo(`postDiv${index}`);
+            }
+        }
+        window.addEventListener('storage', changeDay);
+        return () => {
+            window.removeEventListener('storage', changeDay);
         }
     }, [clickedDay])
 
