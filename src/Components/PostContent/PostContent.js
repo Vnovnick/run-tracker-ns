@@ -121,18 +121,19 @@ export default function PostContent(props) {
     const [clickedDay, setClickedDay] = useState('');
 
     useEffect(() =>{
+        let runTimes = JSON.parse(localStorage.getItem('runTimes'));
         const changeDay = () => {
             if (window.localStorage.getItem('selectedDay')){ 
-                setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));           
-                let runTimes = JSON.parse(localStorage.getItem('runTimes'));
+                setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));         
                 let index = runTimes.findIndex(run => run.includes(clickedDay));
                 console.log(index);
-                scrollTo(`postDiv${index}`);
+                return index;
+                
             }
         }
-        window.addEventListener('storage', changeDay);
+        window.addEventListener('storage', scrollTo(`postDiv${changeDay()}`));
         return () => {
-            window.removeEventListener('storage', changeDay);
+            window.removeEventListener('storage', scrollTo(`postDiv${changeDay()}`));
         }
     }, [clickedDay])
 
