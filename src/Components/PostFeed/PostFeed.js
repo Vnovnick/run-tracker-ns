@@ -119,7 +119,7 @@ export default function PostFeed() {
     }  
 
     const renderTotalLogout = () => {
-      return <li><a href='http://localhost:3000/run-tracker-ns' onClick={() => {stravaLogout(); spotifyLogout();}}>Log-out of both Strava and Spotify</a></li>;
+      return <li><a href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout();}}>Log-out of both Strava and Spotify</a></li>;
     };
     
 
