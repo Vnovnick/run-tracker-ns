@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 // import 'react-calendar/dist/Calendar.css';
 import Calendar from 'react-calendar';
 import './CalendarComp.scss';
@@ -45,16 +45,29 @@ export default function CalendarComp() {
           );
       }} 
 
+
+    const [clickedDay, setClickedDay] = useState('');
+    const scrollTo = (target) => document.getElementById(`postDiv${target}`).scrollIntoView();
+
+    useEffect(() => {
+      console.log(clickedDay);
+      let runTimes = JSON.parse(window.localStorage.getItem('runTimes')); 
+      let index = runTimes.findIndex(run => run.includes(clickedDay));
+      console.log(index);  
+      if (index !== -1){
+        scrollTo(index);
+      }     
+    });
+
+    // const dayClick = (value, event) => window.localStorage.setItem('selectedDay', value);
     const [value, onChange] = useState(new Date()); 
-  
-    const dayClick = (value, event) => window.localStorage.setItem('selectedDay', value);
     return (
       <div>      
         <Calendar onChange={onChange} 
         value={value}            
         tileClassName={tileClassFunc}
         tileContent={tileContentFunc}
-        onClickDay={dayClick}
+        onClickDay={(value) => {setClickedDay(moment(value).format('D MMM'))}}
         />
       </div>
   )

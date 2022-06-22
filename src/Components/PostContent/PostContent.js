@@ -118,24 +118,31 @@ export default function PostContent(props) {
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
 
-    const [clickedDay, setClickedDay] = useState('');
+    // const [clickedDay, setClickedDay] = useState('');
 
-    useEffect(() =>{
-        let runTimes = JSON.parse(localStorage.getItem('runTimes'));
-        const changeDay = () => {
-            if (window.localStorage.getItem('selectedDay')){ 
-                setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));         
-                let index = runTimes.findIndex(run => run.includes(clickedDay));
-                console.log(index);
-                return index;
-                
-            }
-        }
-        window.addEventListener('storage', scrollTo(`postDiv${changeDay()}`));
-        return () => {
-            window.removeEventListener('storage', scrollTo(`postDiv${changeDay()}`));
-        }
-    }, [clickedDay])
+
+    // const changeDay = () => {
+    //     if (window.localStorage.getItem('selectedDay')){ 
+    //         setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));         
+    //         let index = runTimes.findIndex(run => run.includes(clickedDay));
+    //         console.log(index);
+    //         return index;
+            
+    //     }
+    // }
+    // useEffect(() => {
+    //     window.addEventListener('storage', () => {
+    //         setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));
+    //     })
+    // })
+    // useEffect(() => {
+    //     window.addEventListener('storage', scrollTo(`postDiv${changeDay()}`));
+    //     return () => {
+    //         window.removeEventListener('storage', scrollTo(`postDiv${changeDay()}`));
+    //     }
+    // })
+
+
 
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
     return (
