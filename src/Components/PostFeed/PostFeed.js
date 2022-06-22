@@ -71,6 +71,7 @@ export default function PostFeed() {
     window.localStorage.removeItem('runTimes');
     window.localStorage.removeItem('convMovingTimes');
     window.localStorage.removeItem('stravaTotals');
+    window.localStorage.removeItem('selectedDay');
   }
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');
