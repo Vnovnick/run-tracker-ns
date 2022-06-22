@@ -6,7 +6,7 @@ import './PostFeed.css';
 
 
 
-const redirect_uri = 'http://localhost:3000/run-tracker-ns';
+const redirect_uri = 'https://vnovnick.github.io/run-tracker-ns/';
 
 
 export default function PostFeed() {

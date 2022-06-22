@@ -16,7 +16,7 @@ var Buffer = require('buffer/').Buffer;
 // }
 
 
-const redirect_uri = 'http://localhost:3000/run-tracker-ns';
+const redirect_uri = 'https://vnovnick.github.io/run-tracker-ns/';
 
 
 // Strava Urls/endpoints
