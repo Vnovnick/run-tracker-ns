@@ -45,7 +45,7 @@ function CustomTooltip (props){
 
 
 export default function RunChart(props) {
-    console.log(props.runTracks);
+    // console.log(props.runTracks);
     const playTimes = props.runTracks.map(t => {
         return new Date(t.played_at).getTime();
         
@@ -57,7 +57,7 @@ export default function RunChart(props) {
 
 
      
-    console.log(chartData);
+    // console.log(chartData);
 
   return (
     <div className='chart-dropdown'>

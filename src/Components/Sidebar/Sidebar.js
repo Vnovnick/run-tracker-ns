@@ -5,6 +5,7 @@ import CalendarComp from '../Calendar/CalendarComp';
 import { Collapse } from 'bootstrap';
 
 
+
 export default function Sidebar() {
   
   const stravaUserName = localStorage.getItem('StravaUserName');

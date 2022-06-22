@@ -37,22 +37,24 @@ export default function CalendarComp() {
     const tileContentFunc = ({ date, view }) => {
       if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
           return  (
-            <img id='blue-dot' src={blueDot} width='5px' height='5px'></img>
+            <img id='blue-dot' src={blueDot} width='5px' height='5px' alt='dot'></img>
           ); 
       }else if (longRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
           return (
-            <img id='green-dot' src={greenDot} width='8px' height='8px'></img>
+            <img id='green-dot' src={greenDot} width='8px' height='8px' alt='dot'></img>
           );
       }} 
 
     const [value, onChange] = useState(new Date()); 
   
+    const dayClick = (value, event) => window.localStorage.setItem('selectedDay', value);
     return (
       <div>      
         <Calendar onChange={onChange} 
         value={value}            
         tileClassName={tileClassFunc}
         tileContent={tileContentFunc}
+        onClickDay={dayClick}
         />
       </div>
   )
