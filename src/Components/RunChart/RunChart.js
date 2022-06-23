@@ -55,10 +55,6 @@ export default function RunChart(props) {
         return {name: t.track.name, url: t.track.album.images[1].url, playTime: playTimes[i]}
     })
 
-
-     
-    // console.log(chartData);
-
   return (
     <div className='chart-dropdown'>
 

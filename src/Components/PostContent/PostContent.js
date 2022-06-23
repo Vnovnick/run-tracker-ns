@@ -111,9 +111,13 @@ export default function PostContent(props) {
 
     const [showSongs, setShowSongs] = useState(false);
     const [index, setIndex] = useState(null);
-    useEffect(() => {
 
-    })
+    // const handleClick = target => {
+    //     document.getElementById(`songs${target}`).className === 'song-list' ? document.getElementById(`songs${target}`).className = 'song-list-open' :  ;
+    // };
+    // useEffect(() => {
+        
+    // })
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
@@ -131,7 +135,7 @@ export default function PostContent(props) {
                         Song Timeline</button>}
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
-                (<div className='song-list-wrapper'><h3>Listened to: </h3><ul className={showSongs ? 'song-list-open' : "song-list"}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
+                (<div className='song-list-wrapper'><h3>Listened to: </h3><ul className={showSongs ? 'song-list-open' : "song-list"} id={`songs${i}`}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
                 {runTrackObjs[i].length > 6 && (<button className='btn' id='song-button' onClick={() => {setShowSongs(!showSongs)}}>{showSongs ? 'Show Less' : 'Show All'}</button>)}
                 </div>) : 
                 ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}
