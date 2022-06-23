@@ -78,16 +78,17 @@
     max-width: 120px;
 }
 .song-list-open li:nth-child(n+7) {
-    display: inline-flex;
+
     max-width: max-content;
     align-items: stretch;
     max-width: 120px;
 }
 #song-button {
     border-radius: 5px;
-    transition: box-shadow .2s !important;
+    // transition: box-shadow .2s !important;
+    background-color: #fff8ea !important;
 
 }
 #song-button:hover {
-    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    // box-shadow: 0 0 11px rgba(33,33,33,.2);
 }

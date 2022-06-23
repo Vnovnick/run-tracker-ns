@@ -108,42 +108,11 @@ export default function PostContent(props) {
     const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));
     const runTimes = JSON.parse(localStorage.getItem('runTimes'));  
     const convMovingTimes = JSON.parse(localStorage.getItem('convMovingTimes'));
-    const [showSongs, setShowSongs] = useState(false);
-    const [songListClass, setSongListClass] = useState(false);
 
-    const handleSongButtonClick = event => {
-        setShowSongs(!showSongs);
-        setSongListClass(!songListClass);
-    };
+    const [showSongs, setShowSongs] = useState(false);
+
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
-
-    // const [clickedDay, setClickedDay] = useState('');
-
-
-    // const changeDay = () => {
-    //     if (window.localStorage.getItem('selectedDay')){ 
-    //         setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));         
-    //         let index = runTimes.findIndex(run => run.includes(clickedDay));
-    //         console.log(index);
-    //         return index;
-            
-    //     }
-    // }
-    // useEffect(() => {
-    //     window.addEventListener('storage', () => {
-    //         setClickedDay(moment(window.localStorage.getItem('selectedDay')).format('D MMM'));
-    //     })
-    // })
-    // useEffect(() => {
-    //     window.addEventListener('storage', scrollTo(`postDiv${changeDay()}`));
-    //     return () => {
-    //         window.removeEventListener('storage', scrollTo(`postDiv${changeDay()}`));
-    //     }
-    // })
-
-
-
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
     return (
     <div className='post-content' >
@@ -159,8 +128,8 @@ export default function PostContent(props) {
                         Song Timeline</button>}
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
-                (<div className='song-list-wrapper'><h3>Listened to: </h3><ul className={songListClass ? 'song-list-open' : "song-list"}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
-                {runTrackObjs[i].length > 6 && (<button className={showSongs ? 'show-less' : 'show-all'} id='song-button' onClick={handleSongButtonClick}>{showSongs ? 'Show Less' : 'Show All'}</button>)}
+                (<div className='song-list-wrapper'><h3>Listened to: </h3><ul className={showSongs ? 'song-list-open' : "song-list"}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
+                {runTrackObjs[i].length > 6 && (<button className={showSongs ? 'btn show-less' : 'btn show-all'} id='song-button' onClick={() => {setShowSongs(!showSongs)}}>{showSongs ? 'Show Less' : 'Show All'}</button>)}
                 </div>) : 
                 ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}
 
