@@ -110,14 +110,6 @@ export default function PostContent(props) {
     const convMovingTimes = JSON.parse(localStorage.getItem('convMovingTimes'));
 
     const [showSongs, setShowSongs] = useState(false);
-    const [index, setIndex] = useState(null);
-
-    // const handleClick = target => {
-    //     document.getElementById(`songs${target}`).className === 'song-list' ? document.getElementById(`songs${target}`).className = 'song-list-open' :  ;
-    // };
-    // useEffect(() => {
-        
-    // })
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
