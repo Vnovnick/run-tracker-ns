@@ -3,6 +3,7 @@ import './Sidebar.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CalendarComp from '../Calendar/CalendarComp';
 import { Collapse } from 'bootstrap';
+import defaultProfile from '../Sidebar/defaultStravaProfile.png';
 
 
 
@@ -32,14 +33,17 @@ export default function Sidebar() {
     spotifyProfToggle ? bsSpotifyProfCollapse.show() : bsSpotifyProfCollapse.hide();
   })
   
-
+  const addDefaultImage = (event) => {
+    event.target.onError = null;
+    event.target.src = defaultProfile;
+  }
 
   return (
     <div className='sidebar'>
       <h1>Run_Tracker</h1>
       <ul id='user-info'>
       { window.localStorage.getItem('runData') &&
-      <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
+      <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' onError={addDefaultImage} alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
       <div className='collapse' id='stravaCollapse'>
         <div className="card card-body sidebarCollapse">{window.localStorage.getItem('stravaTotals') ? <><div id='run-totals'><h4>Total Runs: </h4><p>{stravaTotals.count}</p></div><div id='distance-totals'><h4>Total Distance: </h4><p>{(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p></div></> : 'Strava Data'}</div>
       </div>
