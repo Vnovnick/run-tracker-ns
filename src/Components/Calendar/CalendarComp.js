@@ -50,10 +50,8 @@ export default function CalendarComp() {
     const scrollTo = (target) => document.getElementById(`postDiv${target}`).scrollIntoView();
 
     useEffect(() => {
-      console.log(clickedDay);
       let runTimes = JSON.parse(window.localStorage.getItem('runTimes')); 
       let index = runTimes.findIndex(run => (run.slice(0, 5) === clickedDay || run.slice(0,6) === clickedDay));
-      console.log(index);  
       if (index !== -1){
         scrollTo(index);
       }     
