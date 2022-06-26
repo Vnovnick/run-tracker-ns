@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CalendarComp from '../Calendar/CalendarComp';
 import { Collapse } from 'bootstrap';
 import defaultProfile from '../Sidebar/defaultStravaProfile.png';
+import icon from '../../running.ico';
 
 
 
@@ -40,7 +41,10 @@ export default function Sidebar() {
 
   return (
     <div className='sidebar'>
-      <h1>Run_Tracker</h1>
+      <div id='sidebar-title'>
+        <img id='logo' src={icon} alt='logo' width='40px' height='40px'></img>
+        <h1>Run_Tracker</h1>
+      </div>
       <ul id='user-info'>
       { window.localStorage.getItem('runData') &&
       <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' onError={addDefaultImage} alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}

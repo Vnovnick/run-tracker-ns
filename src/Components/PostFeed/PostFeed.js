@@ -136,18 +136,15 @@ export default function PostFeed() {
         {window.localStorage.getItem('stravaLogin') ? <li><a href={redirect_uri} onClick={stravaLogout} >Strava Log-out</a></li> : <li><a href={authCodeLink}>Strava Log-in</a></li>}  
         {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} >Spotify Log-out</a></li> : <li><a href={spotAuthCodeLink} >Spotify Log-in</a></li>)}
       </ul>}    
-      {(!loggedIn && !spotLoggedIn) && 
-      <div>
+      {(!loggedIn && !spotLoggedIn) &&       
         <TitleScreen />  
-      </div>}
-      
-            
-        <Post 
-        stravaAuthCode={stravaAuthCode}
-        spotifyStateMatch={spotifyAuthState}
-        spotifyAuthCode={spotifyAuthCode}
-        spotLoggedIn={spotLoggedIn}
-        loggedIn={loggedIn}/>
+      }    
+      <Post 
+      stravaAuthCode={stravaAuthCode}
+      spotifyStateMatch={spotifyAuthState}
+      spotifyAuthCode={spotifyAuthCode}
+      spotLoggedIn={spotLoggedIn}
+      loggedIn={loggedIn}/>
 
     </div>
   )
