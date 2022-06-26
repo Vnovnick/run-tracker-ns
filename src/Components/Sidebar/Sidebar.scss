@@ -2,7 +2,7 @@
 
 
 .sidebar {
-    background-color: gray;
+    background-image: linear-gradient(rgb(14, 13, 13), grey);
     height: 100%;
     position: fixed;
     z-index: 1;
@@ -13,19 +13,13 @@
     border-top-left-radius:15px;
     border-bottom-left-radius: 15px;
     text-align: center;
-
-
 }
 #logo{
     margin-right: 20px;
-    margin-left: 45px;
     margin-top: 5px;
 }
 #sidebar-title{
     display: inline-flex;
-    background-color: black;
-    width: 100%;
-    border-bottom-left-radius: 15px;
 }
 .customButton {
     width: 300px !important;
@@ -35,10 +29,16 @@
     text-align: center;
 
 }
-
+.sidebar #strava-user h4 {
+    color: aliceblue;
+}
+.sidebar #spotify-user h4 {
+    color: aliceblue;
+}
 .sidebar #user-info {
     list-style-type: none;
     position: relative;
+
 }
 
 #stravaProfButton {
@@ -81,7 +81,7 @@
 // }
 #stravaProfButton:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2);
-    
+    color: rgb(216, 141, 2);   
 
 }
 #spotifyProfButton {
@@ -93,7 +93,7 @@
 }
 #spotifyProfButton:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2);  
-
+    color: green;
 
 }
 // #spotifyProfButton:focus{

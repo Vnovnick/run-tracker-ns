@@ -1,6 +1,6 @@
 .post-feed{
     background-color: #ffeecc;
-
+    background-image: linear-gradient(#ffdf9f, #ffeecc);
 }
 
 .post-feed #total-logout{
