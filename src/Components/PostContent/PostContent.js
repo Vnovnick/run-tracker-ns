@@ -110,13 +110,24 @@ export default function PostContent(props) {
     const runTrackObjs = JSON.parse(localStorage.getItem('runTracks'));
     const runTimes = JSON.parse(localStorage.getItem('runTimes'));  
     const convMovingTimes = JSON.parse(localStorage.getItem('convMovingTimes'));
-    const [showSongs, setShowSongs] = useState(false);
+    // const [showSongs, setShowSongs] = useState(false);
 
     const expandSongList = (target) => {
-        setShowSongs(!showSongs);
+        // setShowSongs(!showSongs);
         const element = document.getElementById(target);
+        const index = target.charAt(target.length - 1);
+        // let wrapper = document.getElementById(`postDiv${index}`);
+        // if (document.getElementById(target).className === 'song-list'){
+        //     element.style.height = wrapper.clientHeight + 'px';
+        // }
+        // if (document.getElementById(target).className === 'song-list-open'){
+        //     element.style.height = wrapper.clientHeight + 'px';
+        // }
         element.classList.toggle('song-list-open');
         element.classList.toggle('song-list');
+        let btn = document.getElementById(`list-button${index}`);
+        btn.innerText = btn.innerText === 'Show all' ? 'Show less' : 'Show all';
+
      };
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
@@ -140,7 +151,7 @@ export default function PostContent(props) {
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
                 (<div className='song-list-wrapper'><h3>Listened to: </h3><ul className="song-list" id={`songs${i}`}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
-                {runTrackObjs[i].length > 6 && (<button className='btn' id='song-button' onClick={() => {expandSongList(`songs${i}`)}}>{showSongs ? 'Show Less' : 'Show All'}</button>)}
+                {runTrackObjs[i].length > 6 && (<button className='btn song-button' id={`list-button${i}`} onClick={() => {expandSongList(`songs${i}`)}}>Show all</button>)}
                 </div>) : 
                 ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}
 
