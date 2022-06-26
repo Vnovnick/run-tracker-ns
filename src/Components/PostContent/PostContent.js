@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './PostContent.scss';
 import RunChart from '../RunChart/RunChart';
 import moment from 'moment';
-// import { $CombinedState } from 'redux';
+import blueDot from '../Calendar/blueDot.png';
+import greenDot from '../Calendar/greenDot.png';
+
 
 
 
@@ -125,10 +127,14 @@ export default function PostContent(props) {
         <div className='post-info-wrapper' id={`postDiv${i}`} key={i}>
             <div className='post-info'  >     
                 <div className='post-stravaData'>
-                    <h3 id='run-date'>{runTimes[i]} </h3>
+                    <div className='date-n-dot'>
+                        <h3 id='run-date'>{runTimes[i]} </h3>{(item.workout_type && (item.workout_type === 2 || item.workout_type === 3)) &&
+                        <img className={item.workout_type === 3 ? 'blue-dot' : 'green-dot'} src={item.workout_type === 3 ? blueDot : greenDot}></img>
+                        }
+                    </div>
                     <h3 id='run-name'>{item.name}</h3>
-                    <h4 id='run-distance'>Distance: {(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
-                    <h5 id='run-elapsed'>Time Elapsed: {convMovingTimes[i]}</h5> 
+                    <h4 id='run-distance'><strong>Distance: </strong>{(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
+                    <h5 id='run-elapsed'><strong>Time Elapsed: </strong>{convMovingTimes[i]}</h5> 
                     {(runTrackObjs && runTrackObjs[i].length > 2) && <button className='btn' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`} onClick={() => {scrollTo(`postDiv${i}`)}}>
                         Song Timeline</button>}
                 </div>

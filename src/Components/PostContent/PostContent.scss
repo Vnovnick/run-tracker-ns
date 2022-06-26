@@ -15,7 +15,9 @@
 .customCard {
     background-color: #fff8ea !important;
 }
-
+.post-info-wrapper{
+    transition: all 0.4s ease-out;    
+}
 .post-info{
     padding: 20px;
     max-width: 80%;
@@ -30,6 +32,7 @@
     column-width: auto;
     column-rule: dotted;
     text-align: center;
+
 
 }
 .post-info-open {
@@ -47,14 +50,16 @@
     column-rule: dotted;
     text-align: center;
 }
+#run-name{
+    margin-top: 20px;
+}
 #run-date {
     vertical-align: top;
     text-align: left;
-    margin-bottom: 20px;
 }
 #run-distance, #run-elapsed {
     padding: 10px;
-    
+    margin-top: 10px;
 }
 
 #chartButton {
@@ -62,7 +67,6 @@
 
 }
 .song-list-wrapper{
-
     justify-content: center;
     display: inline-flex;
     flex-wrap: wrap;
@@ -98,11 +102,13 @@
 .song-list li, .song-list-open li {
     align-items: stretch;
     max-width: 120px;
+
 }
 .song-list li:nth-child(n+7) {
     display: none;
     align-items: stretch;
     max-width: 120px;
+
 }
 .song-list-open li:nth-child(n+7) {
     align-items: stretch;
@@ -113,5 +119,16 @@
     // transition: box-shadow .2s !important;
     background-color: #fff8ea !important;
 
+}
+.blue-dot {
+    width: 10px;
+    height: 10px;
+}
+.green-dot{
+    width: 15px;
+    height: 15px;
+}
+.date-n-dot{
+    display: flex;
 }
 
