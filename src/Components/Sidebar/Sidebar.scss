@@ -2,7 +2,7 @@
 
 
 .sidebar {
-    background-image: linear-gradient(rgb(14, 13, 13), grey);
+    background-image: linear-gradient(rgb(14, 13, 13), grey) !important;
     height: 100%;
     position: fixed;
     z-index: 1;
@@ -80,8 +80,8 @@
     
 // }
 #stravaProfButton:hover {
-    box-shadow: 0 0 11px rgba(33,33,33,.2);
-    color: rgb(216, 141, 2);   
+    box-shadow: 0 0 11px rgba(33,33,33,.2) !important;
+    color: rgb(216, 141, 2) !important;   
 
 }
 #spotifyProfButton {
@@ -148,7 +148,7 @@ h5 {
 
 }
 #color-text {
-    background-color: $orange-100;
+    background-color: $orange-100 !important;
     width: 325px;
     align-items: center;
     margin: auto;
