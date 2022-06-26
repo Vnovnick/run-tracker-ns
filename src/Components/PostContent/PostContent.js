@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './PostContent.scss';
 import RunChart from '../RunChart/RunChart';
@@ -121,7 +121,7 @@ export default function PostContent(props) {
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
     return (
     <div className='post-content' >
-        {stravaConvertedData ? stravaConvertedData.map((item, i) => (        
+        {stravaConvertedData && stravaConvertedData.map((item, i) => (        
         <div className='post-info-wrapper' id={`postDiv${i}`} key={i}>
             <div className='post-info'  >     
                 <div className='post-stravaData'>
@@ -151,10 +151,8 @@ export default function PostContent(props) {
                     </div>                
                 </div>
         </div>
-        )) 
-        : 'Please log-in to view Strava Data and to access Spotify log-in'}
-        <br></br>    
-        {/* {!spotifyConvertedData && 'Login to Strava and then to Spotify to see song data'} */}
+        ))
+        }   
     </div>
   )
 }
