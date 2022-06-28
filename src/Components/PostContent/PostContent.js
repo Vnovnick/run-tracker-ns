@@ -116,13 +116,6 @@ export default function PostContent(props) {
         // setShowSongs(!showSongs);
         const element = document.getElementById(target);
         const index = target.charAt(target.length - 1);
-        // let wrapper = document.getElementById(`postDiv${index}`);
-        // if (document.getElementById(target).className === 'song-list'){
-        //     element.style.height = wrapper.clientHeight + 'px';
-        // }
-        // if (document.getElementById(target).className === 'song-list-open'){
-        //     element.style.height = wrapper.clientHeight + 'px';
-        // }
         element.classList.toggle('song-list-open');
         element.classList.toggle('song-list');
         let btn = document.getElementById(`list-button${index}`);
@@ -135,12 +128,12 @@ export default function PostContent(props) {
     return (
     <div className='post-content' >
         {stravaConvertedData && stravaConvertedData.map((item, i) => (        
-        <div className='post-info-wrapper' id={`postDiv${i}`} key={i}>
-            <div className='post-info'  >     
+        <div className='post-info-wrapper'  key={i}>
+            <div className='post-info' id={`postDiv${i}`}>     
                 <div className='post-stravaData'>
                     <div className='date-n-dot'>
                         <h3 id='run-date'>{runTimes[i]} </h3>{(item.workout_type && (item.workout_type === 2 || item.workout_type === 3)) &&
-                        <img className={item.workout_type === 3 ? 'blue-dot' : 'green-dot'} src={item.workout_type === 3 ? blueDot : greenDot}></img>
+                        <img className={item.workout_type === 3 ? 'blue-dot' : 'green-dot'} src={item.workout_type === 3 ? blueDot : greenDot} alt='dot'></img>
                         }
                     </div>
                     <h3 id='run-name'>{item.name}</h3>
