@@ -15,9 +15,9 @@
 .customCard {
     background-color: #fff8ea !important;
 }
-.post-info-wrapper{
-    transition: all 0.4s ease-out;    
-}
+// .post-info-wrapper{
+//     transition: all 0.4s ease-out;    
+// }
 .post-info{
     padding: 20px;
     max-width: 80%;
@@ -32,8 +32,8 @@
     column-width: auto;
     column-rule: dotted;
     text-align: center;
-
-
+    height: fit-content;
+    transition: height 0.3s ease-out;
 }
 .post-info-open {
     padding: 20px;
@@ -49,6 +49,10 @@
     column-width: auto;
     column-rule: dotted;
     text-align: center;
+    max-height: 900px;
+    transition: height 0.3s ease-in;
+
+
 }
 #run-name{
     margin-top: 20px;
@@ -85,7 +89,6 @@
     padding:0;
     margin: 0;
     overflow: auto;
-
 }
 .song-list-open {
     list-style-type: none;
@@ -96,7 +99,6 @@
     padding:0;
     margin: 0;
     overflow: auto;
-
 }
 
 .song-list li, .song-list-open li {
@@ -108,7 +110,6 @@
     display: none;
     align-items: stretch;
     max-width: 120px;
-
 }
 .song-list-open li:nth-child(n+7) {
     align-items: stretch;
