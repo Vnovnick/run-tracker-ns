@@ -150,7 +150,7 @@ export default function PostContent(props) {
                 (<div className='song-list-wrapper'><h3>Listened to: </h3><ul className="song-list" id={`songs${i}`}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
                 {runTrackObjs[i].length > 6 && (<button className='btn song-button' id={`list-button${i}`} onClick={() => {expandSongList(`songs${i}`)}}>Show all</button>)}
                 </div>) : 
-                ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : 'Song Data Unavailable (Spotify limited to last 50 songs)')}
+                ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : <p>Song Data Unavailable (Spotify limited to last 50 songs)</p>)}
 
                 <br></br>
 
