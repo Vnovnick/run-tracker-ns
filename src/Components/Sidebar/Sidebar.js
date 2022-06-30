@@ -68,8 +68,8 @@ export default function Sidebar() {
       <CalendarComp />
       <br></br>
       <div id='color-text'>
-      <h5>Long runs - <span><img src={greenDot} height='16px' width='16px' style={{marginLeft: '3px', marginBottom: '2px'}}></img></span></h5>
-      <h5>Workout runs - <span><img src={blueDot} height='10px' width='10px' style={{marginLeft: '3px', marginBottom: '2px'}}></img></span></h5>
+      <h5>Long runs - <span><img src={greenDot} height='16px' width='16px' style={{marginLeft: '2px', marginBottom: '2px'}} alt='green-dot'></img></span></h5>
+      <h5>Workout runs - <span><img src={blueDot} height='10px' width='10px' style={{marginLeft: '3px', marginBottom: '2px'}} alt='blue-dot'></img></span></h5>
       </div>
       </>
       }
