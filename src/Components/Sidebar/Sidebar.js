@@ -5,6 +5,8 @@ import CalendarComp from '../Calendar/CalendarComp';
 import { Collapse } from 'bootstrap';
 import defaultProfile from '../Sidebar/defaultStravaProfile.png';
 import icon from '../../running.ico';
+import blueDot from '../Calendar/blueDot.png';
+import greenDot from '../Calendar/greenDot.png';
 
 
 
@@ -66,8 +68,8 @@ export default function Sidebar() {
       <CalendarComp />
       <br></br>
       <div id='color-text'>
-      <h5>Long runs = <span style={{color: 'green'}}><strong>green</strong></span>.</h5>
-      <h5>Workout runs = <span style={{color: 'blue'}}><strong>blue</strong></span>.</h5>
+      <h5>Long runs - <span><img src={greenDot} height='16px' width='16px' style={{marginLeft: '3px', marginBottom: '2px'}}></img></span></h5>
+      <h5>Workout runs - <span><img src={blueDot} height='10px' width='10px' style={{marginLeft: '3px', marginBottom: '2px'}}></img></span></h5>
       </div>
       </>
       }
