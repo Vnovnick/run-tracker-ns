@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import axios from 'axios';
-import './Post.css';
+import './Post.scss';
 import { spotifyApiData, stravaApiData } from '../../apiData';
 import qs from 'qs';
 

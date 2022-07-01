@@ -152,7 +152,7 @@ export default function PostContent(props) {
                     <h3 id='run-name'>{item.name}</h3>
                     <h4 id='run-distance'><strong>Distance: </strong>{(item.distance * 0.000621371192).toFixed(2)} mi ({(item.distance/1000).toFixed(2)} km)</h4>
                     <h5 id='run-elapsed'><strong>Time Elapsed: </strong>{convMovingTimes[i]}</h5> 
-                    {(runTrackObjs && runTrackObjs[i].length > 2) && <button className='btn shiny-button' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`} onClick={() => {scrollTo(`postDiv${i}`)}}>
+                    {(runTrackObjs && runTrackObjs[i].length > 2) && <button className='btn' id='chartButton' type="button" data-bs-toggle="collapse" data-bs-target={`#chartCollapse${i}`} aria-expanded="false" aria-controls={`chartCollapse${i}`} onClick={() => {scrollTo(`postDiv${i}`)}}>
                         Song Timeline</button>}
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
