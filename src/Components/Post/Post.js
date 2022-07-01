@@ -31,7 +31,7 @@ const spotifyAuthUrl = 'api/token';
 
 export default function Post(props) {
   
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   // strava states and links
   const [stravaRefreshToken, setStravaRefreshToken] = useState('');
@@ -296,7 +296,8 @@ export default function Post(props) {
       {localStorage.getItem('runData') && 
           <Sidebar/>
       }
-      <PostContent/>        
+      <PostContent />
+     
     </div>
   )
 };
