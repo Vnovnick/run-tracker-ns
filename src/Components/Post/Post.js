@@ -29,7 +29,9 @@ const baseAuthSpotifyUrl = 'https://accounts.spotify.com/';
 const spotifyAuthUrl = 'api/token';
 
 
-export default function Post(props) {  
+export default function Post(props) {
+  
+  const [isLoading, setIsLoading] = useState(false);
   
   // strava states and links
   const [stravaRefreshToken, setStravaRefreshToken] = useState('');
@@ -291,10 +293,10 @@ export default function Post(props) {
 
   return (
     <div className='post-list'>
-
-        <Sidebar/>
-        <PostContent/>
-        
+      {localStorage.getItem('runData') && 
+          <Sidebar/>
+      }
+      <PostContent/>        
     </div>
   )
 };

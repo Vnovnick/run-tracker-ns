@@ -4,6 +4,7 @@
   "homepage": "https://Vnovnick.github.io/run-tracker-ns",
   "private": true,
   "dependencies": {
+    "@loadingio/css-spinner": "^2.0.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
