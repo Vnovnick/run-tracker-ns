@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Post from '../Post/Post';
 import axios from 'axios';
 import { stravaApiData, spotifyApiData } from '../../apiData';
-import './PostFeed.css';
+import './PostFeed.scss';
 import TitleScreen from '../TitleScreen/TitleScreen';
-
+import ReactLoading from 'react-loading';
 
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
@@ -120,11 +120,16 @@ export default function PostFeed() {
     }  
 
     const renderTotalLogout = () => {
-      return <li><a href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout();}}>Log-out of both Strava and Spotify</a></li>;
+      return <li><a className='btn logout-button' href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout();}}>Log-out of both Strava and Spotify</a></li>;
     };
     
 
-
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (document.querySelector("[id^='postDiv']")){
+      setIsLoading(false);
+    }
+  })
 
   return (
     <div className='post-feed'>
@@ -133,13 +138,14 @@ export default function PostFeed() {
      </ul>       
       {!(window.localStorage.getItem('stravaLogin') && window.localStorage.getItem('spotifyLogin')) && 
       <ul id='logins'>
-        {window.localStorage.getItem('stravaLogin') ? <li><a href={redirect_uri} onClick={stravaLogout} >Strava Log-out</a></li> : <li><a href={authCodeLink}>Strava Log-in</a></li>}  
-        {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} >Spotify Log-out</a></li> : <li><a href={spotAuthCodeLink} >Spotify Log-in</a></li>)}
+        {window.localStorage.getItem('stravaLogin') ? <li><a href={redirect_uri} onClick={stravaLogout} ><button className='btn str-button'>Strava Log-out</button></a></li> : <li><a href={authCodeLink} onClick={() => setIsLoading(true)}><button className='btn str-button'>Strava Log-in</button></a>{isLoading && <span><ReactLoading type={'spin'} color={'black'} height={'25px'} width={'25px'} /></span>}</li>}  
+        {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} ><button className='btn spotify-button'>Spotify Log-out</button></a></li> : <li><a href={spotAuthCodeLink} ><button className='btn spotify-button'>Spotify Log-in</button></a></li>)}
       </ul>}    
       {(!loggedIn && !spotLoggedIn) &&       
         <TitleScreen />  
-      }    
+      }  
       <Post 
+      isLoading={isLoading}
       stravaAuthCode={stravaAuthCode}
       spotifyStateMatch={spotifyAuthState}
       spotifyAuthCode={spotifyAuthCode}

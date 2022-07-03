@@ -1,0 +1,41 @@
+.post-feed{
+    background-color: #ffeecc;
+    background-image: linear-gradient(#ffdf9f, #ffeecc);
+    height: 100%;
+}
+
+.post-feed #total-logout{
+    list-style-type: none;
+    display: inline-flex;
+
+}
+.post-feed #logins{
+    list-style-type: none;
+    display: inline-flex;
+}
+
+.post-feed ul li {
+    padding: 9px;
+    display: inline;
+}
+.str-button{
+    background-color: #fff8ea !important;
+}
+.str-button:hover{
+    border-color: rgb(216, 141, 2) !important;
+    color: black !important;
+}
+.spotify-button{
+    background-color: #fff8ea !important;
+}
+.spotify-button:hover{
+    border-color: green !important;
+    color: black !important;
+}
+.logout-button{
+    background-color: #fff8ea !important;
+}
+.logout-button:hover{
+    border-color: rgb(255, 145, 0) !important;
+    color: black !important;
+}

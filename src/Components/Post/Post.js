@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Post.scss';
 import { spotifyApiData, stravaApiData } from '../../apiData';
 import qs from 'qs';
+import ReactLoading from 'react-loading';
 
 
 import PostContent from '../PostContent/PostContent';
@@ -31,7 +32,7 @@ const spotifyAuthUrl = 'api/token';
 
 export default function Post(props) {
   
-  const [isLoading, setIsLoading] = useState(true);
+
   
   // strava states and links
   const [stravaRefreshToken, setStravaRefreshToken] = useState('');
@@ -103,6 +104,7 @@ export default function Post(props) {
         setStravaData(requestActivities.data); 
         const runData = requestActivities.data.map(({name, distance, start_date, elapsed_time, workout_type}) => ({name, distance, start_date, elapsed_time, workout_type}));
         window.localStorage.setItem('runData', JSON.stringify(runData));
+        props.isLoading = false;
         // window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
 
         // let stravaStorageData = localStorage.getItem('StravaData');
@@ -297,6 +299,7 @@ export default function Post(props) {
           <Sidebar/>
       }
       <PostContent />
+
      
     </div>
   )

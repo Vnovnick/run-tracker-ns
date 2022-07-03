@@ -139,7 +139,7 @@ export default function PostContent(props) {
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
     // unique id error with spotify id will hopefully go away once all data is rendered in one div
     return (
-    <div className='post-content' >
+    <div className='post-content'>
         {stravaConvertedData && stravaConvertedData.map((item, i) => (        
         <div className='post-info-wrapper'  key={i}>
             <div className='post-info' id={`postDiv${i}`}>     
