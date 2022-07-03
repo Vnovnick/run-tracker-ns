@@ -298,7 +298,7 @@ export default function Post(props) {
       {localStorage.getItem('runData') && 
           <Sidebar/>
       }
-      <PostContent />
+      {!props.isLoading ? <PostContent /> : <ReactLoading type={'spin'} color={'black'} height={'25px'} width={'25px'} />}     
 
      
     </div>
