@@ -14,9 +14,11 @@
     display: inline-flex;
 }
 #spinner{
-    align-items: center;
+    left: 10px;
 }
-
+#spot-login-li{
+    width: fit-content;
+}
 .post-feed ul li {
     padding: 9px;
 
