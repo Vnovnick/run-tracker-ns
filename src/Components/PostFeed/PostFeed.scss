@@ -13,10 +13,13 @@
     list-style-type: none;
     display: inline-flex;
 }
+#spinner{
+    align-items: center;
+}
 
 .post-feed ul li {
     padding: 9px;
-    display: inline;
+
 }
 .str-button{
     background-color: #fff8ea !important;
@@ -39,3 +42,4 @@
     border-color: rgb(255, 145, 0) !important;
     color: black !important;
 }
+

@@ -1,7 +1,12 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 .post-content {
     max-width: 80%;
+
 }
 .customCollapse {
     max-width: 80%;
@@ -72,6 +77,11 @@
     flex-flow: row wrap;
     padding:0;
     margin: 0;
+    -webkit-animation: fadein 0.5s; 
+    -moz-animation: fadein 0.5s; 
+     -ms-animation: fadein 0.5s; 
+      -o-animation: fadein 0.5s; 
+         animation: fadein 0.5s;
 
 }
 
