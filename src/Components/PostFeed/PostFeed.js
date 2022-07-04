@@ -125,14 +125,6 @@ export default function PostFeed() {
     
 
   const [isLoading, setIsLoading] = useState(false);
-  // useEffect(() => {
-  //   if (document.querySelector("[id^='postDiv']") || document.querySelector("[id^='songWrapper']")){
-  //     setIsLoading(false);
-  //   }
-
-  // })
-
-
   return (
     <div className='post-feed'>
       <ul id='total-logout'>
@@ -140,8 +132,10 @@ export default function PostFeed() {
      </ul>       
       {!(window.localStorage.getItem('stravaLogin') && window.localStorage.getItem('spotifyLogin')) && 
       <ul id='logins'>
-        {window.localStorage.getItem('stravaLogin') ? <li><a href={redirect_uri} onClick={stravaLogout} ><button className='btn str-button'>Strava Log-out</button></a></li> : <li><a href={authCodeLink} onClick={() => setIsLoading(true)}><button className='btn str-button'>Strava Log-in</button></a>{isLoading && <span id='spinner'><ReactLoading type={'spin'} color={'black'} height={'25px'} width={'25px'}/></span>}</li>}  
-        {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} ><button className='btn spotify-button'>Spotify Log-out</button></a></li> : <li id='spot-login-li'><a href={spotAuthCodeLink} onClick={() => setIsLoading(true)}><button className='btn spotify-button'>Spotify Log-in</button></a>{isLoading && <ReactLoading type={'spin'} color={'black'} height={'25px'} width={'25px'} />}</li>)}
+        {window.localStorage.getItem('stravaLogin') ? <li><a href={redirect_uri} onClick={stravaLogout} ><button className='btn str-button'>Strava Log-out</button></a></li> : 
+        <li><a href={authCodeLink} onClick={() => setIsLoading(true)}><button className='btn str-button'>Strava Log-in</button></a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'}/></div>}</li>}  
+        {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} ><button className='btn spotify-button'>Spotify Log-out</button></a></li> : 
+        <li id='spot-login-li'><a href={spotAuthCodeLink} onClick={() => setIsLoading(true)}><button className='btn spotify-button'>Spotify Log-in</button></a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>)}
       </ul>}    
       {(!loggedIn && !spotLoggedIn) &&       
         <TitleScreen />  

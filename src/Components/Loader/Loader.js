@@ -5,7 +5,7 @@ import './Loader.scss';
 export default function Loader() {
   return (
     <div className='loading-div'>
-        <ReactLoading type={'spin'} color={'black'} height={'150px'} width={'150px'} />
+        <ReactLoading type={'bars'} color={'black'} height={'110px'} width={'110px'} />
     </div>
   )
 };
