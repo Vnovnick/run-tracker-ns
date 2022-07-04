@@ -120,7 +120,7 @@ export default function PostFeed() {
     }  
 
     const renderTotalLogout = () => {
-      return <li><a className='btn logout-button' href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout(); setIsLoading(true)}}>Log-out</a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>;
+      return <li><a className='btn logout-button' href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout(); setIsLoading(true)}}>Log-out of all accounts</a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>;
     };
     
 
