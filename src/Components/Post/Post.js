@@ -178,10 +178,9 @@ export default function Post(props) {
         console.error('Error: ', error);
       })
     }
-    if (props.spotifyAuthCode && props.spotLoggedIn && props.spotifyStateMatch){
+    if (props.spotifyAuthCode !== 1 && props.spotLoggedIn && props.spotifyStateMatch){
       authSpotify();
-    }
-    
+    }   
   
 
   // below request creates an infinite loop; needs new conditional
@@ -284,9 +283,6 @@ export default function Post(props) {
     window.localStorage.setItem('topArtists', JSON.stringify(topArtists));
     const topTracks = requestTopTracks.data.items;
     window.localStorage.setItem('topTracks', JSON.stringify(topTracks));
-
-    console.log(topArtists);
-    console.log(topTracks);
   }
   if (spotifyAccessToken && !window.localStorage.getItem('topArtists')){
     fetchTopItems();

@@ -141,7 +141,7 @@ export default function PostContent(props) {
     return (
     <div className='post-content'>
         {stravaConvertedData && stravaConvertedData.map((item, i) => (        
-        <div className='post-info-wrapper'  key={i}>
+        <div className='post-info-wrapper' key={i}>
             <div className='post-info' id={`postDiv${i}`}>     
                 <div className='post-stravaData'>
                     <div className='date-n-dot'>
@@ -156,7 +156,7 @@ export default function PostContent(props) {
                         Song Timeline</button>}
                 </div>
                 {(runTrackObjs && runTrackObjs[i].length >= 1) ? 
-                (<div className='song-list-wrapper' id={`songWrapper${i}`} onLoad={() => {setPostHeight(`songWrapper${i}`)}}><h3>Listened to: </h3><ul className="song-list" id={`songs${i}`}>{runTrackObjs[i].map(t => (<li key={t.id}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
+                (<div className='song-list-wrapper' id={`songWrapper${i}`} onLoad={() => {setPostHeight(`songWrapper${i}`)}}><h3>Listened to: </h3><ul className="song-list" id={`songs${i}`}>{runTrackObjs[i].map((t, i) => (<li key={i}><img src={t.track.album.images[1].url} className='rounded' width="100" height="100" alt='Album Cover'></img><br></br><strong>{t.track.name}</strong> <br></br>({t.track.album.name})</li>))}</ul>
                 {runTrackObjs[i].length > 6 && (<button className='btn song-button' id={`list-button${i}`} onClick={() => {expandSongList(`songs${i}`)}}>Show all</button>)}
                 </div>) : 
                 ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : <p>Song Data Unavailable (Spotify limited to last 50 songs)</p>)}
