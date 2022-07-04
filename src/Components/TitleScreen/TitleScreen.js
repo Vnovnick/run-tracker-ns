@@ -3,6 +3,17 @@ import './TitleScreen.scss';
 import video from '../TitleScreen/SiteDemoVid.mp4';
 
 export default function TitleScreen() {
+
+  const getWidth = () => {
+    return Math.max(
+      document.body.scrollWidth,
+      document.documentElement.scrollWidth,
+      document.body.offsetWidth,
+      document.documentElement.offsetWidth,
+      document.documentElement.clientWidth
+    );
+  };
+
   return (
     <div id='title-screen'>
         <h1 id='title'>Run_Tracker</h1>
