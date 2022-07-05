@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './PostContent.scss';
 import RunChart from '../RunChart/RunChart';
@@ -6,23 +6,17 @@ import moment from 'moment';
 import blueDot from '../Calendar/blueDot.png';
 import greenDot from '../Calendar/greenDot.png';
 
-
-
-
 export default function PostContent(props) {
 // strava data points to work with: 
 // elapsed_time, start_date, moving_time
 
 // spotify data points to work with:
 // played_at
-
-
     const stravaStorageData = localStorage.getItem('runData');
     const stravaConvertedData = JSON.parse(stravaStorageData);
 
     const spotifyStorageData = localStorage.getItem('SpotifyData');
     const spotifyConvertedData = JSON.parse(spotifyStorageData);
-    // console.log(spotifyConvertedData);
 
     if (stravaConvertedData) {
         const runStartDates = stravaConvertedData.map(({start_date}) => start_date); //original date formal = '2022-05-28T00:56:57Z'
@@ -34,12 +28,10 @@ export default function PostContent(props) {
         let zippedTimes = convRunStartDates.map((d, i) => {
             return [d, (movingTimes[i] * 1000)];
         });
-        // console.log(zippedTimes);
 
         let runEndTimes = zippedTimes.map(arr => {
             return arr[0] + arr[1];
         })
-        // console.log(runEndTimes);
 
         let runRanges = convRunStartDates.map((d, i) => {
             return [d, runEndTimes[i]];
@@ -47,22 +39,7 @@ export default function PostContent(props) {
 
         const ISOConversion = runStartDates.map(date => {
             return moment(date).format('D MMM h:mm A');
-            
-            // let newDate = new Date(date);
-            // // let year = newDate.getFullYear();
-            // let month = newDate.getMonth() + 1;
-            // let day = newDate.getDate();
-
-            // if (day < 10){
-            //     day = '0' + day;
-            // }
-            // if (month < 10){
-            //     month = '0' + month;
-            // }
-
-            // return (month + '/' + day);
         })
-
         window.localStorage.setItem('runTimes', JSON.stringify(ISOConversion));
 
         const elapsedConv = movingTimes.map(time => {
@@ -70,7 +47,6 @@ export default function PostContent(props) {
             const seconds = time % 60;
             return `${mins.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         })
-
         window.localStorage.setItem('convMovingTimes', JSON.stringify(elapsedConv));
 
     if (spotifyConvertedData){
@@ -85,11 +61,8 @@ export default function PostContent(props) {
                 }
                 return false;  
             })
-        };
-        
-        const tracksDuringRun = runRanges.map(rangeFunc);
-        // window.localStorage.setItem('tracks', JSON.stringify(tracksDuringRun));      
-
+        };        
+        const tracksDuringRun = runRanges.map(rangeFunc); 
 
         const songObjs = (trackTimes) => {
             return spotifyConvertedData.filter(obj => {
@@ -137,7 +110,6 @@ export default function PostContent(props) {
 
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
-    // unique id error with spotify id will hopefully go away once all data is rendered in one div
     return (
     <div className='post-content'>
         {stravaConvertedData && stravaConvertedData.map((item, i) => (        
@@ -160,19 +132,16 @@ export default function PostContent(props) {
                 {runTrackObjs[i].length > 6 && (<button className='btn song-button' id={`list-button${i}`} onClick={() => {expandSongList(`songs${i}`)}}>Show all</button>)}
                 </div>) : 
                 ((stravaConvertedData && !runTrackObjs) ?  'Please Login to Spotify to see song data' : <p>Song Data Unavailable (Spotify limited to last 50 songs)</p>)}
-
                 <br></br>
-
             </div>
             <div className='collapse customCollapse' id={`chartCollapse${i}`}>
-                    <div className='card card-body customCard'>
-                        {(runTrackObjs && runTrackObjs[i].length >= 1) && 
-                        <RunChart 
-                        runTracks={runTrackObjs[i]}
-                        />    }
-
-                    </div>                
-                </div>
+                <div className='card card-body customCard'>
+                    {(runTrackObjs && runTrackObjs[i].length >= 1) && 
+                    <RunChart 
+                    runTracks={runTrackObjs[i]}
+                    />    }
+                </div>                
+            </div>
         </div>
         ))
         }   

@@ -8,8 +8,6 @@ import icon from '../../running.ico';
 import blueDot from '../Calendar/blueDot.png';
 import greenDot from '../Calendar/greenDot.png';
 
-
-
 export default function Sidebar() {
   
   const stravaUserName = localStorage.getItem('StravaUserName');
@@ -48,29 +46,26 @@ export default function Sidebar() {
         <h1>Run_Tracker</h1>
       </div>
       <ul id='user-info'>
-      { window.localStorage.getItem('runData') &&
-      <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' onError={addDefaultImage} alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
-      <div className='collapse' id='stravaCollapse'>
-        <div className="card card-body sidebarCollapse">{window.localStorage.getItem('stravaTotals') ? <><div id='run-totals'><h4>Total Runs: </h4><p>{stravaTotals.count}</p></div><div id='distance-totals'><h4>Total Distance: </h4><p>{(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p></div></> : 'Strava Data'}</div>
-      </div>
-      { window.localStorage.getItem('SpotifyData') &&
-      <button className='btn customButton' id='spotifyProfButton' onClick={() => setSpotifyProfToggle(spotifyProfToggle => !spotifyProfToggle)}><li id='spotify-user'><img src={spotifyUserProfile} className='rounded-circle border border-success' alt='strava-profile'></img><h4>{spotifyUserName}</h4></li></button>}
-      <div className='collapse' id='spotifyCollapse'>
-        <div className="card card-body sidebarCollapse">{window.localStorage.getItem('topTracks') && <div><h4>Top Tracks:</h4><ul id='top-tracks'>{topTracks.map(track => (<li key={track.id}><img src={track.album.images[1].url} className='rounded' alt='track' width='75' height='75'></img></li>))}</ul>
-        <h4>Top Artists:</h4><ul id='top-artists'>{topArtists.map(artist => (<li key={artist.id}><img src={artist.images[1].url} className='rounded' alt='artist' width='75' height='75'></img><strong>{artist.name}</strong></li>))}</ul></div>}</div>
-      </div>
-      
+        { window.localStorage.getItem('runData') &&
+        <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' onError={addDefaultImage} alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
+        <div className='collapse' id='stravaCollapse'>
+          <div className="card card-body sidebarCollapse">{window.localStorage.getItem('stravaTotals') ? <><div id='run-totals'><h4>Total Runs: </h4><p>{stravaTotals.count}</p></div><div id='distance-totals'><h4>Total Distance: </h4><p>{(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p></div></> : 'Strava Data'}</div>
+        </div>
+        { window.localStorage.getItem('SpotifyData') &&
+        <button className='btn customButton' id='spotifyProfButton' onClick={() => setSpotifyProfToggle(spotifyProfToggle => !spotifyProfToggle)}><li id='spotify-user'><img src={spotifyUserProfile} className='rounded-circle border border-success' alt='strava-profile'></img><h4>{spotifyUserName}</h4></li></button>}
+        <div className='collapse' id='spotifyCollapse'>
+          <div className="card card-body sidebarCollapse">{window.localStorage.getItem('topTracks') && <div><h4>Top Tracks:</h4><ul id='top-tracks'>{topTracks.map(track => (<li key={track.id}><img src={track.album.images[1].url} className='rounded' alt='track' width='75' height='75'></img></li>))}</ul>
+          <h4>Top Artists:</h4><ul id='top-artists'>{topArtists.map(artist => (<li key={artist.id}><img src={artist.images[1].url} className='rounded' alt='artist' width='75' height='75'></img><strong>{artist.name}</strong></li>))}</ul></div>}</div>
+        </div>      
       </ul>
-
-
       {window.localStorage.getItem('runData') &&
       <>
-      <CalendarComp />
-      <br></br>
-      <div id='color-text'>
-      <h5>Long runs - <span><img src={greenDot} height='16px' width='16px' style={{marginLeft: '2px', marginBottom: '2px'}} alt='green-dot'></img></span></h5>
-      <h5>Workout runs - <span><img src={blueDot} height='10px' width='10px' style={{marginLeft: '3px', marginBottom: '2px'}} alt='blue-dot'></img></span></h5>
-      </div>
+        <CalendarComp />
+        <br></br>
+          <div id='color-text'>
+            <h5>Long runs - <span><img src={greenDot} height='16px' width='16px' style={{marginLeft: '2px', marginBottom: '2px'}} alt='green-dot'></img></span></h5>
+            <h5>Workout runs - <span><img src={blueDot} height='10px' width='10px' style={{marginLeft: '3px', marginBottom: '2px'}} alt='blue-dot'></img></span></h5>
+          </div>
       </>
       }
     </div>

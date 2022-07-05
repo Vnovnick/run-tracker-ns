@@ -1,18 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './TitleScreen.scss';
 import video from '../TitleScreen/SiteDemoVid.mp4';
 
 export default function TitleScreen() {
-
-  const getWidth = () => {
-    return Math.max(
-      document.body.scrollWidth,
-      document.documentElement.scrollWidth,
-      document.body.offsetWidth,
-      document.documentElement.offsetWidth,
-      document.documentElement.clientWidth
-    );
-  };
   window.onload = () => {
     changeClass();
   };
@@ -29,7 +19,6 @@ export default function TitleScreen() {
   window.addEventListener('resize', () => {
     changeClass();
   });
-
 
   return (
     <div id='title-screen'>

@@ -12,7 +12,6 @@ export default function CalendarComp() {
   const stravaStorageData = localStorage.getItem('runData');
   const stravaConvertedData = JSON.parse(stravaStorageData);
 
-
   const workoutRuns = stravaConvertedData.map(run => {
       if (run.workout_type === 3){
         return moment(run.start_date).format("DD-MM-YYYY");
@@ -24,8 +23,7 @@ export default function CalendarComp() {
         return moment(run.start_date).format("DD-MM-YYYY");
       }
       return null;
-    })
-   
+    })   
 
     const tileClassFunc = ({ date, view }) => {
       if(workoutRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
@@ -57,7 +55,6 @@ export default function CalendarComp() {
       }     
     });
 
-    // const dayClick = (value, event) => window.localStorage.setItem('selectedDay', value);
     const [value, onChange] = useState(new Date()); 
     return (
       <div>      

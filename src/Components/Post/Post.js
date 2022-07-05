@@ -1,9 +1,8 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './Post.scss';
 import { spotifyApiData, stravaApiData } from '../../apiData';
 import qs from 'qs';
-
 
 import PostContent from '../PostContent/PostContent';
 import Sidebar from '../Sidebar/Sidebar';
@@ -11,14 +10,7 @@ import Loader from '../Loader/Loader';
 
 var Buffer = require('buffer/').Buffer;
 
-// const persistConfig = {
-//   key: 'persist-key',
-//   storage
-// }
-
-
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
-
 
 // Strava Urls/endpoints
 const baseStravaUrl = 'https://www.strava.com/';
@@ -29,11 +21,8 @@ const stravaAuthUrl = 'oauth/token';
 const baseAuthSpotifyUrl = 'https://accounts.spotify.com/';
 const spotifyAuthUrl = 'api/token';
 
-
 export default function Post(props) {
-  
 
-  
   // strava states and links
   const [stravaRefreshToken, setStravaRefreshToken] = useState('');
   const [stravaAccessToken, setStravaAccessToken] = useState('');
@@ -62,23 +51,17 @@ export default function Post(props) {
       await axios.post(stravaAccessCodeLink)
       .then(response => {  
           if (response.status === 200){
-            // console.log(response.data.access_token);
             setStravaAccessToken(response.data.access_token);
-            setIsLoading(true);
-             
-            // console.log(stravaAccessToken); 
-          }   
-      
+            setIsLoading(true);             
+          } 
       })
       .catch(error => {
         console.error('Error: ', error);
-      });
-    
+      });   
     }
     if (props.stravaAuthCode && !stravaAccessToken){
       authStrava(); 
     } 
- 
 
     //refresh token post request
     //  function refreshStravaAccessToken(){
@@ -95,7 +78,6 @@ export default function Post(props) {
     //   }
     // }
 
-    
     async function fetchStravaData(){
         const requestActivities = await axios.get(`${baseStravaUrl}${stravaDataUrl}?access_token=${stravaAccessToken}&per_page=10`, {
           'Authorization': `Bearer ${stravaAccessToken}`
@@ -105,12 +87,6 @@ export default function Post(props) {
         const runData = requestActivities.data.map(({name, distance, start_date, elapsed_time, workout_type}) => ({name, distance, start_date, elapsed_time, workout_type}));
         window.localStorage.setItem('runData', JSON.stringify(runData));
         setIsLoading(false);
-        // window.localStorage.setItem('StravaData', JSON.stringify(requestActivities.data));
-
-        // let stravaStorageData = localStorage.getItem('StravaData');
-        // console.log(JSON.parse(stravaStorageData));  
-         
-        
     }
     if (stravaAccessToken) {
         fetchStravaData(); 
@@ -180,7 +156,7 @@ export default function Post(props) {
     }
     if (props.spotifyAuthCode !== 1 && props.spotLoggedIn && props.spotifyStateMatch){
       authSpotify();
-    }   
+    }  
   
 
   // below request creates an infinite loop; needs new conditional
@@ -203,8 +179,6 @@ export default function Post(props) {
   //     console.log(error);
   //   })
   // }
-
-
   
   const fetchSpotifyData = async () => {
     // getting 'after' parameter in recently played get request
@@ -230,9 +204,7 @@ export default function Post(props) {
       setSpotifyData(requestRecentlyPlayed.data.items);
       window.localStorage.setItem('SpotifyData', JSON.stringify(requestRecentlyPlayed.data.items));
       let spotifyStorageData = localStorage.getItem('SpotifyData');
-      setIsLoading(false);
-      // console.log(JSON.parse(spotifyStorageData));
-    
+      setIsLoading(false);  
   }
 
   if (spotifyAccessToken && window.localStorage.getItem('runData')){
@@ -296,10 +268,7 @@ export default function Post(props) {
       {localStorage.getItem('runData') && 
           <Sidebar/>
       }
-      {!isLoading ? <PostContent /> : <Loader />}     
-
-
-     
+      {!isLoading ? <PostContent /> : <Loader />}       
     </div>
   )
 };
