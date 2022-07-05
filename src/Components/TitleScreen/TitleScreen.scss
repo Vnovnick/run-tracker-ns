@@ -1,26 +1,30 @@
 #title-screen{
     margin-top: 12%;
-    margin-left: 200px;
+    margin-left: 10%;
     height: 100%;
 }
 #title{
     font-size: 50pt;
+    padding-left: 20px;
+}
+#title-screen p{
+    padding-left: 20px
 }
 .demo-vid{
     width: 100%; 
     height: auto;
 }
-.demo-vid-small{
-    width: 340px; 
-    height: auto;
-}
-.demo-wrapper{
-    width: 940px;
-    height: auto;
-    max-width: 50vw;
-    border-radius: 10px; 
-    overflow: hidden; 
+.right{ 
     float: right;
     margin-right: 8%;
     margin-top: -15%;
+    height: auto;
+    width: 60%;
+}
+.demo-wrapper{
+    height: auto;
+    max-width: 70%;
+    min-width: 300px;
+    border-radius: 10px; 
+    overflow: hidden; 
 }

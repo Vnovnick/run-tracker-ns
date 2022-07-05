@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './TitleScreen.scss';
 import video from '../TitleScreen/SiteDemoVid.mp4';
 
@@ -13,6 +13,23 @@ export default function TitleScreen() {
       document.documentElement.clientWidth
     );
   };
+  window.onload = () => {
+    changeClass();
+  };
+  const changeClass = () => {
+    let width = window.innerWidth;
+    console.log(width);
+    if (width < 1500){
+      document.getElementById('demo-container').classList.remove('right');
+    }else if (width >= 1501){
+      document.getElementById('demo-container').classList.add('right');
+    }
+  };
+
+  window.addEventListener('resize', () => {
+    changeClass();
+  });
+
 
   return (
     <div id='title-screen'>
