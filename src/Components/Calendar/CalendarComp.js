@@ -5,6 +5,7 @@ import './CalendarComp.scss';
 import moment from 'moment';
 import blueDot from '../Calendar/blueDot.png';
 import greenDot from '../Calendar/greenDot.png';
+import blackDot from '../Calendar/blackDot.png';
 
 
 // workout_types: 3 = workout; 2 = longrun
@@ -12,17 +13,23 @@ export default function CalendarComp() {
   const stravaStorageData = localStorage.getItem('runData');
   const stravaConvertedData = JSON.parse(stravaStorageData);
 
+  const otherRuns = [];
+
   const workoutRuns = stravaConvertedData.map(run => {
       if (run.workout_type === 3){
         return moment(run.start_date).format("DD-MM-YYYY");
-      }
-      return null;
+      }else{
+        otherRuns.push(moment(run.start_date).format("DD-MM-YYYY"));
+        return null;
+      }      
     })
     const longRuns = stravaConvertedData.map(run => {
       if (run.workout_type === 2){
         return moment(run.start_date).format("DD-MM-YYYY");
-      }
-      return null;
+      }else{
+        otherRuns.push(moment(run.start_date).format("DD-MM-YYYY"));
+        return null;
+      }    
     })   
 
     const tileClassFunc = ({ date, view }) => {
@@ -41,7 +48,12 @@ export default function CalendarComp() {
           return (
             <img id='green-dot' src={greenDot} width='8px' height='8px' alt='dot'></img>
           );
-      }} 
+      }else if (otherRuns.find(run => run===moment(date).format("DD-MM-YYYY"))){
+        return (
+          <img id='black-dot' src={blackDot} width='6px' height='6px' alt='dot'></img>
+        );
+      }
+    } 
 
 
     const [clickedDay, setClickedDay] = useState('');

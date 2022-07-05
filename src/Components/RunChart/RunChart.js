@@ -5,7 +5,7 @@ import { LineChart,
     Tooltip,
     Line,
     XAxis,
-    CartesianGrid } from 'recharts';
+    CartesianGrid } from 'recharts'; 
  
 const tickStyles = {
   height: "65px",
