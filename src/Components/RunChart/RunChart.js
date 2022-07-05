@@ -2,12 +2,9 @@ import React from 'react';
 import moment from 'moment';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { LineChart, 
-    ResponsiveContainer,
-    Legend, 
     Tooltip,
     Line,
     XAxis,
-    YAxis,
     CartesianGrid } from 'recharts';
 
 
@@ -17,13 +14,10 @@ const tickStyles = {
   width: "65px",
 }
 function CustomXAxisTick (props){
-
     return(
-
     <g transform={`translate(${props.x},${props.y})`}>
       <image xlinkHref={props.payload.value} x={-32} y={0} style={tickStyles} anchor="middle" />
     </g>
-
   )
 };
 
@@ -67,7 +61,6 @@ export default function RunChart(props) {
             <Line type="monotone" dataKey="playTime" stroke="#0AA411" />
             {<CartesianGrid strokeDasharray="3 3" />}
             <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick />} />
-            {/* <YAxis/> */}
             <Tooltip content={<CustomTooltip/>} />            
                            
 
