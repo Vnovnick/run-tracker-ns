@@ -40,6 +40,22 @@ export default function Sidebar() {
     event.target.src = defaultProfile;
   }
 
+    // window.onload = () => {
+    //   changeClass();
+    // };
+    // const changeClass = () => {
+    //   let width = window.innerWidth;
+    //   if (width < 900){
+
+    //   }else if (width >= 901){
+
+    //   }
+    // };
+  
+    // window.addEventListener('resize', () => {
+    //   changeClass();
+    // });
+
   return (
     <div className='sidebar'>
       <div id='sidebar-title'>

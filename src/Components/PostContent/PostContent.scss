@@ -11,7 +11,7 @@
      -ms-animation: fadein 0.5s; 
       -o-animation: fadein 0.5s; 
          animation: fadein 0.5s;
-
+    min-width: 400px;
 }
 .customCollapse {
     max-width: 80%;
@@ -24,9 +24,13 @@
 .customCard {
     background-color: #fff8eab2 !important;
 }
+.columnless{
+    column-count: 0 !important;
+}
 .post-info{
     padding: 20px;
     max-width: 80%;
+    min-width: 40%;
     justify-content: center;
     margin: auto;
     margin-top: 10px;

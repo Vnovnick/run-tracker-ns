@@ -108,12 +108,27 @@ export default function PostContent(props) {
         wrapper.style.height = (songWrapperHeight + 35) + 'px';
     };
 
+    // window.onload = () => {
+    //     changeClass();
+    //   };
+    //   const changeClass = () => {
+    //     let width = window.innerWidth;
+    //     if (width < 900){
+    //       document.getElementById('content-wrapper').classList.add('columnless');
+    //     }else if (width >= 901){
+    //       document.getElementById('content-wrapper').classList.remove('columnless');
+    //     }
+    //   };
+    
+    //   window.addEventListener('resize', () => {
+    //     changeClass();
+    //   });
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
     return (
     <div className='post-content'>
         {stravaConvertedData && stravaConvertedData.map((item, i) => (        
-        <div className='post-info-wrapper' key={i}>
+        <div className='post-info-wrapper' id='content-wrapper' key={i}>
             <div className='post-info' id={`postDiv${i}`}>     
                 <div className='post-stravaData'>
                     <div className='date-n-dot'>
