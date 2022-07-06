@@ -22,14 +22,16 @@ export default function TitleScreen() {
 
   return (
     <div id='title-screen'>
+      <div id='heading-elements'>
         <h1 id='title'>Run_Tracker</h1>
         <p>Please log-in to view Strava Data and to access Spotify log-in</p>
-        <div id='demo-container' className='demo-wrapper'>
-          <video id='site-demo' className='demo-vid' autoPlay loop muted>
-              <source src={video} type='video/mp4'/>
-              <source src={video} type="video/ogg" />
-          </video>
-        </div>
+      </div>
+      <div id='demo-container' className='demo-wrapper'>
+        <video id='site-demo' className='demo-vid' autoPlay loop muted>
+            <source src={video} type='video/mp4'/>
+            <source src={video} type="video/ogg" />
+        </video>
+      </div>
 
     </div>
   )
