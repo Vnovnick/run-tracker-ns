@@ -12,19 +12,17 @@
 }
 .demo-vid{
     width: 100%; 
-    height: auto;
 }
 .right{ 
     float: right;
     margin-right: 8%;
     margin-top: -15%;
-    height: auto;
     width: 60%;
 }
 .demo-wrapper{
-    height: auto;
     max-width: 70%;
     min-width: 300px;
-    border-radius: 10px; 
+    border-radius: 15px; 
     overflow: hidden; 
+    // border: 1px solid black;
 }

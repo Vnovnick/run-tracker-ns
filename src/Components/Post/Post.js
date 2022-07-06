@@ -232,7 +232,7 @@ export default function Post(props) {
   } 
 
   const fetchTopItems = async () => {
-    const requestTopArtists = await axios.get(`https://api.spotify.com/v1/me/top/artists?limit=3`, {
+    const requestTopArtists = await axios.get(`https://api.spotify.com/v1/me/top/artists?limit=3&time_range=short_term`, {
       headers: {
         Authorization: `Bearer ${spotifyAccessToken}`,
         'content-type': 'application/json'
@@ -242,7 +242,7 @@ export default function Post(props) {
       console.log(error);
     })
 
-    const requestTopTracks = await axios.get('https://api.spotify.com/v1/me/top/tracks?limit=3', {
+    const requestTopTracks = await axios.get('https://api.spotify.com/v1/me/top/tracks?limit=3&time_range=short_term', {
       headers: {
         Authorization: `Bearer ${spotifyAccessToken}`,
         'content-type': 'application/json'
