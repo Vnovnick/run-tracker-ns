@@ -67,18 +67,12 @@
 .sidebarCollapse {
     background-color:#ffeecc !important;
 }
-// #run-totals, #distance-totals {
 
-// }
-
-#run-totals p, #distance-totals p{
+#run-totals p, #distance-totals p, #ytd-totals p, #ytd-distance-totals p{
     font-size: 20px;
 
 }
 
-// #stravaProfButton:focus{
-    
-// }
 #stravaProfButton:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2) !important;
     color: rgb(216, 141, 2) !important;   
@@ -96,9 +90,6 @@
     color: green;
 
 }
-// #spotifyProfButton:focus{
-//     border-color: ;
-// }
 
 .sidebar #strava-user img{
     width: 70px;

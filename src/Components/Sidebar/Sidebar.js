@@ -13,6 +13,7 @@ export default function Sidebar() {
   const stravaUserName = localStorage.getItem('StravaUserName');
   const stravaUserProfile = localStorage.getItem('StravaUserProfile');
   const stravaTotals = JSON.parse(localStorage.getItem('stravaTotals'));
+  const stravaYtdTotals = JSON.parse(localStorage.getItem('stravaYtdTotals'));
 
   const spotifyUserName = localStorage.getItem('SpotifyUserName');
   const spotifyUserProfile = localStorage.getItem('SpotifyUserProfile');
@@ -49,7 +50,28 @@ export default function Sidebar() {
         { window.localStorage.getItem('runData') &&
         <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' onError={addDefaultImage} alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
         <div className='collapse' id='stravaCollapse'>
-          <div className="card card-body sidebarCollapse">{window.localStorage.getItem('stravaTotals') ? <><div id='run-totals'><h4>Total Runs: </h4><p>{stravaTotals.count}</p></div><div id='distance-totals'><h4>Total Distance: </h4><p>{(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p></div></> : 'Strava Data'}</div>
+          <div className="card card-body sidebarCollapse">
+          {window.localStorage.getItem('stravaTotals') ? 
+          <>
+            <div id='run-totals'>
+              <h4>Total Runs: </h4>
+                <p>{stravaTotals.count}</p>
+            </div>
+            <div id='distance-totals'>
+              <h4>Total Distance: </h4>
+                <p>{(stravaTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaTotals.distance/1000).toFixed(2)} km)</p>
+            </div>
+            <div id='ytd-totals'>
+              <h4>Runs (FTY): </h4>
+                <p>{stravaYtdTotals.count}</p>
+            </div>
+            <div id='ytd-distance-totals'>
+              <h4>Distance (FTY): </h4>
+                <p>{(stravaYtdTotals.distance * 0.000621371192).toFixed(2)} mi ({(stravaYtdTotals.distance/1000).toFixed(2)} km)</p>
+            </div>
+          </> 
+          : 'Strava Data'}
+        </div>
         </div>
         { window.localStorage.getItem('SpotifyData') &&
         <button className='btn customButton' id='spotifyProfButton' onClick={() => setSpotifyProfToggle(spotifyProfToggle => !spotifyProfToggle)}><li id='spotify-user'><img src={spotifyUserProfile} className='rounded-circle border border-success' alt='strava-profile'></img><h4>{spotifyUserName}</h4></li></button>}

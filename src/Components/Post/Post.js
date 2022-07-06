@@ -117,6 +117,7 @@ export default function Post(props) {
       });
       setStravaTotals(requestTotals.data.all_run_totals);
       window.localStorage.setItem('stravaTotals', JSON.stringify(requestTotals.data.all_run_totals));
+      window.localStorage.setItem('stravaYtdTotals', JSON.stringify(requestTotals.data.ytd_run_totals));
     }
     if (!window.localStorage.getItem('StravaTotals') && stravaUserId){
       fetchUserTotals();

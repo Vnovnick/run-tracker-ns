@@ -35,6 +35,7 @@ export default function PostFeed() {
     window.localStorage.removeItem('convMovingTimes');
     window.localStorage.removeItem('stravaTotals');
     window.localStorage.removeItem('selectedDay');
+    window.localStorage.removeItem('stravaYtdTotals');
   }
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');
