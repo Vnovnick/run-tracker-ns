@@ -1,5 +1,15 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
+@media screen and (max-width: 850px){
+  .react-calendar{
+      display: none;
+  }
+}
+@media screen and (min-width: 850px){
+  .react-calendar{
+      display: block;
+  }
+}
 .react-calendar {
     width: 325px;
     max-width: 90%;
