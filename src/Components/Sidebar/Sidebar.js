@@ -64,7 +64,12 @@ export default function Sidebar() {
       </div>
       <ul id='user-info'>
         { window.localStorage.getItem('runData') &&
-        <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}><li id='strava-user'><img src={stravaUserProfile} className='rounded-circle border border-warning' onError={addDefaultImage} alt='strava-profile'></img><h4>{stravaUserName}</h4></li></button>}
+        <button className='btn customButton' id='stravaProfButton' onClick={() => setStravaProfToggle(stravaProfToggle => !stravaProfToggle)}>
+          <li id='strava-user'>
+            <img src={stravaUserProfile} className='rounded-circle border border-warning' onError={addDefaultImage} alt='strava-profile'></img>
+            <h4>{stravaUserName}</h4>
+          </li>
+        </button>}
         <div className='collapse' id='stravaCollapse'>
           <div className="card card-body sidebarCollapse">
           {window.localStorage.getItem('stravaTotals') ? 
