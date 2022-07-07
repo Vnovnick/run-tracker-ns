@@ -2,6 +2,7 @@
     background-color: #ffeecc;
     background-image: linear-gradient(#ffdf9f, #ffeecc);
     height: 100%;
+    width: 100vw;
 }
 
 .post-feed #total-logout{
@@ -18,6 +19,13 @@
     margin-left: 100%;
     margin-top: -30%;
     padding: 5px;
+}
+#sidebar-button{
+    float: auto;
+}
+#side-btn-image{
+    width: 30px;
+    height: auto;
 }
 .post-feed ul li {
     padding: 9px;

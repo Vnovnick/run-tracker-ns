@@ -5,6 +5,7 @@ import { stravaApiData, spotifyApiData } from '../../apiData';
 import './PostFeed.scss';
 import TitleScreen from '../TitleScreen/TitleScreen';
 import ReactLoading from 'react-loading';
+import barButton from '../PostFeed/menu.png';
 
 const redirect_uri = 'http://localhost:3000/run-tracker-ns';
 
@@ -79,7 +80,24 @@ export default function PostFeed() {
 
   const renderTotalLogout = () => {
     return <li><a className='btn logout-button' href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout(); setIsLoading(true)}}>Log-out of all accounts</a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>;
-  };    
+  };
+  
+  window.onload = () => {
+    changeSidbarClass();
+  };
+  const changeSidbarClass = () => {
+    let width = window.innerWidth;
+    console.log(width);
+    if (width < 1100){
+      document.getElementById('sidebar-wrapper').classList.add('hidden');
+    }else if (width >= 1101){
+      document.getElementById('sidebar-wrapper').classList.remove('hidden');
+    }
+  };
+
+  window.addEventListener('resize', () => {
+    changeSidbarClass();
+  });
 
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -93,7 +111,9 @@ export default function PostFeed() {
         <li><a href={authCodeLink} onClick={() => setIsLoading(true)}><button className='btn str-button'>Strava Log-in</button></a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'}/></div>}</li>}  
         {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} ><button className='btn spotify-button'>Spotify Log-out</button></a></li> : 
         <li id='spot-login-li'><a href={spotAuthCodeLink} onClick={() => setIsLoading(true)}><button className='btn spotify-button'>Spotify Log-in</button></a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>)}
-      </ul>}    
+      </ul>}
+      <button className='btn' id='sidebar-button'><img src={barButton} id='side-btn-image' alt='Sidebar Button'></img></button>
+
       {(!loggedIn && !spotLoggedIn) &&       
         <TitleScreen />  
       }  

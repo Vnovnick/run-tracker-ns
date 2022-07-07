@@ -5,7 +5,7 @@ import RunChart from '../RunChart/RunChart';
 import moment from 'moment';
 import blueDot from '../Calendar/blueDot.png';
 import greenDot from '../Calendar/greenDot.png';
-
+import Sidebar from '../Sidebar/Sidebar';
 export default function PostContent(props) {
 // strava data points to work with: 
 // elapsed_time, start_date, moving_time
@@ -157,6 +157,7 @@ export default function PostContent(props) {
                     />    }
                 </div>                
             </div>
+
         </div>
         ))
         }   

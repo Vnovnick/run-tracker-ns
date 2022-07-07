@@ -1,18 +1,17 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
-@media screen and (max-width: 850px){
-  .react-calendar{
-      display: none;
-  }
-}
-@media screen and (min-width: 850px){
-  .react-calendar{
-      display: block;
-  }
-}
+// @media screen and (max-width: 850px){
+//   .react-calendar{
+//       display: none;
+//   }
+// }
+// @media screen and (min-width: 850px){
+//   .react-calendar{
+//       display: block;
+//   }
+// }
 .react-calendar {
-    width: 325px;
-    max-width: 90%;
+    width: 90%;
     background: $orange-100;
     border: 1px solid #a0a096;
     font-family: Arial, Helvetica, sans-serif;

@@ -57,7 +57,7 @@ export default function Sidebar() {
     // });
 
   return (
-    <div className='sidebar'>
+    <div className='sidebar' id='sidebar-wrapper'>
       <div id='sidebar-title'>
         <img id='logo' src={icon} alt='logo' width='40px' height='40px'></img>
         <h1>Run_Tracker</h1>

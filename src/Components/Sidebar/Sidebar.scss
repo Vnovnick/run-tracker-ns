@@ -1,14 +1,17 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
-@media screen and (max-width: 850px){
-    #user-info, #color-text, #sidebar-title h1{
-        display: none;
-    }
-}
-@media screen and (min-width: 850px){
-    #user-info, #color-text, #sidebar-title h1{
-        display: block;
-    }
+// @media screen and (max-width: 850px){
+//     #user-info, #color-text, #sidebar-title h1{
+//         display: none;
+//     }
+// }
+// @media screen and (min-width: 850px){
+//     #user-info, #color-text, #sidebar-title h1{
+//         display: block;
+//     }
+// }
+.hidden{
+    display: none;
 }
 .sidebar {
     background-image: linear-gradient(rgb(14, 13, 13), grey) !important;
@@ -18,7 +21,9 @@
     top: 0;
     right: 0;
     overflow-x: hidden;
-    min-width: 20%;
+    min-width: 15%;
+    max-width: 30%;
+    width: 20vw;
     border-top-left-radius:15px;
     border-bottom-left-radius: 15px;
     text-align: center;
@@ -32,7 +37,7 @@
     display: inline-flex;
 }
 .customButton {
-    width: 300px !important;
+    width: 90% !important;
 }
 .sidebar h1 {
     color: aliceblue;
@@ -59,7 +64,7 @@
 
 }
 .collapse{
-    width: 300px;
+    width: 90%;
     align-items: center;
 
 }
@@ -71,7 +76,7 @@
 }
 
 .collapsing{
-    width: 300px;
+    width: 90%;
     align-items: center;
 }
 .sidebarCollapse {
@@ -150,7 +155,7 @@ h5 {
 }
 #color-text {
     background-color: $orange-100 !important;
-    width: 325px;
+    max-width: 90%;
     align-items: center;
     margin: auto;
     border-radius: 5px;
