@@ -82,22 +82,31 @@ export default function PostFeed() {
     return <li><a className='btn logout-button' href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout(); setIsLoading(true)}}>Log-out of all accounts</a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>;
   };
   
+  // changing sidebar class on resize
   window.onload = () => {
     changeSidbarClass();
   };
   const changeSidbarClass = () => {
     let width = window.innerWidth;
-    console.log(width);
     if (width < 1100){
       document.getElementById('sidebar-wrapper').classList.add('hidden');
     }else if (width >= 1101){
       document.getElementById('sidebar-wrapper').classList.remove('hidden');
     }
   };
-
   window.addEventListener('resize', () => {
     changeSidbarClass();
   });
+
+  const [isHidden, setIsHidden] = useState(false);
+  const setIsHiddenFunc = () => {
+    setIsHidden(!isHidden);
+    if (isHidden){
+      document.getElementById('sidebar-wrapper').classList.add('hidden');
+    } else{
+      document.getElementById('sidebar-wrapper').classList.remove('hidden');
+    }
+  };
 
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -112,7 +121,7 @@ export default function PostFeed() {
         {window.localStorage.getItem('stravaLogin') && (window.localStorage.getItem('spotifyLogin') ? <li><a href={redirect_uri} onClick={spotifyLogout} ><button className='btn spotify-button'>Spotify Log-out</button></a></li> : 
         <li id='spot-login-li'><a href={spotAuthCodeLink} onClick={() => setIsLoading(true)}><button className='btn spotify-button'>Spotify Log-in</button></a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>)}
       </ul>}
-      <button className='btn' id='sidebar-button'><img src={barButton} id='side-btn-image' alt='Sidebar Button'></img></button>
+      <button className='btn' id='sidebar-button' onClick={() => setIsHiddenFunc()}><img src={barButton} id='side-btn-image' alt='Sidebar Button'></img></button>
 
       {(!loggedIn && !spotLoggedIn) &&       
         <TitleScreen />  

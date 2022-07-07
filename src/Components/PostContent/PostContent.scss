@@ -59,8 +59,9 @@
     column-width: auto;
     column-rule: dotted;
     text-align: center;
-    // height: 900px;
+    max-height: 1000px;
     transition: all 0.2s ease;
+    overflow: auto;
 
 }
 #run-name{
