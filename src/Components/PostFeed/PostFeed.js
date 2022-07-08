@@ -83,28 +83,36 @@ export default function PostFeed() {
   };
   
   // changing sidebar class on resize
-  window.onload = () => {
-    changeSidbarClass();
-  };
-  const changeSidbarClass = () => {
+  let isHidden;
+  const changeSidebarClass = () => {
     let width = window.innerWidth;
-    if (width < 1100){
+    if (width < 1100 && !isHidden){
       document.getElementById('sidebar-wrapper').classList.add('hidden');
-    }else if (width >= 1101){
+    }else if (width >= 1101 && isHidden){
       document.getElementById('sidebar-wrapper').classList.remove('hidden');
     }
   };
+  window.onload = () => {
+    changeSidebarClass();
+    let width = window.innerWidth;
+    if (width < 1100){
+      isHidden = true;
+    }else if (width >= 1101){
+      isHidden = false;
+    }
+  };
   window.addEventListener('resize', () => {
-    changeSidbarClass();
+    changeSidebarClass();
   });
 
-  const [isHidden, setIsHidden] = useState(false);
+  
   const setIsHiddenFunc = () => {
-    setIsHidden(!isHidden);
-    if (isHidden){
+    if (!isHidden){
       document.getElementById('sidebar-wrapper').classList.add('hidden');
+      isHidden = true;
     } else{
       document.getElementById('sidebar-wrapper').classList.remove('hidden');
+      isHidden = false;
     }
   };
 
