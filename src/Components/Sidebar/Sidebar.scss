@@ -1,15 +1,19 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
-// @media screen and (max-width: 850px){
-//     #user-info, #color-text, #sidebar-title h1{
-//         display: none;
-//     }
-// }
-// @media screen and (min-width: 850px){
-//     #user-info, #color-text, #sidebar-title h1{
-//         display: block;
-//     }
-// }
+@media screen and (max-width: 1300px){
+    #sidebar-title h1{
+        display: none;
+    }
+    #sidebar-title{
+        align-items: center;
+    }
+}
+@media screen and (min-width: 1300px){
+    #sidebar-title h1{
+        display: block;
+    }
+
+}
 
 .hidden{
     display: none;
@@ -24,11 +28,11 @@
     overflow-x: hidden;
     min-width: 200px;
     max-width: 30%;
-    width: 20vw;
+    width: 21vw;
     border-top-left-radius:15px;
     border-bottom-left-radius: 15px;
     text-align: center;
-    transition: all .3s ease;
+    transition: .2s;
 }
 #logo{
     margin-right: 20px;
@@ -54,7 +58,6 @@
 .sidebar #user-info {
     list-style-type: none;
     position: relative;
-
 }
 
 #stravaProfButton {
@@ -62,12 +65,10 @@
     border-radius: 15px;
     display: flex;    
     align-items: center;
-
 }
 .collapse{
     width: 90%;
     align-items: center;
-
 }
 .collapse h4{
     text-align: left;
@@ -159,5 +160,6 @@ h5 {
     max-width: 90%;
     align-items: center;
     margin: auto;
+    min-width: 200px;
     border-radius: 5px;
 }

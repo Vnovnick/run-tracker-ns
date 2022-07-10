@@ -84,15 +84,25 @@ export default function PostFeed() {
   
   // changing sidebar class on resize
   let isHidden;
+  let isClicked = false;
   const changeSidebarClass = () => {
     let width = window.innerWidth;
-    if (width < 1100 && !isHidden){
-      document.getElementById('sidebar-wrapper').classList.add('hidden');
-      isHidden = true;
-    }else if (width >= 1101 && isHidden){
-      document.getElementById('sidebar-wrapper').classList.remove('hidden');
-      isHidden = false;
+    if (!isClicked){
+      if (width < 1100 && !isHidden){
+        // document.getElementById('sidebar-wrapper').classList.add('hidden');
+        document.getElementById('sidebar-wrapper').style.width = 0;
+        document.getElementById('sidebar-wrapper').style.minWidth = 0;
+        isHidden = true;
+      }else if (width >= 1101 && isHidden){
+        // document.getElementById('sidebar-wrapper').classList.remove('hidden');
+        document.getElementById('sidebar-wrapper').style.width = 21 + 'vw';
+        document.getElementById('sidebar-wrapper').style.minWidth = 200 + 'px';
+        isHidden = false;
+      }
+    }else{
+      return;
     }
+
   };
   window.onload = () => {
     changeSidebarClass();
@@ -108,12 +118,17 @@ export default function PostFeed() {
   });
 
   
-  const setIsHiddenFunc = () => {
+  const setIsClickedFunc = () => {
     if (!isHidden){
-      document.getElementById('sidebar-wrapper').classList.add('hidden');
+      isClicked = true
+      // document.getElementById('sidebar-wrapper').classList.add('hidden');
+      document.getElementById('sidebar-wrapper').style.width = 0;
+      document.getElementById('sidebar-wrapper').style.minWidth = 0;
       isHidden = true;
     } else{
-      document.getElementById('sidebar-wrapper').classList.remove('hidden');
+      // document.getElementById('sidebar-wrapper').classList.remove('hidden');
+      document.getElementById('sidebar-wrapper').style.width = 21 + 'vw';
+      document.getElementById('sidebar-wrapper').style.minWidth = 200 + 'px';
       isHidden = false;
     }
   };
@@ -132,7 +147,7 @@ export default function PostFeed() {
         <li id='spot-login-li'><a href={spotAuthCodeLink} onClick={() => setIsLoading(true)}><button className='btn spotify-button'>Spotify Log-in</button></a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>)}
       </ul>}
       {window.localStorage.getItem('stravaLogin') && 
-        <button className='btn' id='sidebar-button' onClick={() => {setIsHiddenFunc();}}><img src={barButton} id='side-btn-image' alt='Sidebar Button'></img></button>
+        <button className='btn' id='sidebar-button' onClick={() => {setIsClickedFunc();}}><img src={barButton} id='side-btn-image' alt='Sidebar Button'></img></button>
       }
 
 
