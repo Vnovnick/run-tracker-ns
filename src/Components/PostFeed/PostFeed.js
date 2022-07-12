@@ -48,14 +48,11 @@ export default function PostFeed() {
    window.localStorage.removeItem('topTracks');
  
   }
-  // window.onclose = () => {
+  // below doesn't work without additional conditions
+  // window.addEventListener('unload', (e) => {
   //   stravaLogout();
   //   spotifyLogout();
-  // }
-  window.addEventListener('unload', (e) => {
-    stravaLogout();
-    spotifyLogout();
-  });
+  // });
   const getStravaUrlCode = () => {
     if (codeMatch && codeMatch[1].length < 41){
       setLoggedIn(true);
