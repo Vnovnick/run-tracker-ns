@@ -119,10 +119,7 @@ export default function PostContent(props) {
     //       document.getElementById('content-wrapper').classList.remove('columnless');
     //     }
     //   };
-    
-    //   window.addEventListener('resize', () => {
-    //     changeClass();
-    //   });
+
 
     const scrollTo = (target) => document.getElementById(target).scrollIntoView();
     return (
