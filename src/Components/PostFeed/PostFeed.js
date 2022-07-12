@@ -84,10 +84,9 @@ export default function PostFeed() {
   
   // changing sidebar class on resize
   let isHidden;
-  let isClicked = false;
+  // let isClicked = false;
   const changeSidebarClass = () => {
     let width = window.innerWidth;
-    if (!isClicked){
       if (width < 1100 && !isHidden){
         // document.getElementById('sidebar-wrapper').classList.add('hidden');
         document.getElementById('sidebar-wrapper').style.width = 0;
@@ -99,9 +98,6 @@ export default function PostFeed() {
         document.getElementById('sidebar-wrapper').style.minWidth = 200 + 'px';
         isHidden = false;
       }
-    }else{
-      return;
-    }
 
   };
   window.onload = () => {
@@ -120,7 +116,7 @@ export default function PostFeed() {
   
   const setIsClickedFunc = () => {
     if (!isHidden){
-      isClicked = true
+
       // document.getElementById('sidebar-wrapper').classList.add('hidden');
       document.getElementById('sidebar-wrapper').style.width = 0;
       document.getElementById('sidebar-wrapper').style.minWidth = 0;
