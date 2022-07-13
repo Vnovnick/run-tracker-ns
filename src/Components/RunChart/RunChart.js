@@ -5,7 +5,8 @@ import { LineChart,
     Tooltip,
     Line,
     XAxis,
-    CartesianGrid } from 'recharts'; 
+    CartesianGrid, 
+    ResponsiveContainer} from 'recharts'; 
  
 const tickStyles = {
   height: "65px",
@@ -44,6 +45,7 @@ export default function RunChart(props) {
 
   return (
     <div className='chart-dropdown'>
+
         <LineChart width={950} height={180} data={chartData} margin={{        
         right: 50,
         left: 50,
@@ -54,6 +56,7 @@ export default function RunChart(props) {
             <XAxis dataKey="url" interval={0} reversed={true} tick={<CustomXAxisTick />} />
             <Tooltip content={<CustomTooltip/>} />        
         </LineChart>
+
     </div>
   )
 }
