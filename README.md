@@ -6,6 +6,10 @@ This project was born out of my own curiousity to see my Spotify song activity d
 
 ## Displaying Run Data
 
-The user's Strava Run Data is the first login available on the home page. Once logged into Strava, a Spotify login will appear next to 
+The user's Strava Run Data is the first login available on the home page. Once logged in with Strava, the [Sidebar](#sidebar) will appear as well as posts that display the user's last 10 runs. Each of these posts show the date/time of the run, run title, distance in miles and kilometers, and the time elapsed. A colored dot will also appear next to the date/time denoting the type of run. More info on the dots can be found in the [Sidebar](#sidebar) section. 
+
+Some general Strava user info is displayed in the Sidebar as well such as the profile image, username, and run/distance totals.
+
+## Displaying Song Data 
 
 ## Sidebar 
