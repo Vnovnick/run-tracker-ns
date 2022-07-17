@@ -12,7 +12,7 @@ Some general Strava user info is displayed in the Sidebar as well such as the pr
 
 ## Displaying Spotify Song Data 
 
-After the user has logged into Strava, a Spotify login will appear at the top of the page. Once logged into Spotify, the application will add the songs the user listened to during any of the ten runs if applicable (see the [Limitations and Plans for Future Additions](#limitations-and-plans-for-future-additions) section for details). The songs in each post will be listed under "Listened to" with the album cover, song title, and corresponding album listed for each song. In a collapsible section under each post with song data, there is a timeline, created with Recharts, that displays when each song was played during the run chronologically. 
+After the user has logged into Strava, a Spotify login will appear at the top of the page. Once logged into Spotify, the application will add the songs the user listened to during any of the ten runs if applicable (see the [Limitations](#limitations) section for details). The songs in each post will be listed under "Listened to" with the album cover, song title, and corresponding album listed for each song. In a collapsible section under each post with song data, there is a timeline, created with Recharts, that displays when each song was played during the run chronologically. 
 
 Just like the Strava login, logging into Spotify will add general user data to the sidebar such as the profile image, username, and top Tracks/Artists for the month. 
 
@@ -24,4 +24,15 @@ The calendar below the profile displays, created with React-Calendar, adds the o
 
 A small box below the calendar explains which color corresponds to which `workout_type`.
 
-## Limitations and Plans for Future Additions
+## Limitations and Plans for Future Changes or Additions
+
+##### Limitations 
+
+As mentioned in the [Displaying Spotify Song Data](#displaying-spotify-song-data) section, one of the main limitations of the application's use of the Spotify API comes from the limit set by the API on retrievable song objects. Since Spotify only saves the user's last 50 most recently played songs, a frequent user of Spotify will find that the Run Tracker posts will not display any song data or will start to omit songs despite them showing up previously. This is due to the range of 50 songs shifting to leave out song objects that no longer fall within said range. Spotify's API allows you to set "before" and "after" parameters in your request, but setting a range that falls outside of the 50 song range or at its edge, as seen in lines 185 to 194 of the Post.js file, will still only return song objects from those 50 that Spotify saves.
+
+##### Plans for Future Changes or Additions
+
+- Reformat RunChart.js to have each collapsible timeline rotate into a vertical timeline on window resize
+- Fix post height readjustment on window resize
+- Add visual representation of the route as seen in the Strava app
+- Add a functioning Spotify player widget in the sidebar that allows users to drag and drop the album art into the widget to play the song

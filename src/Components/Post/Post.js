@@ -183,7 +183,7 @@ export default function Post(props) {
   
   const fetchSpotifyData = async () => {
     // getting 'after' parameter in recently played get request
-    // let stravaConvertedData = JSON.parse(localStorage.getItem('StravaData'));
+    // let stravaConvertedData = JSON.parse(localStorage.getItem('runData'));
     // let spotAfter = new Date(stravaConvertedData[4].start_date).getTime(); 
     // after=${spotAfter}
 
