@@ -18,4 +18,10 @@ Just like the Strava login, logging into Spotify will add general user data to t
 
 ## Sidebar 
 
+As mentioned at the ends of "Data" sections above, the Sidebar displays some general user info. This info is hidden in collapsible sections on load and can be viewed when clicking on the profile/username displays for each account. 
+
+The calendar below the profile displays, created with React-Calendar, adds the option to quickly navigate through the runs. If a date corresponds with the date of a run, the tile number will change color and the tile will have a small dot in the upper-right corner. These dots correspond with the dots mentioned in the [Displaying Strava Run Data](#displaying-strava-run-data) section. Clicking on a calendar tile with a dot will make the page scroll to the matching run date. The color will be set based on the `workout_type` value assigned to the run in Strava with black being the default color if no value is assigned. 
+
+A small box below the calendar explains which color corresponds to which `workout_type`.
+
 ## Limitations and Plans for Future Additions
