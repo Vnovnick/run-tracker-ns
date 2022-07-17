@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.css": "/run-tracker-ns/static/css/main.bdb3ec2a.css",
-    "main.js": "/run-tracker-ns/static/js/main.288c8e6c.js",
+    "main.css": "/run-tracker-ns/static/css/main.ef0dbe93.css",
+    "main.js": "/run-tracker-ns/static/js/main.8d5dc09a.js",
     "static/js/787.2580e665.chunk.js": "/run-tracker-ns/static/js/787.2580e665.chunk.js",
+    "static/media/SiteDemoVid.mp4": "/run-tracker-ns/static/media/SiteDemoVid.708e0eb7351d1712bd56.mp4",
+    "static/media/defaultStravaProfile.png": "/run-tracker-ns/static/media/defaultStravaProfile.2fda6558cd58b877e14f.png",
+    "static/media/running.ico": "/run-tracker-ns/static/media/running.2d84bac6e6a0f2a197d3.ico",
     "index.html": "/run-tracker-ns/index.html",
-    "main.bdb3ec2a.css.map": "/run-tracker-ns/static/css/main.bdb3ec2a.css.map",
-    "main.288c8e6c.js.map": "/run-tracker-ns/static/js/main.288c8e6c.js.map",
+    "main.ef0dbe93.css.map": "/run-tracker-ns/static/css/main.ef0dbe93.css.map",
+    "main.8d5dc09a.js.map": "/run-tracker-ns/static/js/main.8d5dc09a.js.map",
     "787.2580e665.chunk.js.map": "/run-tracker-ns/static/js/787.2580e665.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bdb3ec2a.css",
-    "static/js/main.288c8e6c.js"
+    "static/css/main.ef0dbe93.css",
+    "static/js/main.8d5dc09a.js"
   ]
 }
