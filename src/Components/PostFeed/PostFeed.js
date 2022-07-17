@@ -7,7 +7,7 @@ import TitleScreen from '../TitleScreen/TitleScreen';
 import ReactLoading from 'react-loading';
 import barButton from '../PostFeed/menu.png';
 
-const redirect_uri = 'http://localhost:3000/run-tracker-ns';
+const redirect_uri = 'https://vnovnick.github.io/run-tracker-ns/';
 
 export default function PostFeed() {
   let randSpotifyState = Math.random().toString(36).substring(1,17);
