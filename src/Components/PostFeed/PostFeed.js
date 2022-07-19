@@ -37,6 +37,7 @@ export default function PostFeed() {
     window.localStorage.removeItem('stravaTotals');
     window.localStorage.removeItem('selectedDay');
     window.localStorage.removeItem('stravaYtdTotals');
+
   }
   const spotifyLogout = () => {
    window.localStorage.removeItem('SpotifyData');
@@ -45,8 +46,7 @@ export default function PostFeed() {
    window.localStorage.removeItem('SpotifyUserName');
    window.localStorage.removeItem('SpotifyUserProfile');
    window.localStorage.removeItem('topArtists');
-   window.localStorage.removeItem('topTracks');
- 
+   window.localStorage.removeItem('topTracks');  
   }
   // below doesn't work without additional conditions
   // window.addEventListener('unload', (e) => {
@@ -77,6 +77,8 @@ export default function PostFeed() {
   if (!spotifyAuthCode || !spotifyAuthState) {
     getSpotifyUrlCode();
   }  
+  // const spotifyLogoutUrl = 'https://accounts.spotify.com/en/logout';
+  // const stravaLogoutUrl = 'https://www.strava.com/logout';
 
   const renderTotalLogout = () => {
     return <li><a className='btn logout-button' href={redirect_uri} onClick={() => {stravaLogout(); spotifyLogout(); setIsLoading(true)}}>Log-out of all accounts</a>{isLoading && <div id='spinner'><ReactLoading type={'bars'} color={'black'} height={'25px'} width={'25px'} /></div>}</li>;
