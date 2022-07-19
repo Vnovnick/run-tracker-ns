@@ -36,3 +36,4 @@ As mentioned in the [Displaying Spotify Song Data](#displaying-spotify-song-data
 - Fix post height readjustment on window resize
 - Add visual representation of the route as seen in the Strava app
 - Add a functioning Spotify player widget in the sidebar that allows users to drag and drop the album art into the widget to play the song
+- Find a way to allow the user to properly logout of their Strava and Spotify accounts. Redirecting to the official logout pages will take the user away from Run Tracker with no way of coming back to the homepage. 
